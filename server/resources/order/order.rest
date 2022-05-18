@@ -7,7 +7,12 @@ Content-Type: application/json
 
 {
   "customer": "6283598560765e36787c6867",
-  "products": ["Produkt 1", "Produkt 2"]
+  "products": ["Produkt 1", "Produkt 2"],
+   "address": {
+    "street": "Åkannavägen",
+    "zipcode": 43540,
+    "city": "Mölnlycke"
+  },
 }
 
 ###

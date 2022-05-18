@@ -9,11 +9,7 @@ Content-Type: application/json
   "firstname": "David",
   "lastname": "Jensen",
   "password": "123",
-  "address": {
-    "street": "Åkannavägen",
-    "zipcode": 43540,
-    "city": "Mölnlycke"
-  }
+ 
 }
 
 ###

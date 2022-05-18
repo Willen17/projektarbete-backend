@@ -1,6 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
-import { userRouter, orderRouter } from "./resources";
+import { userRouter, orderRouter, productRouter } from "./resources";
 import "dotenv/config";
 
 const app = express();
@@ -11,7 +11,7 @@ app.use(express.json());
 // Add routers
 app.use("/api", userRouter);
 app.use("/api", orderRouter);
-// app.use("/api", productRouter);
+app.use("/api", productRouter);
 // Add more routers here....
 
 // Connect to DB & start server

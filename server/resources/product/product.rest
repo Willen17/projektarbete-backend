@@ -1,0 +1,28 @@
+GET http://localhost:3000/api/product 
+
+###
+
+POST http://localhost:3000/api/product
+Content-Type: application/json
+
+{
+"image": "www.google.com/chair",
+  "title": "Chair",
+  "description": "This a chair",
+  "price": 2999,
+  "stock": 52,
+  "category": ["furniture", "chairs"]
+}
+
+###
+
+PUT http://localhost:3000/api/product/6284c0fd3ad1995085fd395a
+Content-Type: application/json
+
+{
+
+}
+
+###
+
+DELETE http://localhost:3000/api/product/12121

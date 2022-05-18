@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { Address, addressSchema } from "./address.schema";
 
 export interface User {
   firstname: string;
@@ -9,7 +8,6 @@ export interface User {
   isAdmin: boolean;
   createdAt: Date;
   updatedAt: Date;
-  address: Address;
 }
 
 const userSchema = new mongoose.Schema(
@@ -18,7 +16,6 @@ const userSchema = new mongoose.Schema(
     lastname: { type: String, required: true },
     password: { type: String, required: true, select: false },
     isAdmin: { type: Boolean, required: true, default: false },
-    address: { type: addressSchema, required: true },
   },
   {
     timestamps: true,
