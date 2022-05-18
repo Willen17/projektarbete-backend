@@ -23,6 +23,12 @@ export const addProduct = async (
     next(err);
   }
 };
+
+export const getOneProduct = async (req: Request, res: Response) => {
+  console.log("Kör request");
+  const product = await ProductModel.findById(req.params.id);
+  res.status(200).json(product);
+};
 export const updateProduct = async (
   req: Request<{ id: string }>,
   res: Response

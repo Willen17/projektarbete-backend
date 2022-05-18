@@ -2,22 +2,31 @@ GET http://localhost:3000/api/order
 
 ###
 
+GET http://localhost:3000/api/order/6284c1933ad1995085fd395e
+
+###
+
 POST http://localhost:3000/api/order
 Content-Type: application/json
 
 {
-  "customer": "6283598560765e36787c6867",
+ 
   "products": ["Produkt 1", "Produkt 2"],
+  "paymentMethod": "swish",
+  "total": 299,
+  "deliveryMethod": "schenker",
+  "isOrderSent": false,
    "address": {
     "street": "Åkannavägen",
     "zipcode": 43540,
     "city": "Mölnlycke"
-  },
+  }
+  
 }
 
 ###
 
-PUT http://localhost:3000/api/order/6283515af3f6ab16ccf62710
+PUT http://localhost:3000/api/order/6284eca183735855607db609
 Content-Type: application/json
 
 {
