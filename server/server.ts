@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import { userRouter, orderRouter } from "./resources";
+import "dotenv/config";
 
 const app = express();
 
@@ -14,11 +15,13 @@ app.use("/api", orderRouter);
 // Add more routers here....
 
 // Connect to DB & start server
-mongoose.connect("mongodb://localhost:27017/layered-backend", (err) => {
+mongoose.connect(process.env.databas!, (err) => {
   if (err) {
     console.error(err);
   } else {
     console.log("Connection to database established!");
-    app.listen(3000, () => console.log("Server is running on http://localhost:3000"));
+    app.listen(3000, () =>
+      console.log("Server is running on http://localhost:3000")
+    );
   }
 });
