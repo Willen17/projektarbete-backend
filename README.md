@@ -26,31 +26,41 @@ npm start
 
 ## Made by:
 
-**Fia Andersson [**github**](https://github.com/fiababiakandersson)**
-
-**Millie Chueng [**github**](https://github.com/millie-wy)**
-
 **Sara Lindqvist [**github**](https://github.com/saralindqvist)**
-
-**Miranda Nilhag [**github**](https://github.com/mirrenil)**
 
 [demo](https://commecicommeca.netlify.app/)
 
-### Krav för VG
+### Krav för G
 
-- [x] Git & GitHub har använts
-- [x] Projektmappen innehåller en README.md fil - (läs ovan för mer info)
-- [x] Uppgiften lämnas in i tid!
-- [x] Ett designsystem används
-- [x] React Router används
-- [x] Formulären vid utcheckningen ska gå att automatiskt fyllas i
+- [x] Alla sidor skall vara responsiva.
+- [x] Arbetet ska implementeras med en React frontend och en Express backend.
+- [x] Skapa ett ER diagram och koddiagram, detta ska lämnas in vid idégodkännandet
+- [x] Beskriv er företagsidé i en kort textuell presentation, detta ska lämnas in vid idégodkännandet
+- [x] All data som programmet utnyttjar ska vara sparat i en Mongo-databas (produkter, beställningar, konton mm)
+- [x] Man ska kunna logga in som administratör i systemet
 - [x] Samtliga fält ska ha valideringsregler
-- [x] Sidan ska vara fullt responsiv
+- [x] Inga Lösenord får sparas i klartext i databasen
 - [x] Mockade produkter ska finnas i en egen fil och vara typade med ett TS interface
-- [x] Projektet skall läggas upp på Netlify eller liknande tjänst.
+- [x] En besökare ska kunna beställa produkter från sidan, detta ska uppdatera lagersaldot i databasen
+- [x] Administratörer ska kunna uppdatera antalet produkter i lager från admin delen av sidan
+- [x] Administratörer ska kunna se en lista på alla gjorda beställningar
+- [x] Sidans produkter ska delas upp i kategorier, en produkt ska tillhöra minst en kategori, men kan tillhöra flera
+- [x] Från hemsidan ska man kunna se en lista över alla produkter, och man ska kunna lista bara dom produkter som tillhör en kategori
+- [x] Besökare ska kunna lägga produkterna i en kundkorg, som är sparad i local-storage på klienten
+- [x] En besökare som gör en beställning ska få möjligheten att registrera sig samt logga in och måste vara inloggad som kund innan beställningen skapas
+- [x] Besökare ska kunna lägga produkterna i en kundkorg, som är sparad i local-storage på klienten
+- [x] Besökare ska kunna välja ett av flera fraktalternativ
+- [x] Tillgängliga fraktalternativ ska vara hämtade från databasen
+- [x] Checkoutflödet i frontendapplikationen ska ha validering på samtliga fält
 
 ### Krav för väl godkänt:
 
 - [x] Alla punkter för godkänt är uppfyllda
-- [x] Det finns en admin-sida där man kan ändra, lägga till eller ta bort produkter på sidan
-- [x] Samtliga produkter skall vara sparade i localstorage (om localstorage är tom då sidan läses in behöver samtliga fördefinierade produkter sparas där)
+- [x] Man ska kunna registrera sig som administratör på sidan, nya användare ska sparas i databasen
+- [x] En administratör behöver godkännas av en tidigare administratör innan man kan logga in fösta gången
+- [x] Administratörer ska kunna markera beställningar som skickade
+- [x] När man är inloggad som kund ska man kunna se sina gjorda beställning och om det är skickade eller inte
+- [x] Administratörer ska kunna redigera vilka kategorier en produkt tillhör
+- [x] Administratörer ska kunna lägga till och ta bort produkter
+- [x] Backendapplikationen måste ha en fungerande global felhantering
+-
