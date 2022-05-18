@@ -1,10 +1,17 @@
 import express from "express";
-import { adminSecure } from "../middlewares";
-import { getAllOrders, addOrder, updateOrder, deleteOrder } from "./order.controller";
+import { adminSecure, isCreator, secure } from "../middlewares";
+import {
+  getAllOrders,
+  addOrder,
+  updateOrder,
+  deleteOrder,
+  getOneOrder,
+} from "./order.controller";
 
 export const orderRouter = express
   .Router()
-  .get("/order", /* adminSecure, */ getAllOrders)
-  .post("/order", addOrder)
-  .put("/order/:id", updateOrder)
-  .delete("/order/:id", deleteOrder);
+  .get("/order", getAllOrders)
+  .get("/order/:id", isCreator, getOneOrder)
+  .post("/order", secure, addOrder)
+  .put("/order/:id", isCreator, updateOrder)
+  .delete("/order/:id", adminSecure, deleteOrder);

@@ -5,11 +5,13 @@ import {
   addProduct,
   updateProduct,
   deleteProduct,
+  getOneProduct,
 } from "./product.controller";
 
 export const productRouter = express
   .Router()
-  .get("/product", /* adminSecure, */ getAllProducts)
-  .post("/product", addProduct)
-  .put("/product/:id", updateProduct)
-  .delete("/product/:id", deleteProduct);
+  .get("/product", getAllProducts)
+  .get("/product/:id", getOneProduct)
+  .post("/product", adminSecure, addProduct)
+  .put("/product/:id", adminSecure, updateProduct)
+  .delete("/product/:id", adminSecure, deleteProduct);

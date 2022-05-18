@@ -1,10 +1,19 @@
 import express from "express";
-import { adminSecure } from "../middlewares";
-import { getAllUsers, addUser, updateUser, deleteUser } from "./user.controller";
+import { adminSecure, secure } from "../middlewares";
+import {
+  getAllUsers,
+  addUser,
+  deleteUser,
+  getOneUser,
+  loginUser,
+  logoutUser,
+} from "./user.controller";
 
 export const userRouter = express
   .Router()
-  .get("/user", /* adminSecure, */ getAllUsers)
+  .get("/user", adminSecure, getAllUsers)
+  .get("/user/:id", adminSecure, getOneUser)
   .post("/user", addUser)
-  .put("/user/:id", updateUser)
-  .delete("/user/:id", deleteUser);
+  .post("/login", loginUser)
+  .delete("/logout", logoutUser)
+  .delete("/user/:id", adminSecure, deleteUser);
