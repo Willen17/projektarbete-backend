@@ -25,7 +25,7 @@ const CustomerDetails = () => {
       </Typography>
       <Box
         sx={{
-          height: 470,
+          height: 600,
           backgroundColor: "#F3F2F0",
           display: "flex",
           flexDirection: "column",
@@ -37,14 +37,14 @@ const CustomerDetails = () => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            width: { xs: "300px", sm: "450px", md: "600px", lg: "600px" },
+            width: { xs: "240px", sm: "450px", md: "600px", lg: "600px" },
           }}
         >
           <TextField
             style={{
               backgroundColor: "white",
               height: "55px",
-              marginBottom: "1rem",
+              marginBottom: "1.5rem",
             }}
             id="name"
             name="name"
@@ -60,23 +60,56 @@ const CustomerDetails = () => {
             style={{
               backgroundColor: "white",
               height: "55px",
-              marginBottom: "1rem",
+              marginBottom: "1.5rem",
             }}
-            id="address"
-            name="address"
-            label="Delivery Address"
+            id="street"
+            name="street"
+            label="Delivery Street"
             type="text"
             margin="normal"
-            value={values.address}
+            value={values.street}
             onChange={handleChange}
-            error={touched.address && Boolean(errors.address)}
-            helperText={errors.address}
+            error={touched.street && Boolean(errors.street)}
+            helperText={errors.street}
           />
           <TextField
             style={{
               backgroundColor: "white",
               height: "55px",
-              marginBottom: "1rem",
+              marginBottom: "1.5rem",
+            }}
+            id="zipcode"
+            name="zipcode"
+            label="Zip Code"
+            type="text"
+            margin="normal"
+            value={values.zipcode}
+            onChange={handleChange}
+            error={touched.zipcode && Boolean(errors.zipcode)}
+            helperText={errors.zipcode}
+          />
+          <TextField
+            style={{
+              backgroundColor: "white",
+              height: "55px",
+              marginBottom: "1.5rem",
+            }}
+            id="city"
+            name="city"
+            label="City"
+            type="text"
+            margin="normal"
+            value={values.city}
+            onChange={handleChange}
+            error={touched.city && Boolean(errors.city)}
+            helperText={errors.city}
+          />
+
+          <TextField
+            style={{
+              backgroundColor: "white",
+              height: "55px",
+              marginBottom: "1.5rem",
             }}
             id="email"
             name="email"
@@ -85,14 +118,14 @@ const CustomerDetails = () => {
             margin="normal"
             value={values.email}
             onChange={handleChange}
-            error={touched.address && Boolean(errors.email)}
+            error={touched.email && Boolean(errors.email)}
             helperText={errors.email}
           />
           <TextField
             style={{
               backgroundColor: "white",
               height: "55px",
-              marginBottom: "1rem",
+              marginBottom: "1.5rem",
             }}
             id="phoneNumber"
             name="phoneNumber"

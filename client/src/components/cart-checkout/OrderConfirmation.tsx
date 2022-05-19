@@ -317,7 +317,49 @@ const OrderConfirmation = () => {
                         }}
                         colSpan={3}
                       >
-                        {orderDetail.customer.address}
+                        {orderDetail.customer.street}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell
+                        colSpan={1}
+                        sx={{
+                          border: "none",
+                          padding: "0 16px",
+                          fontSize: { xs: "12px", sm: "14px" },
+                        }}
+                      />
+                      <TableCell
+                        sx={{
+                          border: "none",
+                          padding: "0 16px",
+                          fontWeight: "bold",
+                          fontSize: { xs: "12px", sm: "14px" },
+                        }}
+                        colSpan={1}
+                      >
+                        {orderDetail.customer.city}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell
+                        colSpan={1}
+                        sx={{
+                          border: "none",
+                          padding: "0 16px",
+                          fontSize: { xs: "12px", sm: "14px" },
+                        }}
+                      />
+                      <TableCell
+                        sx={{
+                          border: "none",
+                          padding: "0 16px",
+                          fontWeight: "bold",
+                          fontSize: { xs: "12px", sm: "14px" },
+                        }}
+                        colSpan={1}
+                      >
+                        {orderDetail.customer.zipcode}
                       </TableCell>
                     </TableRow>
                     <TableRow>
