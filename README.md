@@ -39,7 +39,7 @@ npm start
 - [] All data som programmet utnyttjar ska vara sparat i en Mongo-databas (produkter, beställningar, konton mm)
 - [] Man ska kunna logga in som administratör i systemet
 - [x] Samtliga fält ska ha valideringsregler
-- [] Inga Lösenord får sparas i klartext i databasen
+- [X] Inga Lösenord får sparas i klartext i databasen
 - [] Mockade produkter ska finnas i en egen fil och vara typade med ett TS interface
 - [] En besökare ska kunna beställa produkter från sidan, detta ska uppdatera lagersaldot i databasen
 - [] Administratörer ska kunna uppdatera antalet produkter i lager från admin delen av sidan
@@ -49,7 +49,7 @@ npm start
 - [x] Besökare ska kunna lägga produkterna i en kundkorg, som är sparad i local-storage på klienten
 - [] En besökare som gör en beställning ska få möjligheten att registrera sig samt logga in och måste vara inloggad som kund innan beställningen skapas
 - [x] Besökare ska kunna välja ett av flera fraktalternativ
-- [] Tillgängliga fraktalternativ ska vara hämtade från databasen
+- [X] Tillgängliga fraktalternativ ska vara hämtade från databasen
 - [x] Checkoutflödet i frontendapplikationen ska ha validering på samtliga fält
 
 ### Krav för väl godkänt:
