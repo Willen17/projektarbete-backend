@@ -50,7 +50,9 @@ export const sumDeliveryCost = (
 };
 
 // make data fetching request
-export const makeRequest = async (url: string, method: string, body: any) => {
+
+export const makeRequest = async (url: string, method: string, body?: any) => {
+
   let response = await fetch(url, {
     method,
     body: JSON.stringify(body),

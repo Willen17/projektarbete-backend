@@ -31,8 +31,8 @@ mongoose.connect(process.env.databas!, (err) => {
     console.error(err);
   } else {
     console.log("Connection to database established!");
-    app.listen(3000, () =>
-      console.log("Server is running on http://localhost:3000")
+    app.listen(3001, () =>
+      console.log("Server is running on http://localhost:3001")
     );
   }
 });
