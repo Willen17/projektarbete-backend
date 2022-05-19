@@ -10,10 +10,10 @@ POST http://localhost:3000/api/user
 Content-Type: application/json
 
 {
-  "firstname": "johan",
-  "lastname": "Jensen",
-  "password": "1234",
-  "email": "johan@jensen.se"
+  "firstname": "admin",
+  "lastname": "admin",
+  "password": "admin",
+  "email": "admin"
 }
 
 ###
@@ -22,8 +22,8 @@ POST http://localhost:3000/api/login
 Content-Type: application/json
 
 {
-  "email": "johan@jensen.se",
-  "password": "1234"
+  "email": "admin",
+  "password": "admin"
 }
 
 ###

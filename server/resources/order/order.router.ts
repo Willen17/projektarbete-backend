@@ -1,5 +1,5 @@
 import express from "express";
-import { adminSecure, isCreator, secure } from "../middlewares";
+import { adminSecure, isCreator, isLoggedIn } from "../middlewares";
 import {
   getAllOrders,
   addOrder,
@@ -10,8 +10,8 @@ import {
 
 export const orderRouter = express
   .Router()
-  .get("/order", getAllOrders)
+  .get("/order", adminSecure, getAllOrders)
   .get("/order/:id", isCreator, getOneOrder)
-  .post("/order", secure, addOrder)
+  .post("/order", isLoggedIn, addOrder)
   .put("/order/:id", isCreator, updateOrder)
   .delete("/order/:id", adminSecure, deleteOrder);

@@ -40,3 +40,9 @@ export const updateProduct = async (
 export const deleteProduct = (req: Request, res: Response) => {
   res.status(200).json("DELETED PRODUCT");
 };
+
+export const getCategoryProducts = async (req : Request, res : Response) => {
+  let products = await ProductModel.find({category: req.params.category})
+  if(products.length < 1) return res.status(404).json('Inga produkter i den kategorin')
+  res.status(200).json(products)
+}

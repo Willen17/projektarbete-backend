@@ -1,6 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
-import { userRouter, orderRouter, productRouter } from "./resources";
+import { userRouter, orderRouter, productRouter, deliveryRouter } from "./resources";
 import "dotenv/config";
 import cookieSession from "cookie-session";
 
@@ -22,6 +22,7 @@ app.use(
 app.use("/api", userRouter);
 app.use("/api", orderRouter);
 app.use("/api", productRouter);
+app.use("/api", deliveryRouter)
 // Add more routers here....
 
 // Connect to DB & start server
