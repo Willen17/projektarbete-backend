@@ -81,6 +81,9 @@ function Header() {
             <img className={icon} src={cartIcon} alt="cart" />
           </Badge>
         </Link>
+        <Link to="/login">
+          <img className={icon} src={userIcon} alt="admin" />
+        </Link>
       </div>
     );
   };
