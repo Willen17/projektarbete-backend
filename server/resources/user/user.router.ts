@@ -1,5 +1,5 @@
 import express from "express";
-import { adminSecure, secure } from "../middlewares";
+import { adminSecure, isLoggedIn } from "../middlewares";
 import {
   getAllUsers,
   addUser,

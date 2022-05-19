@@ -17,7 +17,7 @@ const orderSchema = new mongoose.Schema(
     products: [{ type: {} /*PRODUCT????*/, required: true }],
     paymentMethod: [{ type: String, required: true }],
     total: { type: Number, required: true },
-    deliveryMethod: { type: String, required: true },
+    deliveryMethod: { type: String, ref: "deliveryOption", required: true },
     isOrderSent: { type: Boolean, required: true },
     address: { type: {} /* ADDRESS??? */, required: true },
   },

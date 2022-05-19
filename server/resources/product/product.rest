@@ -2,6 +2,9 @@ GET http://localhost:3000/api/product
 
 ###
 GET http://localhost:3000/api/product/6284c0fd3ad1995085fd395a
+###
+
+GET http://localhost:3000/api/category/chairs
 
 ###
 
@@ -9,12 +12,12 @@ POST http://localhost:3000/api/product
 Content-Type: application/json
 
 {
-"image": "www.google.com/chair",
-  "title": "Chair",
-  "description": "This a chair",
-  "price": 2999,
-  "stock": 52,
-  "category": ["furniture", "chairs"]
+"image": "www.google.com/chair2",
+  "title": "Chair2",
+  "description": "This a chair2",
+  "price": 292,
+  "stock": 1,
+  "category": ["furniture"]
 }
 
 ###
