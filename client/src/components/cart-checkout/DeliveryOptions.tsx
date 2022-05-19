@@ -50,7 +50,40 @@ const DeliveryOptions = () => {
           onChange={handleRadioChange}
           value={deliveryMethod}
         >
-          {shippingProvider.map((provider) => {
+          {shippingProvider.map((provider) => (
+            <div>
+              <FormControlLabel
+                control={<Radio required={true} />}
+                value={provider.title}
+                key={provider.title}
+                onClick={() => selectShippment(provider)}
+                label={
+                  <Box
+                    sx={{
+                      display: "flex",
+                      placeItems: "center",
+                      justifyContent: "space-between",
+                      m: "1rem",
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    <img
+                      src={provider.imgURL}
+                      alt={provider.title}
+                      height="30px"
+                    />
+                    <Typography variant="body2" sx={{ marginX: "1rem" }}>
+                      {provider.cost} SEK
+                    </Typography>
+                    <Typography variant="overline" color="#6C665F">
+                      ({provider.deliveryTime})
+                    </Typography>
+                  </Box>
+                }
+              />
+            </div>
+          ))}
+          {/* {shippingProvider.map((provider) => {
             return provider.cost !== 0 ? (
               <FormControlLabel
                 control={<Radio required={true} />}
@@ -70,7 +103,7 @@ const DeliveryOptions = () => {
                     <img
                       src={provider.logoImage}
                       alt={provider.providerName}
-                      height="18px"
+                      height="30px"
                     />
                     <Typography variant="body2" sx={{ marginX: "1rem" }}>
                       {provider.cost} SEK
@@ -110,7 +143,7 @@ const DeliveryOptions = () => {
                 }
               />
             );
-          })}
+          })} */}
         </RadioGroup>
       </Box>
     </Container>

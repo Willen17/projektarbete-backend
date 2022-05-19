@@ -28,7 +28,7 @@ interface CartContextValue {
 export const CartContext = createContext<CartContextValue>({
   cart: [],
   shipper: {
-    providerName: "",
+    title: "",
     cost: 0,
     deliveryTime: "",
   },
@@ -48,7 +48,7 @@ export const CartContext = createContext<CartContextValue>({
 const CartProvider: FC = (props) => {
   const [cart, setCart] = useLocalStorageState<ItemData[]>([], "cc-cart");
   const [shipper, setShipper] = useState<ShippingProvider>({
-    providerName: "Postnord",
+    title: "Postnord",
     cost: 495,
     deliveryTime: "3-5 Weekdays",
   });

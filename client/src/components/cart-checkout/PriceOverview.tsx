@@ -26,7 +26,7 @@ const PriceOverview = () => {
         Total: {numWithSpaces(UseSumTotal(cart, true))} SEK
       </Typography>
       <Typography color="#6C665F" variant="overline">
-        includes delivery fee ({shipper.cost} SEK - {shipper.providerName})
+        includes delivery fee ({shipper.cost} SEK - {shipper.title})
       </Typography>
     </Box>
   );

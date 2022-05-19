@@ -1,29 +1,19 @@
 import DhlLogo from "./assets/images/DhlLogo.png";
 import PostnordLogo from "./assets/images/PostnordLogo.webp";
+import pickup from "./assets/images/pickup.png"
+import { makeRequest } from "./Helper";
 
 export interface ShippingProvider {
-  providerName: string;
+  title: string;
   cost: number;
   deliveryTime: string;
-  logoImage?: string;
+  imgURL?: string;
 }
 
-export const shippingProvider: ShippingProvider[] = [
-  {
-    providerName: "Postnord",
-    cost: 495,
-    deliveryTime: "3-5 Weekdays",
-    logoImage: PostnordLogo,
-  },
-  {
-    providerName: "DHL",
-    cost: 345,
-    deliveryTime: "5-7 Weekdays",
-    logoImage: DhlLogo,
-  },
-  {
-    providerName: "Pick up at terminal",
-    cost: 0,
-    deliveryTime: "2-4 Weekdays",
-  },
-];
+async function getDeliveryOptions() {
+  let response = await makeRequest('/api/deliveryOptions', "GET")
+  let data : [] = await response.json()
+  return data
+}
+
+export const shippingProvider: ShippingProvider[] = getDeliveryOptions()

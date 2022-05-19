@@ -273,7 +273,7 @@ const OrderConfirmation = () => {
                         }}
                         colSpan={3}
                       >
-                        {orderDetail.shipmentOption.providerName}&nbsp;(
+                        {orderDetail.shipmentOption.title}&nbsp;(
                         {orderDetail.shipmentOption.deliveryTime})
                       </TableCell>
                     </TableRow>

@@ -48,3 +48,15 @@ export const sumDeliveryCost = (
   console.log(sum);
   return sum;
 };
+
+// make data fetching request
+export const makeRequest = async (url: string, method: string, body?: any) => {
+  let response = await fetch(url, {
+    method,
+    body: JSON.stringify(body),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
