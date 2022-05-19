@@ -8,10 +8,11 @@ import {
 } from "@mui/material";
 import { FormEvent, useState } from "react";
 import { useCart } from "../../context/CartContextProvider";
-import { shippingProvider } from "../../ShippingProviderData";
+import { useOrder } from "../../context/OrderContextProvider";
 
 const DeliveryOptions = () => {
   const { selectShippment } = useCart();
+  const { shippingProviders } = useOrder();
   const [deliveryMethod, setDeliveryMethod] = useState("");
   const handleRadioChange = (event: FormEvent<HTMLInputElement>) => {
     setDeliveryMethod(event.currentTarget.value);
@@ -50,40 +51,38 @@ const DeliveryOptions = () => {
           onChange={handleRadioChange}
           value={deliveryMethod}
         >
-          {shippingProvider.map((provider) => (
-            <div>
-              <FormControlLabel
-                control={<Radio required={true} />}
-                value={provider.title}
-                key={provider.title}
-                onClick={() => selectShippment(provider)}
-                label={
-                  <Box
-                    sx={{
-                      display: "flex",
-                      placeItems: "center",
-                      justifyContent: "space-between",
-                      m: "1rem",
-                      flexWrap: "wrap",
-                    }}
-                  >
-                    <img
-                      src={provider.imgURL}
-                      alt={provider.title}
-                      height="30px"
-                    />
-                    <Typography variant="body2" sx={{ marginX: "1rem" }}>
-                      {provider.cost} SEK
-                    </Typography>
-                    <Typography variant="overline" color="#6C665F">
-                      ({provider.deliveryTime})
-                    </Typography>
-                  </Box>
-                }
-              />
-            </div>
+          {shippingProviders.map((provider) => (
+            <FormControlLabel
+              control={<Radio required={true} />}
+              value={provider.title}
+              key={provider.title}
+              onClick={() => selectShippment(provider)}
+              label={
+                <Box
+                  sx={{
+                    display: "flex",
+                    placeItems: "center",
+                    justifyContent: "space-between",
+                    m: "1rem",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <img
+                    src={provider.imgURL}
+                    alt={provider.title}
+                    height="30px"
+                  />
+                  <Typography variant="body2" sx={{ marginX: "1rem" }}>
+                    {provider.cost} SEK
+                  </Typography>
+                  <Typography variant="overline" color="#6C665F">
+                    ({provider.deliveryTime})
+                  </Typography>
+                </Box>
+              }
+            />
           ))}
-          {/* {shippingProvider.map((provider) => {
+          {/* {shippingProviders.map((provider) => {
             return provider.cost !== 0 ? (
               <FormControlLabel
                 control={<Radio required={true} />}
