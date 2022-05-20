@@ -35,26 +35,38 @@ function CategoryPage() {
           {params.category}
         </Typography>
       </Container>
-      {productList.length ? (
-        productList.map((product, index) => (
-          <ProductCard product={product} key={index} />
-        ))
-      ) : (
-        <Box
-          sx={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "3rem 10rem",
-            justifyContent: "center",
-            paddingTop: "2rem",
-            paddingBottom: "6rem",
-          }}
-        >
-          <Box sx={{ display: "flex" }}>
-            <CircularProgress />
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "3rem 10rem",
+          justifyContent: "center",
+          paddingTop: "2rem",
+          paddingBottom: "6rem",
+          flexDirection: "row",
+        }}
+      >
+        {productList.length ? (
+          productList.map((product, index) => (
+            <ProductCard product={product} key={index} />
+          ))
+        ) : (
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "3rem 10rem",
+              justifyContent: "center",
+              paddingTop: "2rem",
+              paddingBottom: "6rem",
+            }}
+          >
+            <Box sx={{ display: "flex" }}>
+              <CircularProgress />
+            </Box>
           </Box>
-        </Box>
-      )}
+        )}
+      </Box>
     </Box>
   );
 }
