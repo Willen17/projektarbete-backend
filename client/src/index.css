@@ -6,3 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.css-18lrjg1-MuiCircularProgress-root {
+  color: #6c665f !important;
+}
