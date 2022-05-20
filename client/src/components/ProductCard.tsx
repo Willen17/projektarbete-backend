@@ -15,7 +15,11 @@ import { numWithSpaces } from "../Helper";
 import { ProductData } from "../ProductData";
 import AddToCartButton from "./shared/AddToCartButton";
 
-function ProductCard(product: ProductData) {
+interface cardProps {
+  product: ProductData;
+}
+
+function ProductCard(props: cardProps) {
   return (
     <Box
       sx={{
@@ -27,16 +31,16 @@ function ProductCard(product: ProductData) {
         paddingBottom: "6rem",
       }}
     >
-      <Card sx={cardStyle} key={product.title}>
-        <Link to={`/detail/${product._id}`} style={linkStyle}>
+      <Card sx={cardStyle} key={props.product.title}>
+        <Link to={`/detail/${props.product._id}`} style={linkStyle}>
           <CardActionArea>
             <CardMedia
               component="img"
               height="250"
               style={imgStyle}
-              src={product.image}
-              title={product.title}
-              id={product._id}
+              src={props.product.image}
+              title={props.product.title}
+              id={props.product._id}
             ></CardMedia>
           </CardActionArea>
           <Typography
@@ -45,7 +49,7 @@ function ProductCard(product: ProductData) {
             variant="h5"
             component="h2"
           >
-            {product.title}
+            {props.product.title}
           </Typography>
         </Link>
         <Box
@@ -56,10 +60,10 @@ function ProductCard(product: ProductData) {
           }}
         >
           <Typography variant="body2" color="text.secondary">
-            {numWithSpaces(product.price)} SEK
+            {numWithSpaces(props.product.price)} SEK
           </Typography>
           <CardActions>
-            <AddToCartButton product={product} size="small" />
+            <AddToCartButton product={props.product} size="small" />
           </CardActions>
         </Box>
       </Card>

@@ -15,11 +15,11 @@ function CategoryPage() {
         `/api/category/${params.category}`,
         "GET"
       );
+      setProductList(response);
       console.log(response);
-      // setProductList(response);
     };
     fetchData();
-  }, []);
+  }, [params]);
 
   return (
     <Box>
@@ -36,8 +36,9 @@ function CategoryPage() {
           Furniture
         </Typography>
       </Container>
-
-      {/* <ProductCard /> */}
+      {productList.map((product, index) => (
+        <ProductCard product={product} key={index} />
+      ))}
     </Box>
   );
 }

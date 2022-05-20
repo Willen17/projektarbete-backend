@@ -5,14 +5,14 @@ import DetailPage from "./components/ProductPage";
 import Layout from "./components/Layout";
 import NotFound from "./components/NotFound";
 import OrderConfirmation from "./components/cart-checkout/OrderConfirmation";
-import ProductPage from "./components/CategoryPage";
+import ProductPage from "./components/ProductPage";
 import EmptyPage from "./components/shared/EmptyPage";
 import StartPage from "./components/StartPage";
 import ProductProvider from "./context/AdminPageContext";
 import CartProvider from "./context/CartContextProvider";
 import OrderProvider from "./context/OrderContextProvider";
 import CategoryPage from "./components/CategoryPage";
-
+import Header from "./components/Header";
 function App() {
   return (
     <BrowserRouter>
