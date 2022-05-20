@@ -32,7 +32,7 @@ function Header() {
   const menuLeft: Page[] = [
     {
       label: "Furniture",
-      href: "/furniture",
+      href: "/category/furniture",
     },
     {
       label: "Textiles",
@@ -40,18 +40,18 @@ function Header() {
     },
     {
       label: "Lighting",
-      href: "/lighting",
+      href: "/category/lighting",
     },
   ];
 
   const menuRight: Page[] = [
     {
       label: "Decoration",
-      href: "/decoration",
+      href: "/category/decoration",
     },
     {
       label: "Inspiration",
-      href: "/inspiration",
+      href: "/category/inspiration",
     },
   ];
 

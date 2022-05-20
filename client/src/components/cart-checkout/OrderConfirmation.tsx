@@ -103,7 +103,7 @@ const OrderConfirmation = () => {
                   </TableHead>
                   <TableBody>
                     {orderDetail.boughtItems.map((product) => (
-                      <TableRow key={product.id}>
+                      <TableRow key={product._id}>
                         <TableCell
                           size="small"
                           component="th"
