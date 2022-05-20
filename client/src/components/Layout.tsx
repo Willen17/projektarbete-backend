@@ -13,9 +13,9 @@ function Layout() {
     <div>
       <button onClick={() => console.log(makeRequest('/api/product', "GET"))} >Api</button>
       <Header />
-      <ErrorBoundary onGoBack={() => navigate("/")}>
+      {/* <ErrorBoundary onGoBack={() => navigate("/")}>
         <Outlet />
-      </ErrorBoundary>
+      </ErrorBoundary> */}
       <Footer />
     </div>
   );
