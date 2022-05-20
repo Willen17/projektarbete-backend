@@ -2,13 +2,36 @@ import {
     Box,
     Button,
     Container,
-    Link,
     TextField,
     Typography,
   } from "@mui/material";
+import { useState } from "react";
   import { NavLink } from "react-router-dom";
+import { makeRequest } from "../Helper";
   
   function LogIn() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value);
+      }
+
+      const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+      }
+
+    const signInHandler = (e) => {
+        e.preventDefault();
+        const userData = {
+            email: email,
+            password: password,
+            isAdmin: false,
+        }
+
+        makeRequest('/api/login', "POST", userData);
+    }
+
     return (
       <Container
         sx={{
@@ -60,45 +83,56 @@ import {
                 margin: ".5rem auto",
               }}
             ></Box>
-  
-            <TextField
-              style={{
-                backgroundColor: "white",
-                height: "55px",
-                marginBottom: ".3rem",
-                width: "18rem",
-              }}
-              id="email"
-              name="email"
-              label="Email"
-              type="text"
-              margin="normal"
-            />
-            <TextField
-              style={{
-                backgroundColor: "white",
-                height: "55px",
-                marginBottom: ".3rem",
-                width: "18rem",
-              }}
-              id="password"
-              name="password"
-              label="Password"
-              type="password"
-              margin="normal"
-            />
-            <Button
-              variant="contained"
-              style={{
-                display: "flex",
-                width: "fit-content",
-                backgroundColor: "#CAC2B9",
-                textTransform: "none",
-                marginTop: "1rem",
-              }}
-            >
-              Log In
-            </Button>
+            <form
+                style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center"
+                }}
+                onSubmit={signInHandler}>
+                <TextField
+                    style={{
+                        backgroundColor: "white",
+                        height: "55px",
+                        marginBottom: ".3rem",
+                        width: "18rem",
+                    }}
+                    id="email"
+                    name="email"
+                    label="Email"
+                    type="text"
+                    margin="normal"
+                    onChange={handleEmailChange}
+                />
+                <TextField
+                    style={{
+                        backgroundColor: "white",
+                        height: "55px",
+                        marginBottom: ".3rem",
+                        width: "18rem",
+                    }}
+                    id="password"
+                    name="password"
+                    label="Password"
+                    type="password"
+                    margin="normal"
+                    onChange={handlePasswordChange}
+                />
+                <Button
+                    variant="contained"
+                    style={{
+                        display: "flex",
+                        width: "fit-content",
+                        backgroundColor: "#CAC2B9",
+                        textTransform: "none",
+                        marginTop: "1rem",
+                    }}
+                    type="submit"
+                >
+                Log In
+                </Button>
+            </form>
             <NavLink
               style={{
                 color: "#303030",
