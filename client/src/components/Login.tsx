@@ -4,25 +4,29 @@ import {
     Container,
     TextField,
     Typography,
+    Alert,
+    AlertProps
   } from "@mui/material";
 import { useState } from "react";
   import { NavLink } from "react-router-dom";
 import { makeRequest } from "../Helper";
+
+function MuiAlert(props: JSX.IntrinsicAttributes & AlertProps) {
+    return <Alert elevation={6} variant="filled" {...props} />;
+  }
   
   function LogIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
-    const handleEmailChange = (e) => {
-        setEmail(e.target.value);
-      }
-
-      const handlePasswordChange = (e) => {
-        setPassword(e.target.value);
-      }
+    const [error, setError] = useState('');
 
     const signInHandler = (e) => {
         e.preventDefault();
+        if(email === '' || password === '') {
+            setError("All fields are required");
+            return;
+        }
+        setError('');
         const userData = {
             email: email,
             password: password,
@@ -42,6 +46,17 @@ import { makeRequest } from "../Helper";
           alignItems: "center",
         }}
       >
+        {error && (
+            <MuiAlert 
+                style={{
+                    marginBottom: '-2rem', 
+                    marginTop: '2rem'
+                }} 
+                severity="error" 
+                onClick={() => setError('')}>
+                {error}
+            </MuiAlert>
+        )}
         <Box
           sx={{
             height: 510,
@@ -103,7 +118,7 @@ import { makeRequest } from "../Helper";
                     label="Email"
                     type="text"
                     margin="normal"
-                    onChange={handleEmailChange}
+                    onChange={e => setEmail(e.target.value)}
                 />
                 <TextField
                     style={{
@@ -117,7 +132,7 @@ import { makeRequest } from "../Helper";
                     label="Password"
                     type="password"
                     margin="normal"
-                    onChange={handlePasswordChange}
+                    onChange={e => setPassword(e.target.value)}
                 />
                 <Button
                     variant="contained"

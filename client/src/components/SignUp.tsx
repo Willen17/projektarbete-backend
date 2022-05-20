@@ -6,35 +6,31 @@ import {
     FormControlLabel,
     TextField,
     Typography,
+    Alert,
+    AlertProps
   } from "@mui/material";
 import { useState } from "react";
   import { NavLink } from "react-router-dom";
 import { makeRequest } from "../Helper";
+
+function MuiAlert(props: JSX.IntrinsicAttributes & AlertProps) {
+    return <Alert elevation={6} variant="filled" {...props} />;
+  }
   
   function SignUp() {
-      const [firstName, setFirstName] = useState('');
-      const [lastName, setLastName] = useState('');
-      const [email, setEmail] = useState('');
-      const [password, setPassword] = useState('');
-
-      const handleFirstNameChange = (e) => {
-        setFirstName(e.target.value);
-      }
-
-      const handleLastNameChange = (e) => {
-        setLastName(e.target.value);
-      }
-
-      const handleEmailChange = (e) => {
-        setEmail(e.target.value);
-      }
-
-      const handlePasswordChange = (e) => {
-        setPassword(e.target.value);
-      }
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
     const signUpHandler = (e) => {
         e.preventDefault();
+        if(firstName === '' || lastName === '' || email === '' || password === '') {
+            setError("All fields are required");
+            return;
+        }
+        setError('');
         const newUserData = {
             firstname: firstName,
             lastname: lastName,
@@ -56,6 +52,17 @@ import { makeRequest } from "../Helper";
           alignItems: "center",
         }}
       >
+        {error && (
+            <MuiAlert 
+                style={{
+                    marginBottom: '-2rem', 
+                    marginTop: '2rem'
+                }} 
+                severity="error" 
+                onClick={() => setError('')}>
+                {error}
+            </MuiAlert>
+        )}
         <Box
           sx={{
             height: 510,
@@ -117,7 +124,8 @@ import { makeRequest } from "../Helper";
                 label="First Name"
                 type="text"
                 margin="normal"
-                onChange={handleFirstNameChange}
+                value={firstName}
+                onChange={e => setFirstName(e.target.value)}
                 />
                 <TextField
                 style={{
@@ -131,7 +139,8 @@ import { makeRequest } from "../Helper";
                 label="Last Name"
                 type="text"
                 margin="normal"
-                onChange={handleLastNameChange}
+                value={lastName}
+                onChange={e => setLastName(e.target.value)}
                 />
                 <TextField
                 style={{
@@ -145,7 +154,8 @@ import { makeRequest } from "../Helper";
                 label="Email"
                 type="text"
                 margin="normal"
-                onChange={handleEmailChange}
+                value={email}
+                onChange={e => setEmail(e.target.value)}
                 />
                 <TextField
                 style={{
@@ -159,7 +169,8 @@ import { makeRequest } from "../Helper";
                 label="Password"
                 type="password"
                 margin="normal"
-                onChange={handlePasswordChange}
+                value={password}
+                onChange={e => setPassword(e.target.value)}
                 />
                 <FormControlLabel
                 style={{ color: "grey", marginTop: ".5rem" }}
