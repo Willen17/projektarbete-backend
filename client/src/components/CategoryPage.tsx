@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box, CircularProgress, Container, Typography } from "@mui/material";
 import ProductCard from "./ProductCard";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -20,7 +20,6 @@ function CategoryPage() {
     };
     fetchData();
   }, [params]);
-
   return (
     <Box>
       <Container>
@@ -33,12 +32,29 @@ function CategoryPage() {
           }}
           variant="h5"
         >
-          Furniture
+          {params.category}
         </Typography>
       </Container>
-      {productList.map((product, index) => (
-        <ProductCard product={product} key={index} />
-      ))}
+      {productList.length ? (
+        productList.map((product, index) => (
+          <ProductCard product={product} key={index} />
+        ))
+      ) : (
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "3rem 10rem",
+            justifyContent: "center",
+            paddingTop: "2rem",
+            paddingBottom: "6rem",
+          }}
+        >
+          <Box sx={{ display: "flex" }}>
+            <CircularProgress />
+          </Box>
+        </Box>
+      )}
     </Box>
   );
 }
