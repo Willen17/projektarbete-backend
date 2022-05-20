@@ -23,6 +23,7 @@ function MuiAlert(props: JSX.IntrinsicAttributes & AlertProps) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [isApplyingForAdmin, setIsApplyingForAdmin] = useState(false);
 
     const signUpHandler = (e) => {
         e.preventDefault();
@@ -31,12 +32,14 @@ function MuiAlert(props: JSX.IntrinsicAttributes & AlertProps) {
             return;
         }
         setError('');
+        console.log(isApplyingForAdmin);
         const newUserData = {
             firstname: firstName,
             lastname: lastName,
             email: email,
             password: password,
             isAdmin: false,
+            isApplyingForAdmin: isApplyingForAdmin,
         }
 
         makeRequest('/api/user', "POST", newUserData);
@@ -175,6 +178,13 @@ function MuiAlert(props: JSX.IntrinsicAttributes & AlertProps) {
                 <FormControlLabel
                 style={{ color: "grey", marginTop: ".5rem" }}
                 control={<Checkbox />}
+                onChange={e => setIsApplyingForAdmin(() => {
+                    if(isApplyingForAdmin === false) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                })}
                 label="Apply for being administrator"
                 />
                 <Button
