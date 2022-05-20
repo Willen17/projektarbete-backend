@@ -89,6 +89,9 @@ function Header() {
             />
           </Badge>
         </Link>
+        <Link to="/login">
+          <img className={icon} src={userIcon} alt="admin" />
+        </Link>
       </div>
     );
   };

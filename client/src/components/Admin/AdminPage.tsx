@@ -41,7 +41,6 @@ function AdminPage() {
         </Modal>
       </Box>
       <AdminCollapsibleTable />
-      
     </Container>
   );
 }

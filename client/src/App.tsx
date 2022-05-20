@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AdminPage from "./components/Admin/AdminPage";
+import SignUp from "./components/SignUp";
 import CheckoutPage from "./components/cart-checkout/CheckoutPage";
 import DetailPage from "./components/DetailPage";
 import Layout from "./components/Layout";
@@ -11,6 +12,7 @@ import StartPage from "./components/StartPage";
 import ProductProvider from "./context/AdminPageContext";
 import CartProvider from "./context/CartContextProvider";
 import OrderProvider from "./context/OrderContextProvider";
+import LogIn from "./components/LogIn";
 
 function App() {
   return (
@@ -42,6 +44,8 @@ function App() {
                 <Route path="/confirmation" element={<OrderConfirmation />} />
                 {/* added a quick fix in AdminPage component for now */}
                 <Route path="/admin" element={<AdminPage />} />
+                <Route path="/signup" element={<SignUp />} />
+                <Route path="/login" element={<LogIn />} />
                 <Route path="/checkoutpage" element={<CheckoutPage />} />
                 <Route path="*" element={<NotFound />} />
               </Route>
