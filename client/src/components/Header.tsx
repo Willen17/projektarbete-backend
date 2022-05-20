@@ -13,9 +13,9 @@ import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import cartIcon from "../assets/icons/icon-shopping-cart.webp";
-import userIcon from "../assets/icons/icon-user.webp";
-import logo from "../assets/images/logo.svg";
+// import cartIcon from "../assets/icons/icon-shopping-cart.webp";
+// import userIcon from "../assets/icons/icon-user.webp";
+// import logo from "../assets/images/logo.svg";
 import { useCart } from "../context/CartContextProvider";
 import { sumQuantity } from "../Helper";
 
@@ -67,7 +67,11 @@ function Header() {
     return (
       <div className={iconsContainer}>
         <Link to="/admin">
-          <img className={icon} src={userIcon} alt="admin" />
+          <img
+            className={icon}
+            src="./assets/icons/icon-user.webp"
+            alt="admin"
+          />
         </Link>
         <Link className={quantityIcon} to="/checkoutpage">
           <Badge
@@ -78,7 +82,11 @@ function Header() {
             badgeContent={sumQuantity(cart)}
             color="warning"
           >
-            <img className={icon} src={cartIcon} alt="cart" />
+            <img
+              className={icon}
+              src="./assets/icons/icon-shopping-cart.webp"
+              alt="cart"
+            />
           </Badge>
         </Link>
       </div>
@@ -230,7 +238,11 @@ function Header() {
         </Box>
         {getMenuButtonsLeft()}
         <Link to="/">
-          <img className={ccLogo} src={logo} alt="comme ci comme ça"></img>
+          <img
+            className={ccLogo}
+            src="./assets/images/logo.svg"
+            alt="comme ci comme ça"
+          ></img>
         </Link>
         {getMenuButtonsRight()}
         {icons()}

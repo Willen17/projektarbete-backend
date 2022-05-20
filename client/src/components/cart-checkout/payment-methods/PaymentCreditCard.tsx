@@ -1,6 +1,6 @@
 import { Box, TextField } from "@mui/material";
 import { useFormikContext } from "formik";
-import creditCardLogo from "../../../assets/images/creditCardLogo.png";
+// import creditCardLogo from "../../../assets/images/creditCardLogo.png";
 import { FormValues } from "../CheckoutFormContainer";
 
 const PaymentCreditCard = () => {
@@ -36,7 +36,7 @@ const PaymentCreditCard = () => {
         }}
       >
         <img
-          src={creditCardLogo}
+          src="./assets/images/creditCardLogo.png"
           alt="creditCard"
           height="20px"
           width="50px"
