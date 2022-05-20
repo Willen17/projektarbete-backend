@@ -1,5 +1,5 @@
 import { Box, Container, Typography } from "@mui/material";
-import emptyCart from "../assets/images/empty-cart.webp";
+// import emptyCart from "../assets/images/empty-cart.webp";
 import HomeButton from "./shared/HomeButton";
 
 const EmptyCart = () => {
@@ -25,7 +25,11 @@ const EmptyCart = () => {
           textAlign: "center",
         }}
       >
-        <img src={emptyCart} alt="empty cart" height="300px" />
+        <img
+          src="./assets/images/empty-cart.webp"
+          alt="empty cart"
+          height="300px"
+        />
         <Typography>Your cart is empty.</Typography>
         <HomeButton message="Explore our collections" />
       </Box>

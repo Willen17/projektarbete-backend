@@ -1,7 +1,7 @@
 import { Container, Typography } from "@mui/material";
 import React from "react";
 import { useParams } from "react-router-dom";
-import detailInfo from "../assets/images/detailinfo.png";
+// import detailInfo from "../assets/images/detailinfo.png";
 import { ProductContext } from "../context/AdminPageContext";
 import { numWithSpaces } from "../Helper";
 import AddToCartButton from "./shared/AddToCartButton";
@@ -81,7 +81,6 @@ function DetailPage() {
             letterSpacing: "3px",
           }}
         />
-        <img src={detailInfo} alt="product details" width="350px" />
       </Container>
     </Container>
   );

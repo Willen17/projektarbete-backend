@@ -3,8 +3,8 @@ import { Box, Container, Typography } from "@mui/material";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { useState } from "react";
-import invoiceLogo from "../../assets/images/invoiceLogo.png";
-import SwishLogo from "../../assets/images/SwishLogo.svg";
+// import invoiceLogo from "../../assets/images/invoiceLogo.png";
+// import SwishLogo from "../../assets/images/SwishLogo.svg";
 import { useCart } from "../../context/CartContextProvider";
 import PaymentCreditCard from "./payment-methods/PaymentCreditCard";
 import PaymentInvoice from "./payment-methods/PaymentInvoice";
@@ -76,7 +76,11 @@ const PaymentMethod = () => {
             value="swish"
             onClick={selectSwish}
           >
-            <img src={SwishLogo} alt="Swish" height="20px" />
+            <img
+              src="./assets/images/SwishLogo.svg"
+              alt="Swish"
+              height="20px"
+            />
           </ToggleButton>
           <ToggleButton
             id="invoice"
@@ -85,7 +89,11 @@ const PaymentMethod = () => {
             value="invoice"
             onClick={selectInvoice}
           >
-            <img src={invoiceLogo} alt="invoice" height="20px" />
+            <img
+              src="./assets/images/invoiceLogo.png"
+              alt="invoice"
+              height="20px"
+            />
           </ToggleButton>
         </ToggleButtonGroup>
 

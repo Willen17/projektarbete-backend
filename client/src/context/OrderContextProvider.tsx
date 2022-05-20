@@ -1,4 +1,5 @@
-import { createContext, FC, useContext, useState } from "react";
+import { createContext, FC, useContext, useEffect, useState } from "react";
+import { makeRequest } from "../Helper";
 import { ShippingProvider } from "../ShippingProviderData";
 import { ItemData, useCart } from "./CartContextProvider";
 
@@ -13,7 +14,9 @@ interface OrderData {
 export interface Customer {
   name: string;
   email: string;
-  address: string;
+  street: string;
+  zipcode: string | number;
+  city: string;
   phoneNumber: number | "";
 }
 
@@ -21,17 +24,22 @@ interface OrderContextValue {
   order: OrderData[];
   createOrder: (customerValues: Customer) => void;
   generateOrderNum: () => string;
+  shippingProviders: ShippingProvider[];
 }
 
 export const OrderContext = createContext<OrderContextValue>({
   order: [],
   createOrder: () => {},
   generateOrderNum: () => "",
+  shippingProviders: [],
 });
 
 const OrderProvider: FC = (props) => {
   const { cart, shipper, paymentMethod } = useCart();
   const [order, setOrder] = useState<OrderData[]>([]);
+  const [shippingProviders, setShippingProviders] = useState<
+    ShippingProvider[]
+  >([]);
 
   /** push in everything related to the order to the order state */
   const createOrder = (customerValues: Customer) => {
@@ -39,7 +47,10 @@ const OrderProvider: FC = (props) => {
     const customer: Customer = {
       name: customerValues.name,
       email: customerValues.email,
-      address: customerValues.address,
+      street: customerValues.street,
+      zipcode: customerValues.zipcode,
+      city: customerValues.city,
+
       phoneNumber: customerValues.phoneNumber,
     };
     let updatedOrder: OrderData = {
@@ -65,12 +76,21 @@ const OrderProvider: FC = (props) => {
     return orderNum;
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      let response = await makeRequest("/api/deliveryOptions", "GET");
+      setShippingProviders(response);
+    };
+    fetchData();
+  }, []);
+
   return (
     <OrderContext.Provider
       value={{
         order,
         createOrder,
         generateOrderNum,
+        shippingProviders,
       }}
     >
       {props.children}

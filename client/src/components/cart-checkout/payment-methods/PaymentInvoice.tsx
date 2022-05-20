@@ -1,6 +1,6 @@
 import { Box, TextField } from "@mui/material";
 import { useFormikContext } from "formik";
-import invoiceLogo from "../../../assets/images/invoiceLogo.png";
+// import invoiceLogo from "../../../assets/images/invoiceLogo.png";
 import { FormValues } from "../../cart-checkout/CheckoutFormContainer";
 
 const PaymentInvoice = () => {
@@ -17,7 +17,7 @@ const PaymentInvoice = () => {
       }}
     >
       <img
-        src={invoiceLogo}
+        src="./assets/images/invoiceLogo.png"
         alt="invoice"
         height="25px"
         style={{ marginTop: ".5rem", marginRight: "1rem" }}

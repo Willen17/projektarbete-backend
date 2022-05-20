@@ -34,7 +34,9 @@ function CheckoutFormContainer() {
   const InitialValue: FormValues = {
     name: "",
     email: "",
-    address: "",
+    street: "",
+    zipcode: "",
+    city: "",
     phoneNumber: "",
     cardNumber: "",
     cardExpiry: "",
@@ -45,7 +47,9 @@ function CheckoutFormContainer() {
 
   const ValidationSchema = yup.object().shape({
     name: yup.string().min(2).required("Required"),
-    address: yup.string().min(5).required("Required"),
+    street: yup.string().min(5).required("Required"),
+    zipcode: yup.string().min(5).max(5).required("Required"),
+    city: yup.string().min(5).required("Required"),
     email: yup.string().email("Invalid email").required("Required"),
     phoneNumber: yup
       .string()
