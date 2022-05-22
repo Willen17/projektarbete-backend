@@ -15,6 +15,7 @@ import OrderProvider from "./context/OrderContextProvider";
 import CategoryPage from "./components/CategoryPage";
 import Header from "./components/Header";
 import LogIn from "./components/LogIn";
+import AdminOrders from "./components/Admin/AdminOrders";
 
 function App() {
   return (
@@ -50,7 +51,7 @@ function App() {
                 {/* <Route path="/admin" element={<AdminPage />} /> */}
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/login" element={<LogIn />} />
-
+                <Route path="/adminorders" element={<AdminOrders />} />
                 <Route path="/checkoutpage" element={<CheckoutPage />} />
                 <Route path="*" element={<NotFound />} />
               </Route>
