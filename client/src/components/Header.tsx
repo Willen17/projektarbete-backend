@@ -32,26 +32,26 @@ function Header() {
   const menuLeft: Page[] = [
     {
       label: "Furniture",
-      href: "/furniture",
+      href: "/category/furniture",
     },
     {
-      label: "Textiles",
-      href: "/textiles",
+      label: "Chairs",
+      href: "/category/chairs",
     },
     {
-      label: "Lighting",
-      href: "/lighting",
+      label: "Tables",
+      href: "/category/tables",
     },
   ];
 
   const menuRight: Page[] = [
     {
-      label: "Decoration",
-      href: "/decoration",
+      label: "Decorations",
+      href: "/category/decorations",
     },
     {
-      label: "Inspiration",
-      href: "/inspiration",
+      label: "Beds",
+      href: "/category/beds",
     },
   ];
 
@@ -69,7 +69,7 @@ function Header() {
         <Link to="/admin">
           <img
             className={icon}
-            src="./assets/icons/icon-user.webp"
+            src="/assets/icons/icon-user.webp"
             alt="admin"
           />
         </Link>
@@ -84,7 +84,7 @@ function Header() {
           >
             <img
               className={icon}
-              src="./assets/icons/icon-shopping-cart.webp"
+              src="/assets/icons/icon-shopping-cart.webp"
               alt="cart"
             />
           </Badge>
@@ -243,7 +243,7 @@ function Header() {
         <Link to="/">
           <img
             className={ccLogo}
-            src="./assets/images/logo.svg"
+            src="/assets/images/logo.svg"
             alt="comme ci comme ça"
           ></img>
         </Link>

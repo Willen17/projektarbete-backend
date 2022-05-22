@@ -47,7 +47,7 @@ function ShoppingCart() {
               display: "flex",
               padding: ".8rem 1rem",
             }}
-            key={product.id}
+            key={product._id}
           >
             <img
               style={{ width: 80 }}
@@ -55,7 +55,7 @@ function ShoppingCart() {
               alt={product.title}
             />
             <Box
-              key={product.id}
+              key={product._id}
               sx={{
                 width: 1,
                 display: "flex",
@@ -66,7 +66,7 @@ function ShoppingCart() {
               <Box>
                 <Link
                   style={{ color: "black", textDecoration: "none" }}
-                  to={`/detail/${product.id}`}
+                  to={`/detail/${product._id}`}
                 >
                   <Typography variant="inherit" align="left" m="1rem">
                     {product.title}

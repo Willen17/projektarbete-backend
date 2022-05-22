@@ -13,7 +13,7 @@ export const productRouter = express
   .Router()
   .get("/product", getAllProducts)
   .get("/product/:id", getOneProduct)
-  .get('/category/:category', getCategoryProducts)
+  .get("/category/:category", getCategoryProducts)
   .post("/product", adminSecure, addProduct)
   .put("/product/:id", adminSecure, updateProduct)
   .delete("/product/:id", adminSecure, deleteProduct);

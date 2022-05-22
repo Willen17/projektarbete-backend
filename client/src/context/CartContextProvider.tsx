@@ -59,9 +59,9 @@ const CartProvider: FC = (props) => {
 
   /** add items to cart: if the item does not exist in the cart, add; otherwise increase quantity by 1 */
   const addToCart = async (product: ProductData) => {
-    if (cart.some((item) => item.id === product.id)) {
+    if (cart.some((item) => item._id === product._id)) {
       const updatedCart = cart.map((item) => {
-        if (product.id !== item.id) return item;
+        if (product._id !== item._id) return item;
         return { ...item, quantity: item.quantity + 1 };
       });
       setCart(updatedCart);
@@ -74,7 +74,7 @@ const CartProvider: FC = (props) => {
   /** add item quantity by 1 in shopping cart */
   const onAddQuantity = (product: ItemData) => {
     const updatedQuantity = cart.map((item) => {
-      if (product.id !== item.id) return item;
+      if (product._id !== item._id) return item;
       return { ...item, quantity: item.quantity + 1 };
     });
     setCart(updatedQuantity);
@@ -83,7 +83,7 @@ const CartProvider: FC = (props) => {
   /** reduce item quantity by 1 in shopping cart */
   const onReduceQuantity = (product: ItemData) => {
     const updatedQuantity = cart.map((item) => {
-      if (product.id === item.id && item.quantity > 1)
+      if (product._id === item._id && item.quantity > 1)
         return { ...item, quantity: item.quantity - 1 };
       return item;
     });
@@ -92,8 +92,8 @@ const CartProvider: FC = (props) => {
 
   /** remove item from from the cart */
   const removeFromCart = (product: ItemData) => {
-    if (cart.find((item) => item.id === product.id)) {
-      const updatedCart = cart.filter((item) => item.id !== product.id);
+    if (cart.find((item) => item._id === product._id)) {
+      const updatedCart = cart.filter((item) => item._id !== product._id);
       setCart(updatedCart);
     }
   };

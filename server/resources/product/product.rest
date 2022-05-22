@@ -1,14 +1,14 @@
-GET http://localhost:3000/api/product 
+GET http://localhost:3001/api/product 
 
 ###
-GET http://localhost:3000/api/product/6284c0fd3ad1995085fd395a
+GET http://localhost:3001/api/product/6284c0fd3ad1995085fd395a
 ###
 
-GET http://localhost:3000/api/category/chairs
+GET http://localhost:3001/api/category/penis
 
 ###
 
-POST http://localhost:3000/api/product
+POST http://localhost:3001/api/product
 Content-Type: application/json
 
 {
@@ -22,7 +22,7 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3000/api/product/6284c0fd3ad1995085fd395a
+PUT http://localhost:3001/api/product/6284c0fd3ad1995085fd395a
 Content-Type: application/json
 
 {
@@ -31,4 +31,4 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/api/product/12121
+DELETE http://localhost:3001/api/product/12121
