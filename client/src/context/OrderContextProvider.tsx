@@ -4,11 +4,13 @@ import { ShippingProvider } from "../ShippingProviderData";
 import { ItemData, useCart } from "./CartContextProvider";
 
 interface OrderData {
-  orderNo: string;
-  boughtItems: ItemData[];
-  shipmentOption: ShippingProvider;
+  customer: string;
+  email: string;
+  products: ItemData[];
   paymentMethod: String;
-  customer: Customer;
+  deliveryMethod: ShippingProvider;
+  address: { street: string; city: string; zipcode: string | number };
+  phoneNumber: string | number;
 }
 
 export interface Customer {
@@ -21,14 +23,14 @@ export interface Customer {
 }
 
 interface OrderContextValue {
-  order: OrderData[];
+  order: OrderData | undefined;
   createOrder: (customerValues: Customer) => void;
   generateOrderNum: () => string;
   shippingProviders: ShippingProvider[];
 }
 
 export const OrderContext = createContext<OrderContextValue>({
-  order: [],
+  order: undefined,
   createOrder: () => {},
   generateOrderNum: () => "",
   shippingProviders: [],
@@ -36,31 +38,46 @@ export const OrderContext = createContext<OrderContextValue>({
 
 const OrderProvider: FC = (props) => {
   const { cart, shipper, paymentMethod } = useCart();
-  const [order, setOrder] = useState<OrderData[]>([]);
+  const [order, setOrder] = useState<OrderData>();
   const [shippingProviders, setShippingProviders] = useState<
     ShippingProvider[]
   >([]);
+  // const [totalCost, setTotalCost] = useState<Number>()
 
   /** push in everything related to the order to the order state */
-  const createOrder = (customerValues: Customer) => {
+  const createOrder = (values: Customer) => {
     const boughtItems = [...cart];
-    const customer: Customer = {
-      name: customerValues.name,
-      email: customerValues.email,
-      street: customerValues.street,
-      zipcode: customerValues.zipcode,
-      city: customerValues.city,
 
-      phoneNumber: customerValues.phoneNumber,
-    };
-    let updatedOrder: OrderData = {
-      customer: customer,
-      boughtItems: boughtItems,
-      shipmentOption: shipper,
+    let checkoutObj: OrderData = {
+      customer: values.name,
+      email: values.email,
+      products: boughtItems,
       paymentMethod: paymentMethod,
-      orderNo: generateOrderNum(),
+      deliveryMethod: shipper,
+      address: {
+        street: values.street,
+        city: values.city,
+        zipcode: values.zipcode,
+      },
+      phoneNumber: values.phoneNumber,
     };
-    setOrder([updatedOrder]);
+
+    const fetchData = async () => {
+      let response = await makeRequest("/api/order", "POST", checkoutObj);
+
+      console.log(response);
+    };
+    fetchData();
+
+    // let updatedOrder: OrderData = {
+    //   customer: customer,
+    //   boughtItems: boughtItems,
+    //   shipmentOption: shipper,
+    //   paymentMethod: paymentMethod,
+    //   orderNo: generateOrderNum(),
+    // };
+    //setTotalCost(UseSumTotal(updatedOrder.boughtItems, true))
+    setOrder(checkoutObj);
   };
   // console.log(order);
 

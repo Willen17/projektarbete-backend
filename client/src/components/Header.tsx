@@ -73,7 +73,7 @@ function Header() {
             alt="admin"
           />
         </Link>
-        <Link className={quantityIcon} to="/checkoutpage">
+        <Link className={quantityIcon} to="/checkout">
           <Badge
             anchorOrigin={{
               vertical: "top",
