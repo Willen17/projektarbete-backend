@@ -1,8 +1,14 @@
 import express from "express";
 import mongoose from "mongoose";
-import { userRouter, orderRouter, productRouter, deliveryRouter } from "./resources";
+import {
+  userRouter,
+  orderRouter,
+  productRouter,
+  deliveryRouter,
+} from "./resources";
 import "dotenv/config";
 import cookieSession from "cookie-session";
+import { mediaRouter } from "./resources/media/media.router";
 
 const app = express();
 
@@ -22,7 +28,8 @@ app.use(
 app.use("/api", userRouter);
 app.use("/api", orderRouter);
 app.use("/api", productRouter);
-app.use("/api", deliveryRouter)
+app.use("/api", deliveryRouter);
+app.use("/api", mediaRouter);
 // Add more routers here....
 
 // Connect to DB & start server
