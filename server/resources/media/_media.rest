@@ -3,10 +3,10 @@ Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0g
 
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="media"; filename="bildfew.webp"
+Content-Disposition: form-data; name="media"; filename="Pirri.webp"
 Content-Type: image/jpeg
 
-< ./bildfew.webp
+< ./Pirri.webp
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
 ###
@@ -15,3 +15,4 @@ GET  http://localhost:3001/api/media/628b82f4f9117ea9f4010424
 ###
 
 DELETE  http://localhost:3001/api/media/628b57336968f9cb10e3df04
+
