@@ -85,6 +85,10 @@ function AdminOrders() {
                   <IconButton
                     aria-label="expand row"
                     size="small"
+                    sx={{
+                      padding: "0px",
+                      margin: "0px",
+                    }}
                     onClick={() => setOpen(!open)}
                   >
                     {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
@@ -93,15 +97,23 @@ function AdminOrders() {
                 <TableCell component="th" scope="row">
                   Sara Lindqvist
                 </TableCell>
-                <TableCell align="right">34234234</TableCell>
+                <TableCell align="right">8334926</TableCell>
                 <TableCell align="right">Sent</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell colSpan={6}>
+                <TableCell
+                  colSpan={6}
+                  sx={{
+                    padding: "0px",
+                    margin: "0px",
+                  }}
+                >
                   <Collapse in={open} timeout="auto" unmountOnExit>
                     <Box
                       sx={{
                         backgroundColor: "rgb(248, 244, 239)",
+                        padding: "0px",
+                        margin: "0px",
                       }}
                     >
                       <Table size="small" aria-label="purchases">
