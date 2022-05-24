@@ -13,8 +13,9 @@ import ProductProvider from "./context/AdminPageContext";
 import CartProvider from "./context/CartContextProvider";
 import OrderProvider from "./context/OrderContextProvider";
 import CategoryPage from "./components/CategoryPage";
-import Header from "./components/Header";
-import LogIn from "./components/LogIn";
+import SignUp from "./components/SignUp";
+import LogIn from "./components/Login";
+
 
 function App() {
   return (
@@ -49,10 +50,9 @@ function App() {
 
                 {/* <Route path="/admin" element={<AdminPage />} /> */}
 
-                <Route path="/checkout" element={<CheckoutPage />} />
-
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/login" element={<LogIn />} />
+                <Route path="/checkoutpage" element={<CheckoutPage />} />
 
                 <Route path="*" element={<NotFound />} />
               </Route>

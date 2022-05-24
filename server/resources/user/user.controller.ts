@@ -15,6 +15,11 @@ export const addUser = async (
 ) => {
   // TODO: How do we handle errors in async middlewares?
   try {
+    let findUser = await UserModel.findOne({email: req.body.email});
+    if(findUser) {
+      console.log('user already exists')
+      return res.status(409).send('Email already exists')
+    }
     const user = new UserModel(req.body);
     await user.save();
     console.log(user.fullname);

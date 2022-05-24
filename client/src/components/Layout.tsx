@@ -11,9 +11,9 @@ function Layout() {
   return (
     <div>
       <Header />
-      <ErrorBoundary onGoBack={() => navigate("/")}>
+      {/* <ErrorBoundary onGoBack={() => navigate("/")}> */}
         <Outlet />
-      </ErrorBoundary>
+      {/* </ErrorBoundary> */}
       <Footer />
     </div>
   );
