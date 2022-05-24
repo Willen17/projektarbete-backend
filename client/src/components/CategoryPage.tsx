@@ -10,6 +10,7 @@ function CategoryPage() {
   const [productList, setProductList] = useState<ProductData[]>([]);
 
   useEffect(() => {
+    setProductList([]);
     const fetchData = async () => {
       let response = await makeRequest(
         `/api/category/${params.category}`,

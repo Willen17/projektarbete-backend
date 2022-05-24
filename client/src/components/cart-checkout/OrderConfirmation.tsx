@@ -110,7 +110,7 @@ const OrderConfirmation = () => {
                       }}
                     >
                       <img
-                        src={product.image}
+                        src={product.imageURL}
                         alt={product.title}
                         height="60px"
                       />
