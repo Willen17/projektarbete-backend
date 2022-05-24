@@ -28,7 +28,7 @@ function ProductCard(props: cardProps) {
             component="img"
             height="250"
             style={imgStyle}
-            src={props.product.image}
+            src={props.product.imageURL}
             title={props.product.title}
             id={props.product._id}
           ></CardMedia>

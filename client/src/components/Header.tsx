@@ -73,7 +73,16 @@ function Header() {
             alt="admin"
           />
         </Link>
+
+        <Link to={"/login"}>
+          <img 
+            className={icon}
+            src="./assets/icons/icon-user.webp"
+            alt="user"
+          />
+        </Link>
         <Link className={quantityIcon} to="/checkoutpage">
+
           <Badge
             anchorOrigin={{
               vertical: "top",
@@ -90,7 +99,11 @@ function Header() {
           </Badge>
         </Link>
         <Link to="/login">
-          <img className={icon} src="assets/icons/icon-user.webp" alt="admin" />
+          <img
+            className={icon}
+            src="./assets/icons/icon-user.webp"
+            alt="admin"
+          />
         </Link>
       </div>
     );

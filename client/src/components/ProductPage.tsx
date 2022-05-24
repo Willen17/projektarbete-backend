@@ -35,17 +35,22 @@ function ProductPage() {
         flexDirection: { xs: "column", sm: "column", md: "row", lg: "row" },
       }}
     >
-      <Container
-        component="img"
-        height="300"
-        style={{
-          height: "650px",
-          maxWidth: "500px",
-          marginTop: "2rem",
-          marginBottom: "2rem",
-        }}
-        src={product?.image}
-      ></Container>
+      {" "}
+      {product && product.imageURL ? (
+        <Container
+          component="img"
+          height="300"
+          style={{
+            height: "650px",
+            maxWidth: "500px",
+            marginTop: "2rem",
+            marginBottom: "2rem",
+          }}
+          src={product?.imageURL}
+        ></Container>
+      ) : (
+        <h1>KORV</h1>
+      )}
       <Container
         style={{
           display: "flex",

@@ -13,13 +13,18 @@ export interface Order {
 
 const orderSchema = new mongoose.Schema(
   {
-    customer: { type: Schema.Types.ObjectId, ref: "user", required: true },
-    products: [{ type: {} /*PRODUCT????*/, required: true }],
-    paymentMethod: [{ type: String, required: true }],
-    total: { type: Number, required: true },
+    customer: {
+      type: String /*Schema.Types.ObjectId */,
+      ref: "user",
+      required: true,
+    },
+    products: { type: {} /*PRODUCT????*/, required: true },
+    paymentMethod: { type: String, required: true },
+    total: { type: Number, required: false },
     deliveryMethod: { type: String, ref: "deliveryOption", required: true },
-    isOrderSent: { type: Boolean, required: true },
+    isOrderSent: { type: Boolean, default: false },
     address: { type: {} /* ADDRESS??? */, required: true },
+    phoneNumber: { type: Number || String, required: true },
   },
   {
     timestamps: true,

@@ -49,10 +49,14 @@ function App() {
                 {/* added a quick fix in AdminPage component for now */}
 
                 {/* <Route path="/admin" element={<AdminPage />} /> */}
+
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/login" element={<LogIn />} />
+
                 <Route path="/adminorders" element={<AdminOrders />} />
+
                 <Route path="/checkoutpage" element={<CheckoutPage />} />
+
                 <Route path="*" element={<NotFound />} />
               </Route>
             </Routes>

@@ -18,8 +18,9 @@ export const addOrder = async (
   try {
     if (!req.session) return;
     let orderObj = req.body;
-    orderObj = { ...orderObj, customer: req.session.user._id };
-    console.log(orderObj);
+    let total =
+      // orderObj = { ...orderObj, customer: req.session.user._id };
+      console.log(orderObj);
     const order = new OrderModel(orderObj);
     // order.customer = req.session._id;
     await order.save();
