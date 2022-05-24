@@ -25,20 +25,27 @@ export const addProduct = async (
 };
 
 export const getOneProduct = async (req: Request, res: Response) => {
-  console.log("Kör request");
   const product = await ProductModel.findById(req.params.id);
   res.status(200).json(product);
 };
+
 export const updateProduct = async (
   req: Request<{ id: string }>,
   res: Response
 ) => {
-  const product = await ProductModel.findById(req.params.id);
-  console.log(product);
-  res.status(200).json(product);
+  const product = await ProductModel.findOneAndUpdate(
+    { id_: req.params.id },
+    req.body
+  );
+  res.status(200).json(req.body);
 };
-export const deleteProduct = (req: Request, res: Response) => {
-  res.status(200).json("DELETED PRODUCT");
+export const deleteProduct = async (
+  req: Request<{ id: string }>,
+  res: Response
+) => {
+  console.log(req.params.id);
+  // const product = await ProductModel.findByIdAndRemove(req.params.id);
+  res.status(200).json("DELETED PRODUCT ");
 };
 
 export const getCategoryProducts = async (req: Request, res: Response) => {

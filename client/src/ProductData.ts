@@ -1,11 +1,11 @@
 export interface ProductData {
-  imageURL: string;
+  imageURL?: string;
   title: string;
   description: string;
   price: number;
   stock: number;
   category: string[];
-  _id: string;
+  _id?: string;
 }
 
 /**
