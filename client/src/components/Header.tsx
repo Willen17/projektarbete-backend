@@ -35,23 +35,23 @@ function Header() {
       href: "/category/furniture",
     },
     {
-      label: "Textiles",
-      href: "/textiles",
+      label: "Chairs",
+      href: "/category/chairs",
     },
     {
-      label: "Lighting",
-      href: "/category/lighting",
+      label: "Tables",
+      href: "/category/tables",
     },
   ];
 
   const menuRight: Page[] = [
     {
-      label: "Decoration",
-      href: "/category/decoration",
+      label: "Decorations",
+      href: "/category/decorations",
     },
     {
-      label: "Inspiration",
-      href: "/category/inspiration",
+      label: "Beds",
+      href: "/category/beds",
     },
   ];
 
@@ -69,10 +69,11 @@ function Header() {
         <Link to="/admin">
           <img
             className={icon}
-            src="./assets/icons/icon-user.webp"
+            src="/assets/icons/icon-user.webp"
             alt="admin"
           />
         </Link>
+
         <Link to={"/login"}>
           <img 
             className={icon}
@@ -81,6 +82,7 @@ function Header() {
           />
         </Link>
         <Link className={quantityIcon} to="/checkoutpage">
+
           <Badge
             anchorOrigin={{
               vertical: "top",
@@ -91,10 +93,17 @@ function Header() {
           >
             <img
               className={icon}
-              src="./assets/icons/icon-shopping-cart.webp"
+              src="/assets/icons/icon-shopping-cart.webp"
               alt="cart"
             />
           </Badge>
+        </Link>
+        <Link to="/login">
+          <img
+            className={icon}
+            src="./assets/icons/icon-user.webp"
+            alt="admin"
+          />
         </Link>
       </div>
     );
@@ -247,7 +256,7 @@ function Header() {
         <Link to="/">
           <img
             className={ccLogo}
-            src="./assets/images/logo.svg"
+            src="/assets/images/logo.svg"
             alt="comme ci comme ça"
           ></img>
         </Link>

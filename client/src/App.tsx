@@ -1,11 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AdminPage from "./components/Admin/AdminPage";
+import SignUp from "./components/SignUp";
 import CheckoutPage from "./components/cart-checkout/CheckoutPage";
 import DetailPage from "./components/ProductPage";
 import Layout from "./components/Layout";
 import NotFound from "./components/NotFound";
 import OrderConfirmation from "./components/cart-checkout/OrderConfirmation";
-import ProductPage from "./components/CategoryPage";
+import ProductPage from "./components/ProductPage";
 import EmptyPage from "./components/shared/EmptyPage";
 import StartPage from "./components/StartPage";
 import ProductProvider from "./context/AdminPageContext";
@@ -14,6 +15,7 @@ import OrderProvider from "./context/OrderContextProvider";
 import CategoryPage from "./components/CategoryPage";
 import SignUp from "./components/SignUp";
 import LogIn from "./components/Login";
+
 
 function App() {
   return (
@@ -45,10 +47,13 @@ function App() {
                 <Route path="/detail/:id" element={<ProductPage />} />
                 <Route path="/confirmation" element={<OrderConfirmation />} />
                 {/* added a quick fix in AdminPage component for now */}
+
                 {/* <Route path="/admin" element={<AdminPage />} /> */}
+
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/login" element={<LogIn />} />
                 <Route path="/checkoutpage" element={<CheckoutPage />} />
+
                 <Route path="*" element={<NotFound />} />
               </Route>
             </Routes>

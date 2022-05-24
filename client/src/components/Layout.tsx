@@ -8,10 +8,8 @@ function Layout() {
   window.scrollTo(0, 0);
   const navigate = useNavigate();
 
-  
   return (
     <div>
-      <button onClick={() => console.log(makeRequest('/api/product', "GET"))} >Api</button>
       <Header />
       {/* <ErrorBoundary onGoBack={() => navigate("/")}> */}
         <Outlet />

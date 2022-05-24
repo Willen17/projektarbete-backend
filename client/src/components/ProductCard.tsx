@@ -15,55 +15,48 @@ import { numWithSpaces } from "../Helper";
 import { ProductData } from "../ProductData";
 import AddToCartButton from "./shared/AddToCartButton";
 
-function ProductCard(product: ProductData) {
+interface cardProps {
+  product: ProductData;
+}
+
+function ProductCard(props: cardProps) {
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexWrap: "wrap",
-        gap: "3rem 10rem",
-        justifyContent: "center",
-        paddingTop: "2rem",
-        paddingBottom: "6rem",
-      }}
-    >
-      <Card sx={cardStyle} key={product.title}>
-        <Link to={`/detail/${product._id}`} style={linkStyle}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              height="250"
-              style={imgStyle}
-              src={product.image}
-              title={product.title}
-              id={product._id}
-            ></CardMedia>
-          </CardActionArea>
-          <Typography
-            style={{ marginTop: "1rem" }}
-            gutterBottom
-            variant="h5"
-            component="h2"
-          >
-            {product.title}
-          </Typography>
-        </Link>
-        <Box
-          style={{
-            display: "flex",
-            gap: "2rem",
-            alignItems: "center",
-          }}
+    <Card sx={cardStyle} key={props.product.title}>
+      <Link to={`/detail/${props.product._id}`} style={linkStyle}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            height="250"
+            style={imgStyle}
+            src={props.product.imageURL}
+            title={props.product.title}
+            id={props.product._id}
+          ></CardMedia>
+        </CardActionArea>
+        <Typography
+          style={{ marginTop: "1rem" }}
+          gutterBottom
+          variant="h5"
+          component="h2"
         >
-          <Typography variant="body2" color="text.secondary">
-            {numWithSpaces(product.price)} SEK
-          </Typography>
-          <CardActions>
-            <AddToCartButton product={product} size="small" />
-          </CardActions>
-        </Box>
-      </Card>
-    </Box>
+          {props.product.title}
+        </Typography>
+      </Link>
+      <Box
+        style={{
+          display: "flex",
+          gap: "2rem",
+          alignItems: "center",
+        }}
+      >
+        <Typography variant="body2" color="text.secondary">
+          {numWithSpaces(props.product.price)} SEK
+        </Typography>
+        <CardActions>
+          <AddToCartButton product={props.product} size="small" />
+        </CardActions>
+      </Box>
+    </Card>
   );
 }
 

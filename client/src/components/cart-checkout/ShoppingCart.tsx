@@ -51,7 +51,7 @@ function ShoppingCart() {
           >
             <img
               style={{ width: 80 }}
-              src={product.image}
+              src={product.imageURL}
               alt={product.title}
             />
             <Box
