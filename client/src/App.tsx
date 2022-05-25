@@ -16,6 +16,7 @@ import CategoryPage from "./components/CategoryPage";
 import Header from "./components/Header";
 import LogIn from "./components/Login";
 import AdminOrders from "./components/Admin/AdminOrders";
+import UserProfilePage from "./components/User/UserProfilePage";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
 
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/login" element={<LogIn />} />
+                <Route path="/userProfilePage/:id" element={<UserProfilePage/>} />
 
                 <Route path="/adminorders" element={<AdminOrders />} />
 
