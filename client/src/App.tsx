@@ -19,19 +19,13 @@ import "react-toastify/dist/ReactToastify.css";
 import LogIn from "./components/Login";
 import AdminOrders from "./components/Admin/AdminOrders";
 
-
 function App() {
-  function clickMe() {
-    toast("testar");
-  }
-
   return (
     <BrowserRouter>
       <ToastContainer position="bottom-left" />
       <ProductProvider>
         <CartProvider>
           <OrderProvider>
-            <button onClick={clickMe}>test</button>
             <Routes>
               <Route path="/" element={<Layout />}>
                 <Route index element={<StartPage />} />

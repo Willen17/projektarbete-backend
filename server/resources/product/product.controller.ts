@@ -44,7 +44,7 @@ export const deleteProduct = async (
   res: Response
 ) => {
   console.log(req.params.id);
-  // const product = await ProductModel.findByIdAndRemove(req.params.id);
+  const product = await ProductModel.findByIdAndRemove(req.params.id);
   res.status(200).json("DELETED PRODUCT ");
 };
 

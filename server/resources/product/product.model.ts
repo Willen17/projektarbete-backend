@@ -14,7 +14,6 @@ export interface Product {
 
 const productSchema = new mongoose.Schema<Product>(
   {
-    image: { type: String, required: true },
     imageId: { type: Schema.Types.ObjectId, required: true },
     title: { type: String, required: true },
     description: { type: String, required: true },

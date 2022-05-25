@@ -18,7 +18,7 @@ function ProductPage() {
     const fetchData = async () => {
       let response = await makeRequest(`/api/product/${params.id}`, "GET");
 
-      setProduct(response.response);
+      setProduct(response.data);
     };
     fetchData();
   }, [params]);

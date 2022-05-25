@@ -3,36 +3,33 @@ import { useLocalStorageState } from "../components/hooks/useLocalStorageState";
 import { makeRequest } from "../Helper";
 import { ProductData } from "../ProductData";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 interface AdminContextValue {
-  isEdit: boolean;
-  setEdit: React.Dispatch<React.SetStateAction<boolean>>;
   saveProduct: (product: ProductData) => void;
   addProduct: (product: ProductData) => void;
   removeProduct: (product: ProductData) => void;
 }
 
 export const ProductContext = createContext<AdminContextValue>({
-  isEdit: false,
   addProduct: () => {},
-  setEdit: () => {},
   saveProduct: () => {},
   removeProduct: () => {},
 });
 
 const ProductProvider: FC = (props) => {
-  const [isEdit, setEdit] = useState(false);
+  const navigate = useNavigate();
 
   // /**
   //  * function that pushes new product to a new list and then updates LS
   //  * @param newProduct
   //  */
   const addProduct = async (newProduct: ProductData) => {
-    console.log("Ska lägga till produkt");
-    // if (!newProduct) return toast.error("No product");
-    // let response = await makeRequest("/api/product", "POST", newProduct);
-    // if (!response.ok) return toast.error(response);
-    // toast.success(newProduct.title + " added");
+    console.log(newProduct);
+    if (!newProduct) return toast.error("No product");
+    let response = await makeRequest("/api/product", "POST", newProduct);
+    if (!response.ok) return toast.error(response);
+    toast.success(newProduct.title + " added");
   };
 
   // /**
@@ -97,8 +94,6 @@ const ProductProvider: FC = (props) => {
   return (
     <ProductContext.Provider
       value={{
-        isEdit,
-        setEdit,
         addProduct,
         saveProduct,
         removeProduct,

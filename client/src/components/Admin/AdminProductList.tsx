@@ -22,14 +22,14 @@ import { numWithSpaces } from "../../Helper";
 import { ProductData } from "../../ProductData";
 import RemoveProductConfirmation from "./RemoveProductConfirmation";
 
-
 interface Props {
   product: ProductData;
 }
 
 function AdminProductList(props: Props) {
-  const { isEdit, setEdit, saveProduct } = useAdmin();
+  const { saveProduct } = useAdmin();
 
+  const [isEdit, setEdit] = useState<boolean>(false);
   const [open, setOpen] = useState(false);
   const [imageURL, setImage] = useState(props.product.imageURL);
   const [title, setTitle] = useState(props.product.title);
@@ -96,7 +96,7 @@ function AdminProductList(props: Props) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  <TableRow contentEditable={isEdit}>
+                  <TableRow>
                     <TableCell
                       align="left"
                       sx={{
@@ -214,33 +214,36 @@ function AdminProductList(props: Props) {
                       Description
                     </TableCell>
                   </TableRow>
-
-                  <TableCell
-                    colSpan={5}
-                    align="left"
-                    sx={{
-                      paddingX: { md: "5rem" },
-                    }}
-                  >
-                    {isEdit ? (
-                      <TextareaAutosize
-                        aria-label="description"
-                        value={description}
-                        style={{
-                          width: "100%",
-                          border: "none",
-                          fontFamily: "inherit",
-                          fontSize: ".9rem",
-                          padding: "0.5rem 0.2rem ",
-                          backgroundColor: "#F8F4EF",
-                          borderBottom: "1px solid grey",
-                        }}
-                        onChange={(event) => setDescription(event.target.value)}
-                      />
-                    ) : (
-                      props.product.description
-                    )}
-                  </TableCell>
+                  <TableRow>
+                    <TableCell
+                      colSpan={5}
+                      align="left"
+                      sx={{
+                        paddingX: { md: "5rem" },
+                      }}
+                    >
+                      {isEdit ? (
+                        <TextareaAutosize
+                          aria-label="description"
+                          value={description}
+                          style={{
+                            width: "100%",
+                            border: "none",
+                            fontFamily: "inherit",
+                            fontSize: ".9rem",
+                            padding: "0.5rem 0.2rem ",
+                            backgroundColor: "#F8F4EF",
+                            borderBottom: "1px solid grey",
+                          }}
+                          onChange={(event) =>
+                            setDescription(event.target.value)
+                          }
+                        />
+                      ) : (
+                        props.product.description
+                      )}
+                    </TableCell>
+                  </TableRow>
                 </TableBody>
               </Table>
             </Box>

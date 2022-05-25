@@ -5,31 +5,28 @@ import {
   FormControlLabel,
   FormGroup,
   FormLabel,
-  Input,
-  Radio,
-  RadioGroup,
 } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
 import { useState } from "react";
 import * as yup from "yup";
 import { useAdmin } from "../../context/AdminPageContext";
-import NewProductConfirmation from "./NewProductConfirmation";
 import { ProductData } from "../../ProductData";
+import { toast } from "react-toastify";
 
 export interface ProductValues {
   title: string;
   description: string;
-  price: number;
-  stock: number;
+  price: number | string;
+  stock: number | string;
   category: string[];
 }
 
 const InitialValue: ProductValues = {
   title: "",
   description: "",
-  price: 0,
-  stock: 0,
+  price: "",
+  stock: "",
   category: [""],
 };
 
@@ -45,19 +42,23 @@ function AddProductForm() {
   const [confirmation, setConfirmation] = useState(false);
   const [categories, setCategories] = useState<string[]>([]);
   const [image, setImage] = useState();
+  const [imageId, setImageId] = useState<string>();
 
   const handleImageChange = async (event: any) => {
     // console.log(event.currentTarget.files[0]);
-
+    console.log(event);
     let data = new FormData();
     data.append("media", event.target.files[0]);
+
     // data.append("file", event.target);
     // data.append("file", event.target.files[0]);
     let response = await fetch("/api/media", {
       method: "POST",
       body: data,
     });
-    console.log(await response.json());
+    let jsonres = await response.json();
+    setImage(jsonres.filename);
+    setImageId(jsonres._id);
   };
 
   // Updates the state of the checkboxes
@@ -77,26 +78,27 @@ function AddProductForm() {
 
   const validateAndSaveNewProduct = (values: ProductValues) => {
     values.category = categories;
-    console.log(values.category);
-    /**
-     * makes new product and after 0.5 sec shows confirmation
-     */
-    let promise = new Promise((resolve) => {
-      setTimeout(() => {
-        const newProduct: ProductData = {
-          title: values.title,
-          description: values.description,
-          price: values.price,
-          stock: values.stock,
-          category: values.category,
-        };
-        addProduct(newProduct);
-        resolve(newProduct);
-      }, 500);
-    });
-    promise.then(() => {
-      setConfirmation(true);
-    });
+
+    if (
+      imageId &&
+      values.title &&
+      values.description &&
+      values.price &&
+      values.stock &&
+      values.category.length
+    ) {
+      const newProduct: ProductData = {
+        imageId,
+        title: values.title,
+        description: values.description,
+        price: values.price as number,
+        stock: values.stock as number,
+        category: values.category,
+      };
+      addProduct(newProduct);
+    } else {
+      toast.error("Make sure a category is choosen and an image is uploaded");
+    }
   };
 
   const { values, errors, touched, handleSubmit, handleChange } =
@@ -190,12 +192,14 @@ function AddProductForm() {
                 multiple
                 type="file"
                 style={{ display: "none" }}
-                onChange={(e: any) => handleImageChange(e)}
+                onChange={(e) => handleImageChange(e)}
               />
               <Button variant="contained" component="span">
                 Upload
               </Button>
             </label>
+            {image}
+            <label></label>
             <FormLabel component="legend">Categories</FormLabel>
             <FormGroup>
               <FormControlLabel
@@ -237,7 +241,6 @@ function AddProductForm() {
           </div>
         </div>
         <Button
-          onClick={NewProductConfirmation}
           size="large"
           variant="contained"
           style={{
@@ -254,7 +257,6 @@ function AddProductForm() {
           ADD PRODUCT
         </Button>
       </form>
-      {confirmation ? <NewProductConfirmation /> : undefined}
     </Container>
   );
 }
