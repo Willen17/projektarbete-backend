@@ -5,6 +5,7 @@ export interface ProductData {
   price: number;
   stock: number;
   category: string[];
+  imageId?: string;
   _id?: string;
 }
 
