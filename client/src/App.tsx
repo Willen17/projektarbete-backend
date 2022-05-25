@@ -14,41 +14,34 @@ import CartProvider from "./context/CartContextProvider";
 import OrderProvider from "./context/OrderContextProvider";
 import CategoryPage from "./components/CategoryPage";
 import Header from "./components/Header";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import LogIn from "./components/Login";
 import AdminOrders from "./components/Admin/AdminOrders";
 
+
 function App() {
+  function clickMe() {
+    toast("testar");
+  }
+
   return (
     <BrowserRouter>
+      <ToastContainer position="bottom-left" />
       <ProductProvider>
         <CartProvider>
           <OrderProvider>
+            <button onClick={clickMe}>test</button>
             <Routes>
               <Route path="/" element={<Layout />}>
                 <Route index element={<StartPage />} />
-                {/* <Route path="/furniture" element={<ProductPage />} />
-                <Route
-                  path="/textiles"
-                  element={<EmptyPage page="Textiles" />}
-                />
-                <Route
-                  path="/lighting"
-                  element={<EmptyPage page="Lighting" />}
-                />
-                <Route
-                  path="/decoration"
-                  element={<EmptyPage page="Decoration" />}
-                />
-                <Route
-                  path="/inspiration"
-                  element={<EmptyPage page="Inspiration" />}
-                /> */}
+
                 <Route path="/category/:category" element={<CategoryPage />} />
                 <Route path="/detail/:id" element={<ProductPage />} />
                 <Route path="/confirmation" element={<OrderConfirmation />} />
                 {/* added a quick fix in AdminPage component for now */}
 
-                {/* <Route path="/admin" element={<AdminPage />} /> */}
+                <Route path="/admin" element={<AdminPage />} />
 
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/login" element={<LogIn />} />
