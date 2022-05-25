@@ -49,6 +49,9 @@ const ProductProvider: FC = (props) => {
     if (!response.ok) return toast.error(response);
 
     toast.success("Product removed");
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
   };
 
   // /**
