@@ -14,7 +14,7 @@ import CartProvider from "./context/CartContextProvider";
 import OrderProvider from "./context/OrderContextProvider";
 import CategoryPage from "./components/CategoryPage";
 import Header from "./components/Header";
-import LogIn from "./components/LogIn";
+import LogIn from "./components/Login";
 import AdminOrders from "./components/Admin/AdminOrders";
 
 function App() {
