@@ -16,8 +16,8 @@ function CategoryPage() {
         `/api/category/${params.category}`,
         "GET"
       );
-      setProductList(response);
-      console.log(response);
+      setProductList(response.data);
+      console.log(response.data);
     };
     fetchData();
   }, [params]);

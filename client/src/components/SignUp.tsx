@@ -10,7 +10,7 @@ import {
   AlertProps,
 } from "@mui/material";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { makeRequest } from "../Helper";
 
 function MuiAlert(props: JSX.IntrinsicAttributes & AlertProps) {
@@ -18,6 +18,7 @@ function MuiAlert(props: JSX.IntrinsicAttributes & AlertProps) {
 }
 
 function SignUp() {
+  const navigate = useNavigate();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -25,7 +26,7 @@ function SignUp() {
   const [error, setError] = useState("");
   const [isApplyingForAdmin, setIsApplyingForAdmin] = useState(false);
 
-  const signUpHandler = (e) => {
+  const signUpHandler = async (e) => {
     e.preventDefault();
     if (
       firstName === "" ||
@@ -37,7 +38,6 @@ function SignUp() {
       return;
     }
     setError("");
-    console.log(isApplyingForAdmin);
     const newUserData = {
       firstname: firstName,
       lastname: lastName,
@@ -47,7 +47,13 @@ function SignUp() {
       isApplyingForAdmin: isApplyingForAdmin,
     };
 
-    makeRequest("/api/user", "POST", newUserData);
+    let response = await makeRequest("/api/user", "POST", newUserData);
+    if(response.ok) {
+      navigate('/');
+    } else {
+      setError('Email is already in use');
+      return;
+    }
   };
 
   return (

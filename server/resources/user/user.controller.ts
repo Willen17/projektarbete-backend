@@ -18,7 +18,7 @@ export const addUser = async (
     let findUser = await UserModel.findOne({email: req.body.email});
     if(findUser) {
       console.log('user already exists')
-      return res.status(409).send('Email already exists')
+      return res.status(409).json('Email already exists')
     }
     const user = new UserModel(req.body);
     await user.save();
