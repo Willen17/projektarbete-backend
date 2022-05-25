@@ -7,6 +7,7 @@ export interface User {
   /** Virtual */ fullname: string;
   password: string;
   isAdmin: boolean;
+  isApplyingForAdmin: boolean;
   email: string;
 }
 
@@ -16,6 +17,7 @@ const userSchema = new mongoose.Schema(
     lastname: { type: String, required: true },
     password: { type: String, required: true, select: false },
     isAdmin: { type: Boolean, required: true, default: false, select: true },
+    isApplyingForAdmin: { type: Boolean, required: true, default: false, select: true },
     email: { type: String, required: true },
   },
   {
