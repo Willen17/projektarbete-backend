@@ -22,6 +22,7 @@ import { numWithSpaces } from "../../Helper";
 import { ProductData } from "../../ProductData";
 import RemoveProductConfirmation from "./RemoveProductConfirmation";
 
+
 interface Props {
   product: ProductData;
 }

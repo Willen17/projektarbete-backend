@@ -1,9 +1,7 @@
 import {
   Box,
   Button,
-  Checkbox,
   Container,
-  FormControlLabel,
   TextField,
   Typography,
   Alert,
@@ -17,37 +15,25 @@ function MuiAlert(props: JSX.IntrinsicAttributes & AlertProps) {
   return <Alert elevation={6} variant="filled" {...props} />;
 }
 
-function SignUp() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [isApplyingForAdmin, setIsApplyingForAdmin] = useState(false);
 
-  const signUpHandler = (e) => {
+  const signInHandler = (e) => {
     e.preventDefault();
-    if (
-      firstName === "" ||
-      lastName === "" ||
-      email === "" ||
-      password === ""
-    ) {
+    if (email === "" || password === "") {
       setError("All fields are required");
       return;
     }
     setError("");
-    console.log(isApplyingForAdmin);
-    const newUserData = {
-      firstname: firstName,
-      lastname: lastName,
+    const userData = {
       email: email,
       password: password,
       isAdmin: false,
-      isApplyingForAdmin: isApplyingForAdmin,
     };
 
-    makeRequest("/api/user", "POST", newUserData);
+    makeRequest("/api/login", "POST", userData);
   };
 
   return (
@@ -104,7 +90,7 @@ function SignUp() {
             }}
             variant="h5"
           >
-            Sign Up
+            Log In
           </Typography>
           <Box
             sx={{
@@ -120,38 +106,8 @@ function SignUp() {
               alignItems: "center",
               justifyContent: "center",
             }}
-            onSubmit={signUpHandler}
+            onSubmit={signInHandler}
           >
-            <TextField
-              style={{
-                backgroundColor: "white",
-                height: "55px",
-                marginBottom: ".3rem",
-                width: "18rem",
-              }}
-              id="firstName"
-              name="firstName"
-              label="First Name"
-              type="text"
-              margin="normal"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-            <TextField
-              style={{
-                backgroundColor: "white",
-                height: "55px",
-                marginBottom: ".3rem",
-                width: "18rem",
-              }}
-              id="lastName"
-              name="lastName"
-              label="Last Name"
-              type="text"
-              margin="normal"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-            />
             <TextField
               style={{
                 backgroundColor: "white",
@@ -164,7 +120,6 @@ function SignUp() {
               label="Email"
               type="text"
               margin="normal"
-              value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <TextField
@@ -179,22 +134,7 @@ function SignUp() {
               label="Password"
               type="password"
               margin="normal"
-              value={password}
               onChange={(e) => setPassword(e.target.value)}
-            />
-            <FormControlLabel
-              style={{ color: "grey", marginTop: ".5rem" }}
-              control={<Checkbox />}
-              onChange={(e) =>
-                setIsApplyingForAdmin(() => {
-                  if (isApplyingForAdmin === false) {
-                    return true;
-                  } else {
-                    return false;
-                  }
-                })
-              }
-              label="Apply for being administrator"
             />
             <Button
               variant="contained"
@@ -207,18 +147,18 @@ function SignUp() {
               }}
               type="submit"
             >
-              Sign up
+              Log In
             </Button>
           </form>
           <NavLink
             style={{
               color: "#303030",
               textDecoration: "none",
-              marginTop: "2.5rem",
+              marginTop: "3rem",
             }}
-            to="/login"
+            to="/signup"
           >
-            Already have an account? <b>Log in</b>
+            Don't have an account? <b>Sign up</b>
           </NavLink>
         </Box>
       </Box>
@@ -226,4 +166,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default LogIn;
