@@ -204,6 +204,29 @@ function AdminProductList(props: Props) {
                   </TableRow>
                   <TableRow>
                     <TableCell
+                      colSpan={1}
+                      align="left"
+                      sx={{
+                        paddingX: { md: "5rem" },
+                        color: "#6C665F",
+                      }}
+                    >
+                      Categories:
+                    </TableCell>
+                    <TableCell
+                      colSpan={5}
+                      align="left"
+                      sx={{
+                        paddingX: { md: "5rem" },
+                      }}
+                    >
+                      {props.product.category.map(
+                        (oneCategory) => `${oneCategory}, `
+                      )}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell
                       colSpan={5}
                       align="left"
                       sx={{
