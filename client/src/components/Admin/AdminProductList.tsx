@@ -213,33 +213,36 @@ function AdminProductList(props: Props) {
                       Description
                     </TableCell>
                   </TableRow>
-
-                  <TableCell
-                    colSpan={5}
-                    align="left"
-                    sx={{
-                      paddingX: { md: "5rem" },
-                    }}
-                  >
-                    {isEdit ? (
-                      <TextareaAutosize
-                        aria-label="description"
-                        value={description}
-                        style={{
-                          width: "100%",
-                          border: "none",
-                          fontFamily: "inherit",
-                          fontSize: ".9rem",
-                          padding: "0.5rem 0.2rem ",
-                          backgroundColor: "#F8F4EF",
-                          borderBottom: "1px solid grey",
-                        }}
-                        onChange={(event) => setDescription(event.target.value)}
-                      />
-                    ) : (
-                      props.product.description
-                    )}
-                  </TableCell>
+                  <TableRow>
+                    <TableCell
+                      colSpan={5}
+                      align="left"
+                      sx={{
+                        paddingX: { md: "5rem" },
+                      }}
+                    >
+                      {isEdit ? (
+                        <TextareaAutosize
+                          aria-label="description"
+                          value={description}
+                          style={{
+                            width: "100%",
+                            border: "none",
+                            fontFamily: "inherit",
+                            fontSize: ".9rem",
+                            padding: "0.5rem 0.2rem ",
+                            backgroundColor: "#F8F4EF",
+                            borderBottom: "1px solid grey",
+                          }}
+                          onChange={(event) =>
+                            setDescription(event.target.value)
+                          }
+                        />
+                      ) : (
+                        props.product.description
+                      )}
+                    </TableCell>
+                  </TableRow>
                 </TableBody>
               </Table>
             </Box>

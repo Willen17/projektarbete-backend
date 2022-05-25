@@ -1,11 +1,30 @@
 import AddIcon from "@mui/icons-material/Add";
-import { Box, Button, Container, Typography, Modal } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Typography,
+  Modal,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
 import { useState } from "react";
 import AddProductForm from "./AddProductForm";
 import AdminCollapsibleTable from "./AdminCollapsibleTable";
 
 function AdminPage() {
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setIsOpen(true);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
   return (
     <Container
       sx={{
@@ -35,13 +54,19 @@ function AdminPage() {
           ADD
           <AddIcon />
         </Button>
-        <Modal
+        <Dialog
           open={isOpen}
-          onClose={() => setIsOpen(false)}
-          sx={{ marginTop: "5rem" }}
+          onClose={handleClose}
+          scroll="paper"
+          aria-labelledby="scroll-dialog-title"
+          aria-describedby="scroll-dialog-description"
         >
-          <AddProductForm />
-        </Modal>
+          {" "}
+          <DialogTitle id="scroll-dialog-title">Add product</DialogTitle>
+          <DialogContent dividers={true}>
+            <AddProductForm />
+          </DialogContent>
+        </Dialog>
       </Box>
       <AdminCollapsibleTable />
     </Container>

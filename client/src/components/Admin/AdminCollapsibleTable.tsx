@@ -19,7 +19,7 @@ function AdminCollapsibleTable() {
   useEffect(() => {
     const fetchData = async () => {
       let response = await makeRequest(`/api/product/`, "GET");
-      setProducts(response.response);
+      setProducts(response.data);
     };
     fetchData();
   }, []);
