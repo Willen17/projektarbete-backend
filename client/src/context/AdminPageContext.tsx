@@ -6,23 +6,18 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 interface AdminContextValue {
-  isEdit: boolean;
-  setEdit: React.Dispatch<React.SetStateAction<boolean>>;
   saveProduct: (product: ProductData) => void;
   addProduct: (product: ProductData) => void;
   removeProduct: (product: ProductData) => void;
 }
 
 export const ProductContext = createContext<AdminContextValue>({
-  isEdit: false,
   addProduct: () => {},
-  setEdit: () => {},
   saveProduct: () => {},
   removeProduct: () => {},
 });
 
 const ProductProvider: FC = (props) => {
-  const [isEdit, setEdit] = useState(false);
   const navigate = useNavigate();
 
   // /**
@@ -99,8 +94,6 @@ const ProductProvider: FC = (props) => {
   return (
     <ProductContext.Provider
       value={{
-        isEdit,
-        setEdit,
         addProduct,
         saveProduct,
         removeProduct,

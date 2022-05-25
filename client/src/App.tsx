@@ -16,7 +16,7 @@ import CategoryPage from "./components/CategoryPage";
 import Header from "./components/Header";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import LogIn from "./components/LogIn";
+import LogIn from "./components/Login";
 import AdminOrders from "./components/Admin/AdminOrders";
 
 function App() {

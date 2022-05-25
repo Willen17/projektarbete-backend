@@ -22,14 +22,14 @@ import { numWithSpaces } from "../../Helper";
 import { ProductData } from "../../ProductData";
 import RemoveProductConfirmation from "./RemoveProductConfirmation";
 
-
 interface Props {
   product: ProductData;
 }
 
 function AdminProductList(props: Props) {
-  const { isEdit, setEdit, saveProduct } = useAdmin();
+  const { saveProduct } = useAdmin();
 
+  const [isEdit, setEdit] = useState<boolean>(false);
   const [open, setOpen] = useState(false);
   const [imageURL, setImage] = useState(props.product.imageURL);
   const [title, setTitle] = useState(props.product.title);
@@ -96,7 +96,7 @@ function AdminProductList(props: Props) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  <TableRow contentEditable={isEdit}>
+                  <TableRow>
                     <TableCell
                       align="left"
                       sx={{
