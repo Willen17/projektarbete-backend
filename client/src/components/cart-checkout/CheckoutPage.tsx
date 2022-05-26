@@ -8,7 +8,7 @@ import ShoppingCart from "./ShoppingCart";
 
 function CheckoutPage() {
   const { cart } = useCart();
-  const { currentUser, isLoading } = useUser();
+  /*const { currentUser, isLoading } = useUser();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -17,7 +17,7 @@ function CheckoutPage() {
     if (currentUser) return;
 
     navigate("/login", { replace: true, state: location.pathname });
-  }, [isLoading, currentUser]);
+  }, [isLoading, currentUser]);*/
 
   return cart.length < 1 ? (
     <EmptyCart />
