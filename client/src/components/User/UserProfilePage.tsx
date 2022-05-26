@@ -5,11 +5,7 @@ import {
   Container,
   IconButton,
   TableCell,
-  TableRow,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
+  TableRow
 } from "@mui/material";
 import Collapse from "@mui/material/Collapse";
 import Table from "@mui/material/Table";
@@ -46,7 +42,7 @@ function UserProfilePage() {
       >
         <TableContainer component={Paper}>
           <Table aria-label="collapsible table">
-            <TableHead>
+            <TableHead >
               <TableRow sx={{ backgroundColor: "#CAC2B9", color: "#fff" }}>
                 <TableCell />
                 <TableCell
@@ -55,16 +51,7 @@ function UserProfilePage() {
                     fontSize: "1rem",
                     fontfamily: "Roboto, Helvetica, Arial, sans-serif",
                   }}
-                >
-                  Customer
-                </TableCell>
-                <TableCell
-                  sx={{
-                    color: "#fff",
-                    fontSize: "1rem",
-                    fontfamily: "Roboto, Helvetica, Arial, sans-serif",
-                  }}
-                  align="right"
+                  align="center"
                 >
                   Ordernumber
                 </TableCell>
@@ -74,7 +61,17 @@ function UserProfilePage() {
                     fontSize: "1rem",
                     fontfamily: "Roboto, Helvetica, Arial, sans-serif",
                   }}
-                  align="right"
+                  align="center"
+                >
+                  Date
+                </TableCell>
+                <TableCell
+                  sx={{
+                    color: "#fff",
+                    fontSize: "1rem",
+                    fontfamily: "Roboto, Helvetica, Arial, sans-serif",
+                  }}
+                  align="center"
                 >
                   Status
                 </TableCell>
@@ -95,11 +92,11 @@ function UserProfilePage() {
                     {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                   </IconButton>
                 </TableCell>
-                <TableCell component="th" scope="row">
-                  Sara Lindqvist
+                <TableCell component="th" scope="row" align="center">
+                    8334926
                 </TableCell>
-                <TableCell align="right">8334926</TableCell>
-                <TableCell align="right">Sent</TableCell>
+                <TableCell align="center">2022-05-25</TableCell>
+                <TableCell align="center">Order registered</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell
@@ -128,38 +125,6 @@ function UserProfilePage() {
                                 alignItems: "center",
                               }}
                             >
-                              <Typography
-                                sx={{
-                                  mt: "1rem",
-                                  mb: "1rem",
-                                  mr: "1rem",
-                                }}
-                                variant="body1"
-                              >
-                                Change status of order
-                              </Typography>
-                              <FormControl
-                                sx={{
-                                  m: 1,
-                                  minWidth: 120,
-                                  backgroundColor: "white",
-                                }}
-                                size="small"
-                              >
-                                <InputLabel id="demo-select-small">
-                                  Status
-                                </InputLabel>
-                                <Select
-                                  labelId="demo-select-small"
-                                  id="demo-select-small"
-                                  // value={}
-                                  label="Age"
-                                  //onChange={handleChange}
-                                >
-                                  <MenuItem value={10}>Recieved</MenuItem>
-                                  <MenuItem value={20}>Sent</MenuItem>
-                                </Select>
-                              </FormControl>
                             </Box>
                           </TableRow>
                         </TableHead>

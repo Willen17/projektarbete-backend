@@ -63,6 +63,12 @@ export const loginUser = async (req: Request, res: Response) => {
   // }
 };
 
+export const checkIsLoggedIn = async (req: Request, res: Response) => {
+  if(!req.session) return res.status(401).send("You are not logged in.");
+  if (!req.session.user) return res.status(401).send("You are not logged in.");
+  res.status(200).json(req.session);
+};
+
 export const logoutUser = async (req: Request, res: Response) => {
   if (!req.session) return res.status(404).json("Ingen cookie");
   console.log(req.session.user);

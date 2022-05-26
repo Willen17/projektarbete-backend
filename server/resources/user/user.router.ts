@@ -7,10 +7,12 @@ import {
   getOneUser,
   loginUser,
   logoutUser,
+  checkIsLoggedIn,
 } from "./user.controller";
 
 export const userRouter = express
   .Router()
+  .get("/user/login", checkIsLoggedIn)
   .get("/user", adminSecure, getAllUsers)
   .get("/user/:id", adminSecure, getOneUser)
   .post("/user", addUser)
