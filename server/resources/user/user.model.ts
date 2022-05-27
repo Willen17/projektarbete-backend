@@ -13,8 +13,8 @@ export interface User {
 
 const userSchema = new mongoose.Schema(
   {
-    firstname: { type: String, required: true },
-    lastname: { type: String, required: true },
+    firstname: { type: String, required: true, select: true },
+    lastname: { type: String, required: true, select: true },
     password: { type: String, required: true, select: false },
     isAdmin: { type: Boolean, required: true, default: false, select: true },
     isApplyingForAdmin: { type: Boolean, required: true, default: false, select: true },

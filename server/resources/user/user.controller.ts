@@ -47,7 +47,11 @@ export const loginUser = async (req: Request, res: Response) => {
   let matchPassword = await bcrypt.compare(req.body.password, user.password); // returns true or false
   if (!matchPassword) return res.status(401).json("Wrong username or password"); // if false
   if (req.session) {
-    req.session.user = {_id: user._id, isAdmin: user.isAdmin};
+    req.session.user = {
+      _id: user._id, 
+      name: user.fullname,
+      isAdmin: user.isAdmin,
+    };
   }
   console.log(req.session);
 
