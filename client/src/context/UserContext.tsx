@@ -1,5 +1,5 @@
 import { createContext, FC, useContext, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { makeRequest } from "../Helper";
 
 // interface User {
@@ -10,7 +10,7 @@ import { makeRequest } from "../Helper";
 
 interface UserContextState {
     isLoggedIn: boolean;
-    currentUser: object;
+    currentUser: any;
     logOutUser: (value: boolean) => void;
 }
 
@@ -22,7 +22,8 @@ export const UserContext = createContext<UserContextState>({
 
 const UserProvider: FC = (props) => {
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-    const [currentUser, setCurrentUser] = useState<object>({});
+    const [currentUser, setCurrentUser] = useState<any>({});
+    const navigate = useNavigate();
     const location = useLocation();
 
     useEffect(() => {
@@ -44,6 +45,7 @@ const UserProvider: FC = (props) => {
 
     const logOutUser = (value: boolean) => {
         setIsLoggedIn(value);
+        navigate('/');
     }
 
     return  <UserContext.Provider 

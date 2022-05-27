@@ -30,7 +30,7 @@ function Header() {
   const navigate = useNavigate();
   const [anchorMenu, setAnchorMenu] = useState(false);
   const { ccLogo, icon, iconsContainer, quantityIcon } = useStyles();
-  const { logOutUser, isLoggedIn } = useUser();
+  const { logOutUser, isLoggedIn, currentUser } = useUser();
 
   const menuLeft: Page[] = [
     {
@@ -78,6 +78,7 @@ function Header() {
   const icons = () => {
     return (
       <div className={iconsContainer}>
+        {isLoggedIn ?
         <Link to="/admin">
           <img
             className={icon}
@@ -85,14 +86,16 @@ function Header() {
             alt="admin"
           />
         </Link>
-
-        <Link to={"/login"}>
+        : ''}
+        {isLoggedIn ?
+        <Link to={`/userProfilePage/${currentUser.data._id}`}>
           <img 
             className={icon}
             src="./assets/icons/icon-user.webp"
             alt="user"
           />
         </Link>
+        : '' }
         <Link className={quantityIcon} to="/checkoutpage">
 
           <Badge
