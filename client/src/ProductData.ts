@@ -9,6 +9,26 @@ export interface ProductData {
   _id?: string;
 }
 
+export interface OrderData {
+  _id: string;
+  customer: {
+    firstname: string;
+  };
+  products: ProductData[];
+  paymentMethod: string;
+  total: number;
+  deliveryMethod: string;
+  isOrderSent: boolean;
+  address: {
+    street: string;
+    zipcode: number;
+    city: string;
+  };
+  phoneNumber: number | string;
+  createdAt: {};
+  updatedAt: {};
+}
+
 /**
  * function that returns a unique Id, both numbers and letters
  */
