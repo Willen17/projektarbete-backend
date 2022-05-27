@@ -11,11 +11,13 @@ import { makeRequest } from "../Helper";
 interface UserContextState {
     isLoggedIn: boolean;
     currentUser: object;
+    logOutUser: (value: boolean) => void;
 }
 
 export const UserContext = createContext<UserContextState>({
     isLoggedIn: false,
     currentUser: {},
+    logOutUser: (value: boolean) => {},
   });
 
 const UserProvider: FC = (props) => {
@@ -40,11 +42,15 @@ const UserProvider: FC = (props) => {
       getCookieSession();
     }, [location]);
 
+    const logOutUser = (value: boolean) => {
+        setIsLoggedIn(value);
+    }
 
     return  <UserContext.Provider 
         value={{
             isLoggedIn,
             currentUser,
+            logOutUser,
         }}
     >
         {props.children}

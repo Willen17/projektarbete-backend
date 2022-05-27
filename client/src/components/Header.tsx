@@ -12,12 +12,13 @@ import {
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 // import cartIcon from "../assets/icons/icon-shopping-cart.webp";
 // import userIcon from "../assets/icons/icon-user.webp";
 // import logo from "../assets/images/logo.svg";
 import { useCart } from "../context/CartContextProvider";
-import { sumQuantity } from "../Helper";
+import { useUser } from "../context/UserContext";
+import { makeRequest, sumQuantity } from "../Helper";
 
 interface Page {
   label: string;
@@ -26,8 +27,10 @@ interface Page {
 
 function Header() {
   const { cart } = useCart();
+  const navigate = useNavigate();
   const [anchorMenu, setAnchorMenu] = useState(false);
   const { ccLogo, icon, iconsContainer, quantityIcon } = useStyles();
+  const { logOutUser, isLoggedIn } = useUser();
 
   const menuLeft: Page[] = [
     {
@@ -62,6 +65,15 @@ function Header() {
   const handleCloseMenu = () => {
     setAnchorMenu(false);
   };
+
+  const logOutHandler = async () => {
+    logOutUser(false);
+    return await makeRequest("/api/logout", "DELETE");
+  }
+
+  const logInHandler = async () => {
+    navigate('/login')
+  }
 
   const icons = () => {
     return (
@@ -98,13 +110,27 @@ function Header() {
             />
           </Badge>
         </Link>
-        <Link to="/login">
-          <img
-            className={icon}
-            src="./assets/icons/icon-user.webp"
-            alt="admin"
-          />
-        </Link>
+        {isLoggedIn ?
+        <Button
+          style={{
+            color: "white",
+            marginLeft: "1rem",
+          }}
+          onClick={logOutHandler}
+        >
+          Logout
+        </Button>
+        : 
+        <Button
+          style={{
+            color: "white",
+            marginLeft: "1rem",
+          }}
+          onClick={logInHandler}
+        >
+          Login
+        </Button>
+        }
       </div>
     );
   };
