@@ -1,4 +1,3 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {
@@ -19,9 +18,22 @@ import TableHead from "@mui/material/TableHead";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { makeRequest } from "../../Helper";
+import React, { useState } from "react";
+import OrderCard from "./OrderCard";
+import { OrderData } from "../../ProductData";
 
 function AdminOrders() {
-  const [open, setOpen] = React.useState(false);
+  const [orders, setOrders] = useState<OrderData[]>([]);
+  React.useEffect(() => {
+    async function fetch() {
+      let response = await makeRequest("/api/order", "GET");
+      setOrders(await response.data);
+    }
+    fetch();
+  }, []);
+
+  console.log(orders);
   return (
     <Container
       sx={{
@@ -43,133 +55,9 @@ function AdminOrders() {
           marginTop: "2rem",
         }}
       >
-        <TableContainer component={Paper}>
-          <Table aria-label="collapsible table">
-            <TableHead>
-              <TableRow sx={{ backgroundColor: "#CAC2B9", color: "#fff" }}>
-                <TableCell />
-                <TableCell
-                  sx={{
-                    color: "#fff",
-                    fontSize: "1rem",
-                    fontfamily: "Roboto, Helvetica, Arial, sans-serif",
-                  }}
-                >
-                  Customer
-                </TableCell>
-                <TableCell
-                  sx={{
-                    color: "#fff",
-                    fontSize: "1rem",
-                    fontfamily: "Roboto, Helvetica, Arial, sans-serif",
-                  }}
-                  align="right"
-                >
-                  Ordernumber
-                </TableCell>
-                <TableCell
-                  sx={{
-                    color: "#fff",
-                    fontSize: "1rem",
-                    fontfamily: "Roboto, Helvetica, Arial, sans-serif",
-                  }}
-                  align="right"
-                >
-                  Status
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
-                <TableCell>
-                  <IconButton
-                    aria-label="expand row"
-                    size="small"
-                    sx={{
-                      padding: "0px",
-                      margin: "0px",
-                    }}
-                    onClick={() => setOpen(!open)}
-                  >
-                    {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                  </IconButton>
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  Sara Lindqvist
-                </TableCell>
-                <TableCell align="right">8334926</TableCell>
-                <TableCell align="right">Sent</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell
-                  colSpan={6}
-                  sx={{
-                    padding: "0px",
-                    margin: "0px",
-                  }}
-                >
-                  <Collapse in={open} timeout="auto" unmountOnExit>
-                    <Box
-                      sx={{
-                        backgroundColor: "rgb(248, 244, 239)",
-                        padding: "0px",
-                        margin: "0px",
-                      }}
-                    >
-                      <Table size="small" aria-label="purchases">
-                        <TableHead>
-                          <TableRow>
-                            <Box
-                              sx={{
-                                display: "flex",
-                                justifyContent: "flex-end",
-                                height: "100px",
-                                alignItems: "center",
-                              }}
-                            >
-                              <Typography
-                                sx={{
-                                  mt: "1rem",
-                                  mb: "1rem",
-                                  mr: "1rem",
-                                }}
-                                variant="body1"
-                              >
-                                Change status of order
-                              </Typography>
-                              <FormControl
-                                sx={{
-                                  m: 1,
-                                  minWidth: 120,
-                                  backgroundColor: "white",
-                                }}
-                                size="small"
-                              >
-                                <InputLabel id="demo-select-small">
-                                  Status
-                                </InputLabel>
-                                <Select
-                                  labelId="demo-select-small"
-                                  id="demo-select-small"
-                                  // value={}
-                                  label="Age"
-                                  //onChange={handleChange}
-                                >
-                                  <MenuItem value={10}>Recieved</MenuItem>
-                                  <MenuItem value={20}>Sent</MenuItem>
-                                </Select>
-                              </FormControl>
-                            </Box>
-                          </TableRow>
-                        </TableHead>
-                      </Table>
-                    </Box>
-                  </Collapse>
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
+        {orders.map((order, index) => (
+          <OrderCard key={index} order={order} />
+        ))}
       </Box>
     </Container>
   );
