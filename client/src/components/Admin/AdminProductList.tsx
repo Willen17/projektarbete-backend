@@ -7,6 +7,9 @@ import {
   Box,
   Button,
   Collapse,
+  Dialog,
+  DialogContent,
+  DialogTitle,
   IconButton,
   Table,
   TableBody,
@@ -20,6 +23,8 @@ import { Fragment, useState } from "react";
 import { useAdmin } from "../../context/AdminPageContext";
 import { numWithSpaces } from "../../Helper";
 import { ProductData } from "../../ProductData";
+
+import EditProductForm from "./EditProductForm";
 import RemoveProductConfirmation from "./RemoveProductConfirmation";
 
 interface Props {
@@ -29,14 +34,21 @@ interface Props {
 function AdminProductList(props: Props) {
   const { saveProduct } = useAdmin();
 
-  const [isEdit, setEdit] = useState<boolean>(false);
   const [open, setOpen] = useState(false);
   const [imageURL, setImage] = useState(props.product.imageURL);
   const [title, setTitle] = useState(props.product.title);
   const [description, setDescription] = useState(props.product.description);
   const [price, setPrice] = useState(props.product.price);
   const [openRemove, setOpenRemove] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
+  const handleClickOpen = () => {
+    setIsOpen(true);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
   return (
     <Fragment>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
@@ -103,69 +115,17 @@ function AdminProductList(props: Props) {
                         paddingX: { md: "5rem" },
                       }}
                     >
-                      {isEdit ? (
-                        <Box
-                          style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
-                          }}
-                        >
-                          <img
-                            src={props.product.imageURL}
-                            alt={props.product.title}
-                            style={{ maxHeight: "180px" }}
-                          />
-                          <TextField
-                            required
-                            multiline
-                            label="Image URL"
-                            variant="standard"
-                            onChange={(event) => setImage(event.target.value)}
-                            inputProps={{ style: { fontSize: ".9rem" } }}
-                            InputLabelProps={{ style: { fontSize: ".9rem" } }}
-                          />
-                        </Box>
-                      ) : (
-                        <img
-                          src={props.product.imageURL}
-                          alt={props.product.title}
-                          style={{ maxHeight: "180px" }}
-                        />
-                      )}
+                      <img
+                        src={props.product.imageURL}
+                        alt={props.product.title}
+                        style={{ maxHeight: "180px" }}
+                      />
                     </TableCell>
 
                     <TableCell align="center">{props.product._id!}</TableCell>
+                    <TableCell align="center">{props.product.title}</TableCell>
                     <TableCell align="center">
-                      {isEdit ? (
-                        <TextField
-                          value={title}
-                          variant="standard"
-                          onChange={(event) => setTitle(event.target.value)}
-                          inputProps={{ style: { fontSize: ".9rem" } }}
-                          InputLabelProps={{ style: { fontSize: ".9rem" } }}
-                        />
-                      ) : (
-                        props.product.title
-                      )}
-                    </TableCell>
-                    <TableCell align="center">
-                      {isEdit ? (
-                        <TextField
-                          value={String(price)}
-                          variant="standard"
-                          onChange={(event) => {
-                            console.log(isNaN(Number(event.target.value)));
-                            if (!isNaN(Number(event.target.value))) {
-                              setPrice(Number(event.target.value));
-                            }
-                          }}
-                          inputProps={{ style: { fontSize: ".9rem" } }}
-                          InputLabelProps={{ style: { fontSize: ".9rem" } }}
-                        />
-                      ) : (
-                        numWithSpaces(props.product.price)
-                      )}
+                      {numWithSpaces(props.product.price)}
                     </TableCell>
                     <TableCell align="center">
                       <Button onClick={() => setOpenRemove(true)}>
@@ -175,31 +135,53 @@ function AdminProductList(props: Props) {
                         <DeleteOutline style={{ color: "#ed6c02" }} />
                       </Button>
 
-                      {!isEdit ? (
-                        <Button
-                          onClick={() => {
-                            setEdit(true);
-                          }}
-                        >
-                          <EditIcon style={{ color: "#ed6c02" }} />
-                        </Button>
-                      ) : (
-                        <Button
-                          onClick={() => {
-                            saveProduct({
-                              title,
-                              imageURL,
-                              description,
-                              category: props.product.category,
-                              price,
-                              stock: props.product.stock,
-                              _id: props.product._id,
-                            });
-                          }}
-                        >
-                          <DoneIcon style={{ color: "#ed6c02" }} />
-                        </Button>
+                      <Button onClick={() => setIsOpen(true)}>
+                        <EditIcon style={{ color: "#ed6c02" }} />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell
+                      colSpan={1}
+                      align="left"
+                      sx={{
+                        paddingX: { md: "5rem" },
+                        color: "#6C665F",
+                      }}
+                    >
+                      Categories:
+                    </TableCell>
+                    <TableCell
+                      colSpan={5}
+                      align="left"
+                      sx={{
+                        paddingX: { md: "5rem" },
+                      }}
+                    >
+                      {props.product.category.map(
+                        (oneCategory) => `${oneCategory}, `
                       )}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell
+                      colSpan={1}
+                      align="left"
+                      sx={{
+                        paddingX: { md: "5rem" },
+                        color: "#6C665F",
+                      }}
+                    >
+                      Stock:
+                    </TableCell>
+                    <TableCell
+                      colSpan={5}
+                      align="left"
+                      sx={{
+                        paddingX: { md: "5rem" },
+                      }}
+                    >
+                      {props.product.stock}
                     </TableCell>
                   </TableRow>
                   <TableRow>
@@ -222,26 +204,7 @@ function AdminProductList(props: Props) {
                         paddingX: { md: "5rem" },
                       }}
                     >
-                      {isEdit ? (
-                        <TextareaAutosize
-                          aria-label="description"
-                          value={description}
-                          style={{
-                            width: "100%",
-                            border: "none",
-                            fontFamily: "inherit",
-                            fontSize: ".9rem",
-                            padding: "0.5rem 0.2rem ",
-                            backgroundColor: "#F8F4EF",
-                            borderBottom: "1px solid grey",
-                          }}
-                          onChange={(event) =>
-                            setDescription(event.target.value)
-                          }
-                        />
-                      ) : (
-                        props.product.description
-                      )}
+                      {props.product.description}
                     </TableCell>
                   </TableRow>
                 </TableBody>
@@ -250,6 +213,19 @@ function AdminProductList(props: Props) {
           </Collapse>
         </TableCell>
       </TableRow>
+      <Dialog
+        open={isOpen}
+        onClose={handleClose}
+        scroll="paper"
+        aria-labelledby="scroll-dialog-title"
+        aria-describedby="scroll-dialog-description"
+      >
+        {" "}
+        <DialogTitle id="scroll-dialog-title">Update Product</DialogTitle>
+        <DialogContent dividers={true}>
+          <EditProductForm product={props.product} />
+        </DialogContent>
+      </Dialog>
     </Fragment>
   );
 }

@@ -10,18 +10,30 @@ POST http://localhost:3001/api/order
 Content-Type: application/json
 
 {
- 
-  "products": ["Produkt 1", "Produkt 2"],
+  "products": [{
+  "_id": "6285fa5dbc7a85b713e24eb1",
+  "image": "https://assets.ellosgroup.com/i/ellos/b?$eg$&$em$&$ep$&$ed$&n=ell_1660641-01_Fm_M0062969&mw=1500&fmt=webp",
+  "title": "Alba",
+  "description": "Mango wood desk with waxed surface. Three drawers with drawer stop. Clear height under furniture 57 cm. Easier installation.",
+  "price": 3449,
+  "stock": 50,
+  "quantity": 2,
+  "category": [
+    "tables",
+    "furniture"
+  ],
+  "imageId": "628b89ba32bbfbe94ecffdd5"
+}],
   "paymentMethod": "swish",
   "total": 299,
   "deliveryMethod": "schenker",
+  "phoneNumber": "0702232081",
   "isOrderSent": false,
    "address": {
     "street": "Åkannavägen",
     "zipcode": 43540,
     "city": "Mölnlycke"
   }
-  
 }
 
 ###

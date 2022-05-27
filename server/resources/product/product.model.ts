@@ -9,7 +9,7 @@ export interface Product {
   _id: string;
   stock: number;
   category: string[];
-  quantity?: number; 
+  quantity?: number;
 }
 
 const productSchema = new mongoose.Schema<Product>(

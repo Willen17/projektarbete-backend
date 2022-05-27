@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 interface AdminContextValue {
-  saveProduct: (product: ProductData) => void;
+  saveProduct: (product: ProductData, id: string) => void;
   addProduct: (product: ProductData) => void;
   removeProduct: (product: ProductData) => void;
 }
@@ -58,16 +58,18 @@ const ProductProvider: FC = (props) => {
   //  * function that saves an edited product
   //  * @param editedProduct
   //  */
-  const saveProduct = async (editedProduct: ProductData) => {
-    if (!editedProduct._id) return toast.error("No Product");
+  const saveProduct = async (editedProduct: ProductData, id: string) => {
+    if (!id) return toast.error("No Product");
     let response = await makeRequest(
-      `/api/product/${editedProduct._id}`,
+      `/api/product/${id}`,
       "PUT",
       editedProduct
     );
     if (!response.ok) return toast.error(response);
 
-    toast.success(editedProduct.title + " Edited");
+    toast.success(response.data);
+
+    // toast.success(editedProduct.title + " Edited");
     // const productExists = products.find(
     //   (item) => item.id === editedProduct._id
     // );

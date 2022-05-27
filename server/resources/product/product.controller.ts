@@ -33,8 +33,12 @@ export const updateProduct = async (
   req: Request<{ id: string }>,
   res: Response
 ) => {
-  const product = await ProductModel.findOneAndUpdate(
-    { id_: req.params.id },
+  // const product = await ProductModel.findOneAndUpdate(
+  //   { id_: req.params.id },
+  //   req.body
+  // );
+  const producti = await ProductModel.findByIdAndUpdate(
+    req.params.id,
     req.body
   );
   res.status(200).json(req.body);
