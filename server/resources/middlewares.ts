@@ -16,12 +16,12 @@ export const isCreator = async (
 ) => {
   if (!req.session) return res.status(404).json("Ingen cookie");
   if (!req.session.user) return res.status(404).json("Du måste logga in för att kolla ordrar");
-  let order = await OrderModel.findById(req.params.id);
+  let order = await OrderModel.find({customer: req.session.user._id});
   if (!order) return res.status(403).json('Finns ingen order med det ID:t');
   let isAdmin = req.session.user.isAdmin === true;
-  let checkOrderCustomer = order.customer._id == req.session.user._id;
+  // let checkOrderCustomer = order.customer._id == req.session.user._id;
   if (!isAdmin) {
-    if (!checkOrderCustomer) return res.status(404).json("Inte tillgång till denna order");
+    // if (!checkOrderCustomer) return res.status(404).json("Inte tillgång till denna order");
     next()
   } else {
     next()

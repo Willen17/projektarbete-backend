@@ -13,13 +13,30 @@ import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import Paper from "@mui/material/Paper";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+// import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+// import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useUser } from "../../context/UserContext";
+// import { useEffect, useState } from "react";
+// import { makeRequest } from "../../Helper";
+import { useLocation } from "react-router-dom";
 
 function UserProfilePage() {
   const [open, setOpen] = React.useState(false);
-  const { currentUser } = useUser();
+  const { currentUser, orders } = useUser();
+  // const [orders, setOrders] = useState<any>([]);
+  // const location = useLocation();
+
+  // useEffect(() => {
+  //   const getOrder = async () => {
+  //     let response = await makeRequest(`/api/order/${currentUser.data.user._id}`, "GET");
+  //     if(response.ok) {
+  //       console.log(response);
+  //       setOrders(response.data);
+  //       return;
+  //     }
+  //   }
+  //   getOrder();
+  // }, [location])
 
   return (
     <Container
@@ -33,7 +50,7 @@ function UserProfilePage() {
         sx={{ textTransform: "uppercase", fontFamily: "Prata", mt: "2rem" }}
         variant="h5"
       >
-        Welcome {currentUser.data.user.name}
+        Welcome {currentUser.data?.user.name}
       </Typography>
       <Box
         style={{
@@ -46,7 +63,6 @@ function UserProfilePage() {
           <Table aria-label="collapsible table">
             <TableHead >
               <TableRow sx={{ backgroundColor: "#CAC2B9", color: "#fff" }}>
-                <TableCell />
                 <TableCell
                   sx={{
                     color: "#fff",
@@ -79,63 +95,29 @@ function UserProfilePage() {
                 </TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-              <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
-                <TableCell>
-                  <IconButton
-                    aria-label="expand row"
-                    size="small"
-                    sx={{
-                      padding: "0px",
-                      margin: "0px",
-                    }}
-                    onClick={() => setOpen(!open)}
-                  >
-                    {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                  </IconButton>
-                </TableCell>
-                <TableCell component="th" scope="row" align="center">
-                    8334926
-                </TableCell>
-                <TableCell align="center">2022-05-25</TableCell>
-                <TableCell align="center">Order registered</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell
-                  colSpan={6}
-                  sx={{
-                    padding: "0px",
-                    margin: "0px",
-                  }}
-                >
-                  <Collapse in={open} timeout="auto" unmountOnExit>
-                    <Box
-                      sx={{
-                        backgroundColor: "rgb(248, 244, 239)",
-                        padding: "0px",
-                        margin: "0px",
-                      }}
-                    >
-                      <Table size="small" aria-label="purchases">
-                        <TableHead>
-                          <TableRow>
-                            <Box
-                              sx={{
-                                display: "flex",
-                                justifyContent: "flex-end",
-                                height: "100px",
-                                alignItems: "center",
-                              }}
-                            >
-                            </Box>
-                          </TableRow>
-                        </TableHead>
-                      </Table>
-                    </Box>
-                  </Collapse>
-                </TableCell>
-              </TableRow>
-            </TableBody>
+
+                  {orders.length > 0 ? 
+                    orders.map((order, index) => {
+                      return (
+                        <TableBody key={index}>
+                        <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+
+                          <TableCell align="center">{order._id}</TableCell>
+                          <TableCell align="center">{order.createdAt}</TableCell>
+                          <TableCell align="center">{order.isOrderSent ? 'Order sent' : 'Order registered'}</TableCell>
+                        </TableRow>
+                      </TableBody>
+                    )})
+                  :          
+                    <TableBody>   
+                      <TableRow>
+                        <TableCell>
+                          No orders to show
+                        </TableCell>
+                      </TableRow>             
+                    </TableBody>
+                  }
+
           </Table>
         </TableContainer>
       </Box>
