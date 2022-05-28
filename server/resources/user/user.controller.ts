@@ -23,6 +23,13 @@ export const addUser = async (
     const user = new UserModel(req.body);
     await user.save();
     console.log(user.fullname);
+    if (req.session) {
+      req.session.user = {
+        _id: user._id, 
+        name: user.fullname,
+        isAdmin: user.isAdmin,
+      };
+    }
     res.status(200).json(user);
   } catch (err) {
     next(err);
