@@ -88,7 +88,7 @@ function Header() {
         </Link>
         : ''}
         {isLoggedIn ?
-        <Link to={`/userProfilePage/${currentUser.data._id}`}>
+        <Link to={`/userProfilePage/${currentUser.data.user._id}`}>
           <img 
             className={icon}
             src="./assets/icons/icon-user.webp"

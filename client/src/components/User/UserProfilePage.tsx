@@ -15,9 +15,11 @@ import TableHead from "@mui/material/TableHead";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { useUser } from "../../context/UserContext";
 
 function UserProfilePage() {
   const [open, setOpen] = React.useState(false);
+  const { currentUser } = useUser();
 
   return (
     <Container
@@ -31,7 +33,7 @@ function UserProfilePage() {
         sx={{ textTransform: "uppercase", fontFamily: "Prata", mt: "2rem" }}
         variant="h5"
       >
-        Profile
+        Welcome {currentUser.data.user.name}
       </Typography>
       <Box
         style={{
