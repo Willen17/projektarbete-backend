@@ -3,40 +3,18 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {
   Container,
-  IconButton,
   TableCell,
   TableRow
 } from "@mui/material";
-import Collapse from "@mui/material/Collapse";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import Paper from "@mui/material/Paper";
-// import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-// import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useUser } from "../../context/UserContext";
-// import { useEffect, useState } from "react";
-// import { makeRequest } from "../../Helper";
-import { useLocation } from "react-router-dom";
 
 function UserProfilePage() {
-  const [open, setOpen] = React.useState(false);
   const { currentUser, orders } = useUser();
-  // const [orders, setOrders] = useState<any>([]);
-  // const location = useLocation();
-
-  // useEffect(() => {
-  //   const getOrder = async () => {
-  //     let response = await makeRequest(`/api/order/${currentUser.data.user._id}`, "GET");
-  //     if(response.ok) {
-  //       console.log(response);
-  //       setOrders(response.data);
-  //       return;
-  //     }
-  //   }
-  //   getOrder();
-  // }, [location])
 
   return (
     <Container
@@ -50,7 +28,7 @@ function UserProfilePage() {
         sx={{ textTransform: "uppercase", fontFamily: "Prata", mt: "2rem" }}
         variant="h5"
       >
-        Welcome {currentUser.data?.user.name}
+        Welcome {currentUser?.name}
       </Typography>
       <Box
         style={{
@@ -97,7 +75,7 @@ function UserProfilePage() {
             </TableHead>
 
                   {orders.length > 0 ? 
-                    orders.map((order, index) => {
+                    orders.map((order: { _id: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; createdAt: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; isOrderSent: any; }, index: React.Key | null | undefined) => {
                       return (
                         <TableBody key={index}>
                         <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>

@@ -2,29 +2,33 @@ import { createContext, FC, useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { makeRequest } from "../Helper";
 
-// interface User {
-//     _id: string;
-//     name: string;
-//     isAdmin: boolean;
-// }
+interface User {
+    _id: string;
+    name: string;
+    isAdmin: boolean;
+}
 
 interface UserContextState {
     isLoggedIn: boolean;
-    currentUser: any;
+    currentUser: User;
     orders: any;
     logOutUser: (value: boolean) => void;
 }
 
 export const UserContext = createContext<UserContextState>({
     isLoggedIn: false,
-    currentUser: {},
+    currentUser: {
+        _id: '',
+        name: '',
+        isAdmin: false,
+    },
     orders: [],
     logOutUser: (value: boolean) => {},
   });
 
 const UserProvider: FC = (props) => {
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-    const [currentUser, setCurrentUser] = useState<any>({});
+    const [currentUser, setCurrentUser] = useState<User>({_id: '', name: '', isAdmin: false});
     const [orders, setOrders] = useState<any>([]);
     const navigate = useNavigate();
     const location = useLocation();
@@ -36,7 +40,7 @@ const UserProvider: FC = (props) => {
           let result = await makeRequest("/api/user/login", "GET");
           if(result.ok) {
             console.log(result);
-            setCurrentUser(result);
+            setCurrentUser(result.data.user);
             setIsLoggedIn(true);
           }
         } catch (error) {
@@ -48,7 +52,7 @@ const UserProvider: FC = (props) => {
 
     useEffect(() => {
         const getOrder = async () => {
-          let response = await makeRequest(`/api/order/${currentUser.data.user._id}`, "GET");
+          let response = await makeRequest(`/api/order/${currentUser?._id}`, "GET");
           if(response.ok) {
             console.log(response);
             setOrders(response.data);
@@ -58,7 +62,7 @@ const UserProvider: FC = (props) => {
           }
         }
         getOrder();
-      }, [location])
+      }, [currentUser?._id, location])
 
     const logOutUser = (value: boolean) => {
         setIsLoggedIn(value);

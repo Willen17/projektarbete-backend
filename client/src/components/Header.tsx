@@ -78,7 +78,7 @@ function Header() {
   const icons = () => {
     return (
       <div className={iconsContainer}>
-        {isLoggedIn && currentUser.data.user.isAdmin ?
+        {isLoggedIn && currentUser.isAdmin ?
         <Link to="/admin">
           <img
             className={icon}
@@ -87,8 +87,8 @@ function Header() {
           />
         </Link>
         : ''}
-        {isLoggedIn && !currentUser.data.user.isAdmin ?
-        <Link to={`/userProfilePage/${currentUser.data.user._id}`}>
+        {isLoggedIn && !currentUser.isAdmin ?
+        <Link to={`/userProfilePage/${currentUser._id}`}>
           <img 
             className={icon}
             src="./assets/icons/icon-user.webp"
