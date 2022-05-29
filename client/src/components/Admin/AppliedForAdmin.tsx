@@ -20,7 +20,7 @@ function AppliedForAdmin() {
       sx={{
         display: "flex",
         flexDirection: "column",
-        minHeight: "35rem",
+        minHeight: "25rem",
       }}
     >
       <Typography
@@ -28,7 +28,7 @@ function AppliedForAdmin() {
           textTransform: "uppercase",
           fontFamily: "Prata",
           mt: "2rem",
-          mb: "5rem",
+          mb: "2rem",
         }}
         variant="h5"
       >

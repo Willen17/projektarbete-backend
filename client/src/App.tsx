@@ -18,7 +18,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LogIn from "./components/Login";
 import AdminOrders from "./components/Admin/AdminOrders";
-import AppliedForAdmin from "./components/Admin/AppliedForAdmin";
 
 function App() {
   return (
@@ -37,10 +36,7 @@ function App() {
                 <Route path="/admin" element={<AdminPage />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/login" element={<LogIn />} />
-                <Route path="/adminorders" element={<AdminOrders />} />
-                <Route path="/appliedforadmin" element={<AppliedForAdmin />} />
                 <Route path="/checkoutpage" element={<CheckoutPage />} />
-
                 <Route path="*" element={<NotFound />} />
               </Route>
             </Routes>

@@ -61,7 +61,12 @@ function OrderCard(props: OrderProps) {
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
-          <TableRow sx={{ backgroundColor: "#CAC2B9", color: "#fff" }}>
+          <TableRow
+            sx={{
+              backgroundColor: "#CAC2B9",
+              color: "#fff",
+            }}
+          >
             <TableCell />
             <TableCell
               sx={{

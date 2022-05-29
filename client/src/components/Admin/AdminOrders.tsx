@@ -39,14 +39,14 @@ function AdminOrders() {
       sx={{
         display: "flex",
         flexDirection: "column",
-        minHeight: "35rem",
+        minHeight: "20rem",
       }}
     >
       <Typography
         sx={{ textTransform: "uppercase", fontFamily: "Prata", mt: "2rem" }}
         variant="h5"
       >
-        Orders
+        Status of orders
       </Typography>
       <Box
         style={{
