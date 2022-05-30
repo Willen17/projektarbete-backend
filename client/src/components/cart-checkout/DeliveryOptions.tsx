@@ -6,9 +6,18 @@ import {
   RadioGroup,
   Typography,
 } from "@mui/material";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useCart } from "../../context/CartContextProvider";
 import { useOrder } from "../../context/OrderContextProvider";
+import { makeRequest } from "../../Helper";
+
+export interface DeliveryOptions {
+title: string;
+cost: number;
+deliveryTime: string;
+_id: string;
+imageURL: string;
+}
 
 const DeliveryOptions = () => {
   const { selectShippment } = useCart();
@@ -17,6 +26,16 @@ const DeliveryOptions = () => {
   const handleRadioChange = (event: FormEvent<HTMLInputElement>) => {
     setDeliveryMethod(event.currentTarget.value);
   };
+  const [deliveryOptions, setDeliveryOptions] = useState<DeliveryOptions[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let response = await makeRequest(`/api/deliveryOptions`, "GET");
+      console.log(response.data);
+      setDeliveryOptions(response.data);
+    };
+    fetchData();
+  }, []);
 
   return (
     <Container
@@ -51,12 +70,13 @@ const DeliveryOptions = () => {
           onChange={handleRadioChange}
           value={deliveryMethod}
         >
-          {shippingProviders.map((provider) => (
+          {deliveryOptions.length ? (
+            deliveryOptions.map((deliveryOption) => (
             <FormControlLabel
               control={<Radio required={true} />}
-              value={provider.title}
-              key={provider.title}
-              onClick={() => selectShippment(provider)}
+              value={deliveryOption.title}
+              key={deliveryOption.title}
+              onClick={() => selectShippment(deliveryOption)}
               label={
                 <Box
                   sx={{
@@ -68,20 +88,21 @@ const DeliveryOptions = () => {
                   }}
                 >
                   <img
-                    src={provider.imgURL}
-                    alt={provider.title}
+                    src={deliveryOption?.imageURL}
+                    alt={'Wazup'}
                     height="30px"
                   />
                   <Typography variant="body2" sx={{ marginX: "1rem" }}>
-                    {provider.cost} SEK
+                    {deliveryOption.cost} SEK
                   </Typography>
                   <Typography variant="overline" color="#6C665F">
-                    ({provider.deliveryTime})
+                    ({deliveryOption.deliveryTime})
                   </Typography>
                 </Box>
-              }
+            }
             />
-          ))}
+          ))) : 
+          ''}
           {/* {shippingProviders.map((provider) => {
             return provider.cost !== 0 ? (
               <FormControlLabel
