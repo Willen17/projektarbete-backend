@@ -38,28 +38,26 @@ npm start
 - [x] Beskriv er företagsidé i en kort textuell presentation, detta ska lämnas in vid idégodkännandet
 - [x] All data som programmet utnyttjar ska vara sparat i en Mongo-databas (produkter, beställningar, konton mm)
 - [x] Man ska kunna logga in som administratör i systemet
-- [x] Samtliga fält ska ha valideringsregler
 - [X] Inga Lösenord får sparas i klartext i databasen
-- [x] Mockade produkter ska finnas i en egen fil och vara typade med ett TS interface
 - [x] En besökare ska kunna beställa produkter från sidan, detta ska uppdatera lagersaldot i databasen
-- [] Administratörer ska kunna uppdatera antalet produkter i lager från admin delen av sidan
-- [] Administratörer ska kunna se en lista på alla gjorda beställningar
+- [X] Administratörer ska kunna uppdatera antalet produkter i lager från admin delen av sidan
+- [X] Administratörer ska kunna se en lista på alla gjorda beställningar
 - [x] Sidans produkter ska delas upp i kategorier, en produkt ska tillhöra minst en kategori, men kan tillhöra flera
 - [x] Från hemsidan ska man kunna se en lista över alla produkter, och man ska kunna lista bara dom produkter som tillhör en kategori
 - [x] Besökare ska kunna lägga produkterna i en kundkorg, som är sparad i local-storage på klienten
-- [] En besökare som gör en beställning ska få möjligheten att registrera sig samt logga in och måste vara inloggad som kund innan beställningen skapas
+- [x] En besökare som gör en beställning ska få möjligheten att registrera sig samt logga in och måste vara inloggad som kund innan beställningen skapas
 - [x] Besökare ska kunna välja ett av flera fraktalternativ
 - [X] Tillgängliga fraktalternativ ska vara hämtade från databasen
 - [x] Checkoutflödet i frontendapplikationen ska ha validering på samtliga fält
 
 ### Krav för väl godkänt:
 
-- [] Alla punkter för godkänt är uppfyllda
-- [] Man ska kunna registrera sig som administratör på sidan, nya användare ska sparas i databasen
+- [x] Alla punkter för godkänt är uppfyllda
+- [x] Man ska kunna registrera sig som administratör på sidan, nya användare ska sparas i databasen
 - [] En administratör behöver godkännas av en tidigare administratör innan man kan logga in fösta gången
-- [] Administratörer ska kunna markera beställningar som skickade
-- [] När man är inloggad som kund ska man kunna se sina gjorda beställning och om det är skickade eller inte
-- [] Administratörer ska kunna redigera vilka kategorier en produkt tillhör
-- [] Administratörer ska kunna lägga till och ta bort produkter
+- [x] Administratörer ska kunna markera beställningar som skickade
+- [x] När man är inloggad som kund ska man kunna se sina gjorda beställning och om det är skickade eller inte
+- [x] Administratörer ska kunna redigera vilka kategorier en produkt tillhör
+- [x] Administratörer ska kunna lägga till och ta bort produkter
 - [] Backendapplikationen måste ha en fungerande global felhantering
 -
