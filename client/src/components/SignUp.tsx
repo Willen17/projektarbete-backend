@@ -12,6 +12,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { makeRequest } from "../Helper";
 import { useFormik } from "formik";
 import { User } from "../context/UserContext";
+import { useState } from "react";
 interface FormValues extends Omit<User, "_id" | "fullname" | "isAdmin"> {
   password: string;
   isApplyingForAdmin: boolean;
@@ -23,19 +24,23 @@ const ValidationSchema = yup
     firstname: yup.string().required("Required"),
     lastname: yup.string().required("Required"),
     email: yup.string().email("Invalid email").required("Required"),
-    password: yup.string().min(5).max(8).required("Required"),
+    password: yup.string().min(6).max(10).required("Required"),
     isApplyingForAdmin: yup.boolean(),
   });
 
 function SignUp() {
   const navigate = useNavigate();
+  const [isApplyingForAdmin, setIsApplyingForAdmin] = useState(false);
 
   const signUpHandler = async (values: FormValues) => {
+    values["isApplyingForAdmin"] = isApplyingForAdmin;
+    console.log(values);
+
     let response = await makeRequest("/api/user", "POST", values);
     if (response.ok) {
       navigate("/");
     } else {
-      // setError("Email is already in use");
+      //setError("Email is already in use");
       return;
     }
   };
@@ -46,8 +51,8 @@ function SignUp() {
         firstname: "",
         lastname: "",
         password: "",
-        isApplyingForAdmin: false,
         email: "",
+        isApplyingForAdmin: isApplyingForAdmin,
       },
       validationSchema: ValidationSchema,
       onSubmit: signUpHandler,
@@ -158,8 +163,8 @@ function SignUp() {
               value={values.lastname}
               onChange={handleChange}
               onBlur={handleBlur}
-              error={Boolean(touched.firstname && errors.firstname)}
-              helperText={errors.firstname}
+              error={Boolean(touched.lastname && errors.lastname)}
+              helperText={errors.lastname}
             />
             <TextField
               style={{
@@ -176,8 +181,8 @@ function SignUp() {
               value={values.email}
               onChange={handleChange}
               onBlur={handleBlur}
-              error={Boolean(touched.firstname && errors.firstname)}
-              helperText={errors.firstname}
+              error={Boolean(touched.email && errors.email)}
+              helperText={errors.email}
             />
             <TextField
               style={{
@@ -194,14 +199,21 @@ function SignUp() {
               value={values.password}
               onChange={handleChange}
               onBlur={handleBlur}
-              error={Boolean(touched.firstname && errors.firstname)}
-              helperText={errors.firstname}
+              error={Boolean(touched.password && errors.password)}
+              helperText={errors.password}
             />
             <FormControlLabel
               style={{ color: "grey", marginTop: ".5rem" }}
               control={<Checkbox />}
-              value={values.isApplyingForAdmin}
-              onChange={handleChange}
+              onChange={(e) =>
+                setIsApplyingForAdmin(() => {
+                  if (isApplyingForAdmin === false) {
+                    return true;
+                  } else {
+                    return false;
+                  }
+                })
+              }
               label="Apply for being administrator"
             />
             <Button
