@@ -8,7 +8,7 @@ import {
   AlertProps,
 } from "@mui/material";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { makeRequest } from "../Helper";
 
 function MuiAlert(props: JSX.IntrinsicAttributes & AlertProps) {
@@ -16,11 +16,12 @@ function MuiAlert(props: JSX.IntrinsicAttributes & AlertProps) {
 }
 
 function LogIn() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const signInHandler = (e) => {
+  const signInHandler = async (e) => {
     e.preventDefault();
     if (email === "" || password === "") {
       setError("All fields are required");
@@ -33,7 +34,13 @@ function LogIn() {
       isAdmin: false,
     };
 
-    makeRequest("/api/login", "POST", userData);
+    let response = await makeRequest("/api/login", "POST", userData);
+    if(response.ok) {
+      navigate('/');
+    } else {
+      setError('Wrong email or password, please try again');
+      return;
+    }
   };
 
   return (

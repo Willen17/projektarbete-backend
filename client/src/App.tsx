@@ -18,11 +18,14 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LogIn from "./components/Login";
 import AdminOrders from "./components/Admin/AdminOrders";
+import UserProfilePage from "./components/User/UserProfilePage";
+import UserProvider from "./context/UserContext";
 
 function App() {
   return (
     <BrowserRouter>
       <ToastContainer position="bottom-left" />
+      <UserProvider>
       <ProductProvider>
         <CartProvider>
           <OrderProvider>
@@ -32,17 +35,18 @@ function App() {
                 <Route path="/category/:category" element={<CategoryPage />} />
                 <Route path="/detail/:id" element={<ProductPage />} />
                 <Route path="/confirmation" element={<OrderConfirmation />} />
-                {/* added a quick fix in AdminPage component for now */}
                 <Route path="/admin" element={<AdminPage />} />
-                <Route path="/signup" element={<SignUp />} />
-                <Route path="/login" element={<LogIn />} />
+                 <Route path="/signup" element={<SignUp />} />
+                  <Route path="/login" element={<LogIn />} />
+                  <Route path="/userProfilePage/:id" element={<UserProfilePage/>} />
                 <Route path="/checkoutpage" element={<CheckoutPage />} />
                 <Route path="*" element={<NotFound />} />
               </Route>
             </Routes>
           </OrderProvider>
         </CartProvider>
-      </ProductProvider>
+      </ProductProvider>     
+      </UserProvider>
     </BrowserRouter>
   );
 }

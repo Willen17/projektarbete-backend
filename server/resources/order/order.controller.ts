@@ -60,7 +60,8 @@ export const addOrder = async (
 
 export const getOneOrder = async (req: Request, res: Response) => {
   console.log("Kör request");
-  const order = await OrderModel.findById(req.params.id);
+  // const order = await OrderModel.findById(req.params.id);
+  const order = await OrderModel.find({customer: req.session?.user._id});
   res.status(200).json(order);
 };
 
