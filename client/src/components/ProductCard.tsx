@@ -8,10 +8,10 @@ import {
   Theme,
   Typography,
 } from "@mui/material";
-import { CSSProperties } from "react";
+import { CSSProperties, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAdmin } from "../context/AdminPageContext";
-import { numWithSpaces } from "../Helper";
+import { makeRequest, numWithSpaces } from "../Helper";
 import { ProductData } from "../ProductData";
 import AddToCartButton from "./shared/AddToCartButton";
 
@@ -20,6 +20,7 @@ interface cardProps {
 }
 
 function ProductCard(props: cardProps) {
+
   return (
     <Card sx={cardStyle} key={props.product.title}>
       <Link to={`/detail/${props.product._id}`} style={linkStyle}>
@@ -52,9 +53,15 @@ function ProductCard(props: cardProps) {
         <Typography variant="body2" color="text.secondary">
           {numWithSpaces(props.product.price)} SEK
         </Typography>
+        {props.product.stock > 0 ? (
         <CardActions>
           <AddToCartButton product={props.product} size="small" />
         </CardActions>
+        ) : 
+        <Typography>
+          Out of stock
+        </Typography>
+        }
       </Box>
     </Card>
   );
