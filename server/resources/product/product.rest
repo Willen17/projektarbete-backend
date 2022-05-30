@@ -17,17 +17,31 @@ Content-Type: application/json
   "description": "This a chair2",
   "price": 292,
   "stock": 1,
+   "imageId": "628b8faa422f2d703070d9dd",
   "category": ["furniture"]
 }
 
 ###
 
-PUT http://localhost:3001/api/product/6284c0fd3ad1995085fd395a
+PUT http://localhost:3001/api/product/6285f3a6bc7a85b713e24ea8
 Content-Type: application/json
 
-{
 
-}
+ {
+    "image": "https://assets.ellosgroup.com/i/ellos/b?$eg$&$em$&$ep$&$ed$&n=ell_1032228-02_Fm_M0013527&mw=1500&fmt=webp",
+    "title": "Jolly",
+    "description": "Stool with comfortable, shaped seat. Made of solid wood, in the Toon Wood type. Height 61 cm. Seat 40x32 cm. Seat height: 61 cm Width at the bottom 47 cm. Mounted.",
+    "price": 1599,
+    "stock": 50,
+    "category": [
+      "chairs",
+      "furniture"
+    ],
+    "imageId": "628b8faa422f2d703070d9dd",
+    "imageURL": "/api/media/628b8faa422f2d703070d9dd"
+    
+  }
+
 
 ###
 

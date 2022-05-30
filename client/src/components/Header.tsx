@@ -86,6 +86,7 @@ function Header() {
             alt="admin"
           />
         </Link>
+
         : ''}
         {isLoggedIn && !currentUser.isAdmin ?
         <Link to={`/userProfilePage/${currentUser._id}`}>
@@ -97,7 +98,6 @@ function Header() {
         </Link>
         : '' }
         <Link className={quantityIcon} to="/checkoutpage">
-
           <Badge
             anchorOrigin={{
               vertical: "top",

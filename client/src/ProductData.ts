@@ -1,11 +1,32 @@
 export interface ProductData {
-  imageURL: string;
+  imageURL?: string;
   title: string;
   description: string;
   price: number;
   stock: number;
   category: string[];
+  imageId?: string;
+  _id?: string;
+}
+
+export interface OrderData {
   _id: string;
+  customer: {
+    firstname: string;
+  };
+  products: ProductData[];
+  paymentMethod: string;
+  total: number;
+  deliveryMethod: string;
+  isOrderSent: boolean;
+  address: {
+    street: string;
+    zipcode: number;
+    city: string;
+  };
+  phoneNumber: number | string;
+  createdAt: {};
+  updatedAt: {};
 }
 
 /**

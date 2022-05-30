@@ -95,7 +95,10 @@ const OrderProvider: FC = (props) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      let response = await makeRequest("/api/deliveryOptions", "GET");
+      let response = await makeRequest<ShippingProvider[]>(
+        "/api/deliveryOptions",
+        "GET"
+      );
       setShippingProviders(response.data);
     };
     fetchData();

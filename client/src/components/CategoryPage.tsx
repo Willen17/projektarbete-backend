@@ -17,7 +17,6 @@ function CategoryPage() {
         "GET"
       );
       setProductList(response.data);
-      console.log(response.data);
     };
     fetchData();
   }, [params]);

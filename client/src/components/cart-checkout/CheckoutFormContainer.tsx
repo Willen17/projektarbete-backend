@@ -11,6 +11,7 @@ import CustomerDetails from "./CustomerDetails";
 import DeliveryOptions from "./DeliveryOptions";
 import PaymentMethod from "./PaymentMethod";
 import PriceOverview from "./PriceOverview";
+
 export interface FormValues extends Customer {
   cardNumber: number | "";
   cardExpiry: number | "";

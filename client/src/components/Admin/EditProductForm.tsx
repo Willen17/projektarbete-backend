@@ -22,27 +22,31 @@ export interface ProductValues {
   category: string[];
 }
 
-const InitialValue: ProductValues = {
-  title: "",
-  description: "",
-  price: "",
-  stock: "",
-  category: [""],
-};
+interface editProduct {
+  product: ProductData;
+}
 
-const ProductValidationSchema = yup.object({
-  title: yup.string().required("Title is required"),
-  description: yup.string().required("Description is required"),
-  price: yup.number().required("Price is required"),
-  stock: yup.number().required("Stock is required"),
-});
-
-function AddProductForm() {
-  const { addProduct } = useAdmin();
-  const [confirmation, setConfirmation] = useState(false);
-  const [categories, setCategories] = useState<string[]>([]);
+function EditProductForm(props: editProduct) {
+  console.log(props.product.category);
+  const InitialValue: ProductValues = {
+    title: props.product.title,
+    description: props.product.description,
+    price: props.product.price,
+    stock: props.product.stock,
+    category: props.product.category,
+  };
+  const ProductValidationSchema = yup.object({
+    title: yup.string().required("Title is required"),
+    description: yup.string().required("Description is required"),
+    price: yup.number().required("Price is required"),
+    stock: yup.number().required("Stock is required"),
+  });
+  const { saveProduct } = useAdmin();
+  const [categories, setCategories] = useState<string[]>(
+    props.product.category
+  );
   const [image, setImage] = useState();
-  const [imageId, setImageId] = useState<string>();
+  const [imageId, setImageId] = useState<string>(props.product.imageId!);
 
   const handleImageChange = async (event: any) => {
     // console.log(event.currentTarget.files[0]);
@@ -78,14 +82,14 @@ function AddProductForm() {
 
   const validateAndSaveNewProduct = (values: ProductValues) => {
     values.category = categories;
-
+    console.log(imageId);
     if (
       imageId &&
       values.title &&
       values.description &&
       values.price &&
       values.stock &&
-      values.category.length
+      props.product.category.length > 0
     ) {
       const newProduct: ProductData = {
         imageId,
@@ -95,7 +99,8 @@ function AddProductForm() {
         stock: values.stock as number,
         category: values.category,
       };
-      addProduct(newProduct);
+      console.log(newProduct);
+      saveProduct(newProduct, props.product._id!);
     } else {
       toast.error("Make sure a category is choosen and an image is uploaded");
     }
@@ -206,35 +211,54 @@ function AddProductForm() {
                 name="furniture"
                 onChange={(e: any) => handleCategoryChange(e)}
                 value="furniture"
-                control={<Checkbox />}
+                control={
+                  <Checkbox
+                    defaultChecked={values.category.includes("furniture")}
+                  />
+                }
                 label="Furniture"
               />
               <FormControlLabel
                 name="chairs"
                 onChange={(e: any) => handleCategoryChange(e)}
                 value="chairs"
-                control={<Checkbox />}
+                control={
+                  <Checkbox
+                    defaultChecked={values.category.includes("chairs")}
+                  />
+                }
                 label="Chairs"
               />
               <FormControlLabel
                 name="decorations"
                 onChange={(e: any) => handleCategoryChange(e)}
                 value="decorations"
-                control={<Checkbox />}
+                control={
+                  <Checkbox
+                    defaultChecked={values.category.includes("decorations")}
+                  />
+                }
                 label="Decorations"
               />
               <FormControlLabel
                 name="beds"
                 onChange={(e: any) => handleCategoryChange(e)}
                 value="beds"
-                control={<Checkbox />}
+                control={
+                  <Checkbox defaultChecked={values.category.includes("beds")} />
+                }
                 label="Beds"
+                defaultChecked
               />
               <FormControlLabel
                 name="tables"
                 onChange={(e: any) => handleCategoryChange(e)}
                 value="tables"
-                control={<Checkbox />}
+                control={
+                  <Checkbox
+                    defaultChecked={values.category.includes("tables")}
+                  />
+                }
                 label="Tables"
               />
             </FormGroup>
@@ -254,11 +278,11 @@ function AddProductForm() {
           }}
           type="submit"
         >
-          ADD PRODUCT
+          UPDATE PRODUCT
         </Button>
       </form>
     </Container>
   );
 }
 
-export default AddProductForm;
+export default EditProductForm;
