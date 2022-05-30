@@ -14,6 +14,8 @@ import {
 import { useState } from "react";
 import AddProductForm from "./AddProductForm";
 import AdminCollapsibleTable from "./AdminCollapsibleTable";
+import AdminOrders from "./AdminOrders";
+import AppliedForAdmin from "./AppliedForAdmin";
 
 function AdminPage() {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,11 +36,13 @@ function AdminPage() {
         minHeight: "35rem",
       }}
     >
+      <AppliedForAdmin />
+      <AdminOrders />
       <Typography
-        sx={{ textTransform: "uppercase", fontFamily: "Prata", mt: "1rem" }}
+        sx={{ textTransform: "uppercase", fontFamily: "Prata" }}
         variant="h5"
       >
-        Admin
+        Change products
       </Typography>
       <Box style={{ display: "flex", justifyContent: "flex-end" }}>
         <Button

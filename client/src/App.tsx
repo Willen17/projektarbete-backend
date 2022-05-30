@@ -32,28 +32,20 @@ function App() {
             <Routes>
               <Route path="/" element={<Layout />}>
                 <Route index element={<StartPage />} />
-
                 <Route path="/category/:category" element={<CategoryPage />} />
                 <Route path="/detail/:id" element={<ProductPage />} />
                 <Route path="/confirmation" element={<OrderConfirmation />} />
-                {/* added a quick fix in AdminPage component for now */}
-
                 <Route path="/admin" element={<AdminPage />} />
-
-                  <Route path="/signup" element={<SignUp />} />
+                 <Route path="/signup" element={<SignUp />} />
                   <Route path="/login" element={<LogIn />} />
                   <Route path="/userProfilePage/:id" element={<UserProfilePage/>} />
-
-                  <Route path="/adminorders" element={<AdminOrders />} />
-
-                  <Route path="/checkoutpage" element={<CheckoutPage />} />
-
-                  <Route path="*" element={<NotFound />} />
-                </Route>
-              </Routes>
-            </OrderProvider>
-          </CartProvider>
-        </ProductProvider>
+                <Route path="/checkoutpage" element={<CheckoutPage />} />
+                <Route path="*" element={<NotFound />} />
+              </Route>
+            </Routes>
+          </OrderProvider>
+        </CartProvider>
+      </ProductProvider>     
       </UserProvider>
     </BrowserRouter>
   );
