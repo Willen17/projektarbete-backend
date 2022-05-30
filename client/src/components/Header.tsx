@@ -30,7 +30,7 @@ function Header() {
   const navigate = useNavigate();
   const [anchorMenu, setAnchorMenu] = useState(false);
   const { ccLogo, icon, iconsContainer, quantityIcon } = useStyles();
-  const { logOutUser, isLoggedIn, currentUser } = useUser();
+  const { logOutUser, currentUser } = useUser();
 
   const menuLeft: Page[] = [
     {
@@ -69,34 +69,37 @@ function Header() {
   const logOutHandler = async () => {
     logOutUser(false);
     return await makeRequest("/api/logout", "DELETE");
-  }
+  };
 
   const logInHandler = async () => {
-    navigate('/login')
-  }
+    navigate("/login");
+  };
 
   const icons = () => {
     return (
       <div className={iconsContainer}>
-        {isLoggedIn && currentUser.isAdmin ?
-        <Link to="/admin">
-          <img
-            className={icon}
-            src="/assets/icons/icon-user.webp"
-            alt="admin"
-          />
-        </Link>
-
-        : ''}
-        {isLoggedIn && !currentUser.isAdmin ?
-        <Link to={`/userProfilePage/${currentUser._id}`}>
-          <img 
-            className={icon}
-            src="./assets/icons/icon-user.webp"
-            alt="user"
-          />
-        </Link>
-        : '' }
+        {currentUser?.isAdmin ? (
+          <Link to="/admin">
+            <img
+              className={icon}
+              src="/assets/icons/icon-user.webp"
+              alt="admin"
+            />
+          </Link>
+        ) : (
+          ""
+        )}
+        {currentUser && !currentUser.isAdmin ? (
+          <Link to={`/userProfilePage/${currentUser._id}`}>
+            <img
+              className={icon}
+              src="./assets/icons/icon-user.webp"
+              alt="user"
+            />
+          </Link>
+        ) : (
+          ""
+        )}
         <Link className={quantityIcon} to="/checkoutpage">
           <Badge
             anchorOrigin={{
@@ -113,27 +116,27 @@ function Header() {
             />
           </Badge>
         </Link>
-        {isLoggedIn ?
-        <Button
-          style={{
-            color: "white",
-            marginLeft: "1rem",
-          }}
-          onClick={logOutHandler}
-        >
-          Logout
-        </Button>
-        : 
-        <Button
-          style={{
-            color: "white",
-            marginLeft: "1rem",
-          }}
-          onClick={logInHandler}
-        >
-          Login
-        </Button>
-        }
+        {currentUser ? (
+          <Button
+            style={{
+              color: "white",
+              marginLeft: "1rem",
+            }}
+            onClick={logOutHandler}
+          >
+            Logout
+          </Button>
+        ) : (
+          <Button
+            style={{
+              color: "white",
+              marginLeft: "1rem",
+            }}
+            onClick={logInHandler}
+          >
+            Login
+          </Button>
+        )}
       </div>
     );
   };
