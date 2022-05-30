@@ -18,11 +18,18 @@ export const addUser = async (
     let findUser = await UserModel.findOne({email: req.body.email});
     if(findUser) {
       console.log('user already exists')
-      return res.status(409).send('Email already exists')
+      return res.status(409).json('Email already exists')
     }
     const user = new UserModel(req.body);
     await user.save();
     console.log(user.fullname);
+    if (req.session) {
+      req.session.user = {
+        _id: user._id, 
+        name: user.fullname,
+        isAdmin: user.isAdmin,
+      };
+    }
     res.status(200).json(user);
   } catch (err) {
     next(err);
@@ -47,7 +54,11 @@ export const loginUser = async (req: Request, res: Response) => {
   let matchPassword = await bcrypt.compare(req.body.password, user.password); // returns true or false
   if (!matchPassword) return res.status(401).json("Wrong username or password"); // if false
   if (req.session) {
-    req.session.user = {_id: user._id, isAdmin: user.isAdmin};
+    req.session.user = {
+      _id: user._id, 
+      name: user.fullname,
+      isAdmin: user.isAdmin,
+    };
   }
   console.log(req.session);
 
@@ -61,6 +72,12 @@ export const loginUser = async (req: Request, res: Response) => {
   //     .status(401)
   //     .json("You have entered either an incorrect email or password.");
   // }
+};
+
+export const checkIsLoggedIn = async (req: Request, res: Response) => {
+  if(!req.session) return res.status(401).send("You are not logged in.");
+  if (!req.session.user) return res.status(401).send("You are not logged in.");
+  res.status(200).json(req.session);
 };
 
 export const logoutUser = async (req: Request, res: Response) => {

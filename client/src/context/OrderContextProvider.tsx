@@ -65,7 +65,7 @@ const OrderProvider: FC = (props) => {
     const fetchData = async () => {
       let response = await makeRequest("/api/order", "POST", checkoutObj);
 
-      console.log(response);
+      console.log(response.data);
     };
     fetchData();
 
