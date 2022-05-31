@@ -45,8 +45,9 @@ export const getUserOrders = async (
   if (req.params.id !== req.session?.user._id) {
     throw new Error(ErrorCodes.unauthorized);
   }
-  const order = await OrderModel.find({ customer: req.session?.user._id });
-  res.status(200).json(order);
+  const orders = await OrderModel.find({ customer: req.params.id });
+  // console.log(orders);
+  res.status(200).json(orders);
 };
 
 export const updateOrder = async (

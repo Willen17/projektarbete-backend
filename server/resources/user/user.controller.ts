@@ -47,6 +47,8 @@ export const loginUser = async (req: Request, res: Response) => {
     req.session.user = {
       _id: user._id,
       name: user.fullname,
+      firstname: user.firstname,
+      lastname: user.lastname,
       isAdmin: user.isAdmin,
     };
   }

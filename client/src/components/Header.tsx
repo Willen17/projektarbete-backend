@@ -65,8 +65,8 @@ function Header() {
   };
 
   const logOutHandler = async () => {
+    await makeRequest("/api/logout", "DELETE");
     logOutUser(false);
-    return await makeRequest("/api/logout", "DELETE");
   };
 
   const logInHandler = async () => {
@@ -91,7 +91,7 @@ function Header() {
           <Link to={`/userProfilePage/${currentUser._id}`}>
             <img
               className={icon}
-              src="./assets/icons/icon-user.webp"
+              src="/assets/icons/icon-user.webp"
               alt="user"
             />
           </Link>

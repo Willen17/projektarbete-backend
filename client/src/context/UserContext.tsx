@@ -44,6 +44,7 @@ const UserProvider: FC = (props) => {
     const getOrder = async () => {
       let response = await makeRequest(`/api/order/${currentUser?._id}`, "GET");
       if (!response.ok) return;
+      // console.log(response.data)
       setOrders(response.data);
     };
     getOrder();
@@ -53,6 +54,7 @@ const UserProvider: FC = (props) => {
     setCurrentUser(undefined);
     navigate("/");
     toast.success("You successfully logged out");
+    // window.location.reload();
   };
 
   return (

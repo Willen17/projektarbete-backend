@@ -24,7 +24,11 @@ const ProductProvider: FC = (props) => {
     if (!newProduct) return toast.error("No product");
     let response = await makeRequest("/api/product", "POST", newProduct);
     if (!response.ok) return toast.error(response);
+
     toast.success(newProduct.title + " added");
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
   };
 
   const removeProduct = async (productToBeRemoved: ProductData) => {
@@ -33,7 +37,7 @@ const ProductProvider: FC = (props) => {
       `/api/product/${productToBeRemoved._id}`,
       "DELETE"
     );
-    if (!response.ok) return toast.error(response);
+    if (!response.ok) return toast.error(response.data);
 
     toast.success("Product removed");
     setTimeout(() => {
@@ -48,9 +52,11 @@ const ProductProvider: FC = (props) => {
       "PUT",
       editedProduct
     );
-    if (!response.ok) return toast.error(response);
-
+    if (!response.ok) return toast.error(response.data);
     toast.success(response.data);
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
   };
 
   return (
