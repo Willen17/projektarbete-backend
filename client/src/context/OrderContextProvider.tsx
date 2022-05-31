@@ -4,6 +4,7 @@ import { ShippingProvider } from "../ShippingProviderData";
 import { ItemData, useCart } from "./CartContextProvider";
 import { toast } from "react-toastify";
 interface OrderData {
+  _id?: string;
   customer: string;
   email: string;
   products: ItemData[];
@@ -69,21 +70,13 @@ const OrderProvider: FC = (props) => {
     const fetchData = async () => {
       let response = await makeRequest("/api/order", "POST", checkoutObj);
       if (!response.ok) return toast.error(response.data);
+      checkoutObj._id = response.data._id;
+      setOrder(checkoutObj);
       navigate("/confirmation");
       toast.success("Order Placed");
       emptyCart();
     };
     fetchData();
-
-    // let updatedOrder: OrderData = {
-    //   customer: customer,
-    //   boughtItems: boughtItems,
-    //   shipmentOption: shipper,
-    //   paymentMethod: paymentMethod,
-    //   orderNo: generateOrderNum(),
-    // };
-    //setTotalCost(UseSumTotal(updatedOrder.boughtItems, true))
-    setOrder(checkoutObj);
   };
   // console.log(order);
 
