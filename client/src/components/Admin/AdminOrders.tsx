@@ -38,9 +38,52 @@ function AdminOrders() {
           marginTop: "2rem",
         }}
       >
-        {orders.map((order, index) => (
-          <OrderCard key={index} order={order} />
-        ))}
+        <TableContainer component={Paper}>
+          <Table aria-label="collapsible table">
+            <TableHead>
+              <TableRow
+                sx={{
+                  backgroundColor: "#CAC2B9",
+                  color: "#fff",
+                }}
+              >
+                <TableCell />
+                <TableCell
+                  sx={{
+                    color: "#fff",
+                    fontSize: "1rem",
+                    fontfamily: "Roboto, Helvetica, Arial, sans-serif",
+                  }}
+                >
+                  Customer
+                </TableCell>
+                <TableCell
+                  sx={{
+                    color: "#fff",
+                    fontSize: "1rem",
+                    fontfamily: "Roboto, Helvetica, Arial, sans-serif",
+                  }}
+                  align="right"
+                >
+                  Ordernumber
+                </TableCell>
+                <TableCell
+                  sx={{
+                    color: "#fff",
+                    fontSize: "1rem",
+                    fontfamily: "Roboto, Helvetica, Arial, sans-serif",
+                  }}
+                  align="right"
+                >
+                  Status
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            {orders.map((order, index) => (
+              <OrderCard key={index} order={order} />
+            ))}
+          </Table>
+        </TableContainer>
       </Box>
     </Container>
   );

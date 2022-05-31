@@ -2,7 +2,7 @@ import { createContext, FC, useContext, useEffect, useState } from "react";
 import { makeRequest } from "../Helper";
 import { ShippingProvider } from "../ShippingProviderData";
 import { ItemData, useCart } from "./CartContextProvider";
-
+import { toast } from "react-toastify";
 interface OrderData {
   customer: string;
   email: string;
@@ -24,7 +24,11 @@ export interface Customer {
 
 interface OrderContextValue {
   order: OrderData | undefined;
-  createOrder: (customerValues: Customer) => void;
+  createOrder: (
+    customerValues: Customer,
+    navigate: any,
+    emptyCart: any
+  ) => void;
   generateOrderNum: () => string;
   shippingProviders: ShippingProvider[];
 }
@@ -45,7 +49,7 @@ const OrderProvider: FC = (props) => {
   // const [totalCost, setTotalCost] = useState<Number>()
 
   /** push in everything related to the order to the order state */
-  const createOrder = (values: Customer) => {
+  const createOrder = (values: Customer, navigate: any, emptyCart: any) => {
     const boughtItems = [...cart];
 
     let checkoutObj: OrderData = {
@@ -64,8 +68,10 @@ const OrderProvider: FC = (props) => {
 
     const fetchData = async () => {
       let response = await makeRequest("/api/order", "POST", checkoutObj);
-
-      console.log(response.data);
+      if (!response.ok) return toast.error(response.data);
+      navigate("/confirmation");
+      toast.success("Order Placed");
+      emptyCart();
     };
     fetchData();
 
@@ -95,10 +101,7 @@ const OrderProvider: FC = (props) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      let response = await makeRequest(
-        "/api/deliveryOptions",
-        "GET"
-      );
+      let response = await makeRequest("/api/deliveryOptions", "GET");
       setShippingProviders(response.data);
     };
     fetchData();

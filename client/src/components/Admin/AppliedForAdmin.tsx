@@ -13,143 +13,73 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+import { useState, useEffect } from "react";
+import { User } from "../../context/UserContext";
+import { makeRequest } from "../../Helper";
+import ApplyingForAdminCard from "./ApplyingForAdminCard";
 
 function AppliedForAdmin() {
+  const [users, setUsers] = useState<User[]>([]);
+
+  useEffect(() => {
+    async function fetch() {
+      let response = await makeRequest("/api/user", "GET");
+      let newList = response.data.filter(
+        (user: User) => user.isApplyingForAdmin === true
+      );
+      setUsers(newList);
+    }
+    fetch();
+  }, []);
   return (
     <Container
       sx={{
         display: "flex",
         flexDirection: "column",
-        minHeight: "25rem",
+        minHeight: "20rem",
       }}
     >
       <Typography
-        sx={{
-          textTransform: "uppercase",
-          fontFamily: "Prata",
-          mt: "2rem",
-          mb: "2rem",
-        }}
+        sx={{ textTransform: "uppercase", fontFamily: "Prata", mt: "2rem" }}
         variant="h5"
       >
-        Applied For Admin
+        Applied for admin
       </Typography>
-      <TableContainer component={Paper}>
-        <Table aria-label="collapsible table">
-          <TableHead>
-            <TableRow sx={{ backgroundColor: "#CAC2B9", color: "#fff" }}>
-              <TableCell
+      <Box
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          marginTop: "2rem",
+        }}
+      >
+        <TableContainer component={Paper}>
+          <Table aria-label="collapsible table">
+            <TableHead>
+              <TableRow
                 sx={{
+                  backgroundColor: "#CAC2B9",
                   color: "#fff",
-                  fontSize: "1rem",
-                  fontfamily: "Roboto, Helvetica, Arial, sans-serif",
-                  borderBottom: "none",
+                  width: "100%",
                 }}
               >
-                Name
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableRow style={{ display: "flex", flexDirection: "column" }}>
-            <Box
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              <TableCell
-                sx={{
-                  color: "#000",
-                  fontSize: "1rem",
-                  fontfamily: "Roboto, Helvetica, Arial, sans-serif",
-                  borderBottom: "none",
-                  mt: "1rem",
-                }}
-              >
-                Sara Lindqvist
-              </TableCell>
-              <TableCell
-                sx={{
-                  color: "#000",
-                  fontSize: "1rem",
-                  fontfamily: "Roboto, Helvetica, Arial, sans-serif",
-                  borderBottom: "none",
-                }}
-                align="right"
-              >
-                <FormControl
+                <TableCell
+                  colSpan={9}
                   sx={{
-                    m: 1,
-                    minWidth: 120,
-                    backgroundColor: "white",
+                    color: "#fff",
+                    fontSize: "1rem",
+                    fontfamily: "Roboto, Helvetica, Arial, sans-serif",
                   }}
-                  size="small"
                 >
-                  <InputLabel id="demo-select-small">Approve</InputLabel>
-                  <Select
-                    labelId="demo-select-small"
-                    id="demo-select-small"
-                    // value={}
-                    label="Age"
-                    //onChange={}
-                  >
-                    <MenuItem value={"notSent"}>Yes</MenuItem>
-                    <MenuItem value={"sent"}>No</MenuItem>
-                  </Select>
-                </FormControl>
-              </TableCell>
-            </Box>
-            <Box
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              <TableCell
-                sx={{
-                  color: "#000",
-                  fontSize: "1rem",
-                  fontfamily: "Roboto, Helvetica, Arial, sans-serif",
-                  borderBottom: "none",
-                  mt: "1rem",
-                }}
-              >
-                Sara Lindqvist
-              </TableCell>
-              <TableCell
-                sx={{
-                  color: "#000",
-                  fontSize: "1rem",
-                  fontfamily: "Roboto, Helvetica, Arial, sans-serif",
-                  borderBottom: "none",
-                }}
-                align="right"
-              >
-                <FormControl
-                  sx={{
-                    m: 1,
-                    minWidth: 120,
-                    backgroundColor: "white",
-                  }}
-                  size="small"
-                >
-                  <InputLabel id="demo-select-small">Approve</InputLabel>
-                  <Select
-                    labelId="demo-select-small"
-                    id="demo-select-small"
-                    // value={}
-                    label="Age"
-                    //onChange={}
-                  >
-                    <MenuItem value={"notSent"}>Yes</MenuItem>
-                    <MenuItem value={"sent"}>No</MenuItem>
-                  </Select>
-                </FormControl>
-              </TableCell>
-            </Box>
-          </TableRow>
-        </Table>
-      </TableContainer>
+                  Name
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            {users.map((user, index) => (
+              <ApplyingForAdminCard key={index} user={user} />
+            ))}
+          </Table>
+        </TableContainer>
+      </Box>
     </Container>
   );
 }

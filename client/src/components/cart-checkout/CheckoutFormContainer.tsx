@@ -125,15 +125,14 @@ function CheckoutFormContainer() {
         let promise = new Promise((resolve) => {
           setIsLoading(true);
           setTimeout(() => {
-            createOrder(values);
+            createOrder(values, navigate, emptyCart);
             resolve(values);
           }, 2000);
         });
         promise
           .then(() => {
             setIsLoading(false);
-            navigate("/confirmation");
-            emptyCart();
+            // navigate("/confirmation");
           })
           .catch((error: Error) => {
             alert(error.message);
