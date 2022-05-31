@@ -49,7 +49,7 @@ const OrderConfirmation = () => {
           Thank you for your purchase!
         </Typography>
         <Typography sx={{ fontFamily: "Prata", mt: "1rem" }} variant="inherit">
-          Order#: SKA FIXAS
+          {order!._id}
         </Typography>
         <Typography
           sx={{ fontFamily: "Prata", mt: "1rem" }}
