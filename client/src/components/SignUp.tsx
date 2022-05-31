@@ -6,55 +6,57 @@ import {
   FormControlLabel,
   TextField,
   Typography,
-  Alert,
-  AlertProps,
 } from "@mui/material";
-import { useState } from "react";
+import * as yup from "yup";
 import { NavLink, useNavigate } from "react-router-dom";
 import { makeRequest } from "../Helper";
-
-function MuiAlert(props: JSX.IntrinsicAttributes & AlertProps) {
-  return <Alert elevation={6} variant="filled" {...props} />;
+import { useFormik } from "formik";
+import { User } from "../context/UserContext";
+import { useState } from "react";
+interface FormValues extends Omit<User, "_id" | "fullname" | "isAdmin"> {
+  password: string;
+  isApplyingForAdmin: boolean;
 }
+
+const ValidationSchema = yup
+  .object()
+  .shape<Record<keyof FormValues, yup.AnySchema>>({
+    firstname: yup.string().required("Required"),
+    lastname: yup.string().required("Required"),
+    email: yup.string().email("Invalid email").required("Required"),
+    password: yup.string().min(6).max(10).required("Required"),
+    isApplyingForAdmin: yup.boolean(),
+  });
 
 function SignUp() {
   const navigate = useNavigate();
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const [isApplyingForAdmin, setIsApplyingForAdmin] = useState(false);
 
-  const signUpHandler = async (e) => {
-    e.preventDefault();
-    if (
-      firstName === "" ||
-      lastName === "" ||
-      email === "" ||
-      password === ""
-    ) {
-      setError("All fields are required");
-      return;
-    }
-    setError("");
-    const newUserData = {
-      firstname: firstName,
-      lastname: lastName,
-      email: email,
-      password: password,
-      isAdmin: false,
-      isApplyingForAdmin: isApplyingForAdmin,
-    };
+  const signUpHandler = async (values: FormValues) => {
+    values["isApplyingForAdmin"] = isApplyingForAdmin;
+    console.log(values);
 
-    let response = await makeRequest("/api/user", "POST", newUserData);
-    if(response.ok) {
-      navigate('/');
+    let response = await makeRequest("/api/user", "POST", values);
+    if (response.ok) {
+      navigate("/");
     } else {
-      setError('Email is already in use');
+      //setError("Email is already in use");
       return;
     }
   };
+
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
+    useFormik<FormValues>({
+      initialValues: {
+        firstname: "",
+        lastname: "",
+        password: "",
+        email: "",
+        isApplyingForAdmin: isApplyingForAdmin,
+      },
+      validationSchema: ValidationSchema,
+      onSubmit: signUpHandler,
+    });
 
   return (
     <Container
@@ -66,18 +68,18 @@ function SignUp() {
         alignItems: "center",
       }}
     >
-      {error && (
-        <MuiAlert
-          style={{
-            marginBottom: "-2rem",
-            marginTop: "2rem",
-          }}
-          severity="error"
-          onClick={() => setError("")}
-        >
-          {error}
-        </MuiAlert>
-      )}
+      {/* {errors && (
+          <MuiAlert
+            style={{
+              marginBottom: "-2rem",
+              marginTop: "2rem",
+            }}
+            severity="error"
+            onClick={() => setError("")}
+          >
+            {error}
+          </MuiAlert>
+        )} */}
       <Box
         sx={{
           height: 510,
@@ -126,7 +128,7 @@ function SignUp() {
               alignItems: "center",
               justifyContent: "center",
             }}
-            onSubmit={signUpHandler}
+            onSubmit={handleSubmit}
           >
             <TextField
               style={{
@@ -135,13 +137,16 @@ function SignUp() {
                 marginBottom: ".3rem",
                 width: "18rem",
               }}
-              id="firstName"
-              name="firstName"
+              id="firstname"
+              name="firstname"
               label="First Name"
               type="text"
               margin="normal"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              value={values.firstname}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={Boolean(touched.firstname && errors.firstname)}
+              helperText={errors.firstname}
             />
             <TextField
               style={{
@@ -150,13 +155,16 @@ function SignUp() {
                 marginBottom: ".3rem",
                 width: "18rem",
               }}
-              id="lastName"
-              name="lastName"
+              id="lastname"
+              name="lastname"
               label="Last Name"
               type="text"
               margin="normal"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
+              value={values.lastname}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={Boolean(touched.lastname && errors.lastname)}
+              helperText={errors.lastname}
             />
             <TextField
               style={{
@@ -170,8 +178,11 @@ function SignUp() {
               label="Email"
               type="text"
               margin="normal"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={values.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={Boolean(touched.email && errors.email)}
+              helperText={errors.email}
             />
             <TextField
               style={{
@@ -185,8 +196,11 @@ function SignUp() {
               label="Password"
               type="password"
               margin="normal"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={values.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={Boolean(touched.password && errors.password)}
+              helperText={errors.password}
             />
             <FormControlLabel
               style={{ color: "grey", marginTop: ".5rem" }}

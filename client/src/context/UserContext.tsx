@@ -2,84 +2,80 @@ import { createContext, FC, useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { makeRequest } from "../Helper";
 
-interface User {
-    _id: string;
-    name: string;
-    isAdmin: boolean;
+export interface User {
+  _id: string;
+  firstname: string;
+  lastname: string;
+  fullname: string;
+  isAdmin: boolean;
+  isApplyingForAdmin: boolean;
+  email: string;
 }
 
 interface UserContextState {
-    isLoggedIn: boolean;
-    currentUser: User;
-    orders: any;
-    logOutUser: (value: boolean) => void;
+  currentUser?: User;
+  orders: any;
+  logOutUser: (value: boolean) => void;
 }
 
 export const UserContext = createContext<UserContextState>({
-    isLoggedIn: false,
-    currentUser: {
-        _id: '',
-        name: '',
-        isAdmin: false,
-    },
-    orders: [],
-    logOutUser: (value: boolean) => {},
-  });
+  orders: [],
+  logOutUser: (value: boolean) => {},
+});
 
 const UserProvider: FC = (props) => {
-    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-    const [currentUser, setCurrentUser] = useState<User>({_id: '', name: '', isAdmin: false});
-    const [orders, setOrders] = useState<any>([]);
-    const navigate = useNavigate();
-    const location = useLocation();
+  const [currentUser, setCurrentUser] = useState<User>();
+  const [orders, setOrders] = useState<any>([]);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    useEffect(() => {
-      // get the cookie session details from backend
-      const getCookieSession = async () => {
-        try {
-          let result = await makeRequest("/api/user/login", "GET");
-          if(result.ok) {
-            console.log(result);
-            setCurrentUser(result.data.user);
-            setIsLoggedIn(true);
-          }
-        } catch (error) {
-          return console.log('not logged in');
+  useEffect(() => {
+    // get the cookie session details from backend
+    const getCookieSession = async () => {
+      try {
+        let result = await makeRequest("/api/user/login", "GET");
+        if (result.ok) {
+          console.log(result);
+          setCurrentUser(result.data.user);
         }
-      };
-      getCookieSession();
-    }, [location]);
+      } catch (error) {
+        return console.log("not logged in");
+      }
+    };
+    getCookieSession();
+  }, [location]);
 
-    useEffect(() => {
-        const getOrder = async () => {
-          let response = await makeRequest(`/api/order/${currentUser?._id}`, "GET");
-          if(response.ok) {
-            console.log(response);
-            setOrders(response.data);
-            return;
-          } else {
-              console.log('not logged in')
-          }
-        }
-        getOrder();
-      }, [currentUser?._id, location])
+  useEffect(() => {
+    const getOrder = async () => {
+      let response = await makeRequest(`/api/order/${currentUser?._id}`, "GET");
+      if (response.ok) {
+        console.log(response);
+        setOrders(response.data);
+        return;
+      } else {
+        console.log("not logged in");
+      }
+    };
+    getOrder();
+  }, [currentUser?._id, location]);
 
-    const logOutUser = (value: boolean) => {
-        setIsLoggedIn(value);
-        navigate('/');
-    }
+  const logOutUser = (value: boolean) => {
+    setCurrentUser(undefined);
+    navigate("/");
+  };
 
-    return  <UserContext.Provider 
-        value={{
-            isLoggedIn,
-            currentUser,
-            orders,
-            logOutUser,
-        }}
+  return (
+    <UserContext.Provider
+      value={{
+        currentUser,
+        orders,
+        logOutUser,
+      }}
     >
-        {props.children}
+      {props.children}
     </UserContext.Provider>
-}
+  );
+};
 
 export default UserProvider;
 export const useUser = () => useContext(UserContext);

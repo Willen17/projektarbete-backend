@@ -9,14 +9,14 @@ import ShoppingCart from "./ShoppingCart";
 
 function CheckoutPage() {
   const { cart } = useCart();
-  const { isLoggedIn } = useUser();
+  const { currentUser } = useUser();
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
-    if (isLoggedIn) return;
+    if (currentUser) return;
     navigate("/login", { replace: true, state: location.pathname });
-  }, [isLoggedIn]);
+  }, [currentUser]);
 
   return cart.length < 1 ? (
     <EmptyCart />
