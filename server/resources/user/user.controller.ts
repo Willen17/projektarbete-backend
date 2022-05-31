@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { UserModel, User } from "./user.model";
 import bcrypt from "bcrypt";
 import cookieSession from "cookie-session";
+import { ErrorCodes } from "../errorHandlers";
 
 export const getAllUsers = async (req: Request, res: Response) => {
   // TODO: Who is allowed to use this endpoint?
@@ -37,7 +38,6 @@ export const addUser = async (
 };
 
 export const getOneUser = async (req: Request, res: Response) => {
-  console.log("Kör request");
   const user = await UserModel.findById(req.params.id);
   res.status(200).json(user);
 };
@@ -50,9 +50,9 @@ export const loginUser = async (req: Request, res: Response) => {
   let user = await UserModel.findOne({ email: req.body.email }).select(
     "password"
   );
-  if (!user) return res.status(404).send("ingen user");
+  if (!user) throw new Error(ErrorCodes.no_valid_inputs);
   let matchPassword = await bcrypt.compare(req.body.password, user.password); // returns true or false
-  if (!matchPassword) return res.status(401).json("Wrong username or password"); // if false
+  if (!matchPassword) throw new Error(ErrorCodes.wrong_user); // if false
   if (req.session) {
     req.session.user = {
       _id: user._id,
@@ -60,25 +60,15 @@ export const loginUser = async (req: Request, res: Response) => {
       isAdmin: user.isAdmin,
     };
   }
-  console.log(req.session);
 
   res.json(user);
-  // console.log("test");
-  // const user = await UserModel.findOne({ email: req.body.email }).select(
-  //   "password"
-  // );
-  // if (!user || !(await bcrypt.compare(req.body.password, user.password))) {
-  //   return res
-  //     .status(401)
-  //     .json("You have entered either an incorrect email or password.");
-  // }
 };
 
 export const editUser = async (req: Request<{ id: string }>, res: Response) => {
   // const order = await OrderModel.findByIdAndUpdate(req.params.id, {
   //   isOrderSent: req.body,
   // });
-  if (!req.body) return res.status(404).json("No valid inputs");
+  if (!req.body) throw new Error(ErrorCodes.no_valid_inputs);
   const user = await UserModel.findByIdAndUpdate(req.params.id, {
     isApplyingForAdmin: req.body.isApplyingForAdmin,
     isAdmin: req.body.isAdmin,
@@ -88,15 +78,14 @@ export const editUser = async (req: Request<{ id: string }>, res: Response) => {
 };
 
 export const checkIsLoggedIn = async (req: Request, res: Response) => {
-  if (!req.session) return res.status(401).send("You are not logged in.");
-  if (!req.session.user) return res.status(401).send("You are not logged in.");
+  if (!req.session) throw new Error(ErrorCodes.session_not_initialized);
+  if (!req.session.user) throw new Error(ErrorCodes.unauthorized);
   res.status(200).json(req.session);
 };
 
 export const logoutUser = async (req: Request, res: Response) => {
-  if (!req.session) return res.status(404).json("Ingen cookie");
-  console.log(req.session.user);
-  if (!req.session.user) return res.status(201).json("Du är inte inloggad");
+  if (!req.session) throw new Error(ErrorCodes.session_not_initialized);
+  if (!req.session.user) throw new Error(ErrorCodes.unauthorized);
 
   req.session = null;
   res.status(200).json("Utloggad");

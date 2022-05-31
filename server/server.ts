@@ -1,4 +1,5 @@
 import express from "express";
+require("express-async-errors");
 import mongoose from "mongoose";
 import {
   userRouter,
@@ -9,6 +10,7 @@ import {
 import "dotenv/config";
 import cookieSession from "cookie-session";
 import { mediaRouter } from "./resources/media/media.router";
+import { ErrorHandler } from "./resources/errorHandlers";
 
 const app = express();
 
@@ -31,6 +33,8 @@ app.use("/api", productRouter);
 app.use("/api", deliveryRouter);
 app.use("/api", mediaRouter);
 // Add more routers here....
+
+app.use(ErrorHandler);
 
 // Connect to DB & start server
 mongoose.connect(process.env.databas!, (err) => {

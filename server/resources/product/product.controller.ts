@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { ErrorCodes } from "../errorHandlers";
 import { OrderModel } from "../order";
 import { User } from "../user";
 import { ProductModel, Product } from "./product.model";
@@ -15,13 +16,9 @@ export const addProduct = async (
   next: NextFunction
 ) => {
   // TODO: How do we handle errors in async middlewares?
-  try {
-    const product = new ProductModel(req.body);
-    await product.save();
-    res.status(200).json(product);
-  } catch (err) {
-    next(err);
-  }
+  const product = new ProductModel(req.body);
+  await product.save();
+  res.status(200).json(product);
 };
 
 export const getOneProduct = async (req: Request, res: Response) => {
@@ -47,14 +44,21 @@ export const deleteProduct = async (
   req: Request<{ id: string }>,
   res: Response
 ) => {
-  console.log(req.params.id);
-  const product = await ProductModel.findByIdAndRemove(req.params.id);
+  await ProductModel.findByIdAndRemove(req.params.id);
   res.status(200).json("DELETED PRODUCT ");
 };
 
 export const getCategoryProducts = async (req: Request, res: Response) => {
   let products = await ProductModel.find({ category: req.params.category });
-  if (products.length < 1)
-    return res.status(404).json("Inga produkter i den kategorin");
   res.status(200).json(products);
+};
+
+export const productNotFoundCheck = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  let product = await ProductModel.findById(req.params.id);
+  if (!product) throw new Error(ErrorCodes.product_not_found);
+  next();
 };
