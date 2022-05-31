@@ -11,14 +11,12 @@ import {
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-// import cartIcon from "../assets/icons/icon-shopping-cart.webp";
-// import userIcon from "../assets/icons/icon-user.webp";
-// import logo from "../assets/images/logo.svg";
 import { useCart } from "../context/CartContextProvider";
 import { useUser } from "../context/UserContext";
 import { makeRequest, sumQuantity } from "../Helper";
+import { toast } from "react-toastify";
 
 interface Page {
   label: string;
