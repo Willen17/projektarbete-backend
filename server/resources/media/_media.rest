@@ -3,14 +3,14 @@ Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0g
 
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="media"; filename="Pirri.webp"
+Content-Disposition: form-data; name="media"; filename="PostnordLogo.webp"
 Content-Type: image/jpeg
 
-< ./Pirri.webp
+< ./PostnordLogo.webp
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
 ###
-GET  http://localhost:3001/api/media/628b82f4f9117ea9f4010424
+GET  http://localhost:3001/api/media/6294c3b05c76833417dfff79
 
 ###
 
