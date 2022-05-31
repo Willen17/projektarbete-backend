@@ -17,13 +17,16 @@ const userSchema = new mongoose.Schema(
     lastname: { type: String, required: true, select: true },
     password: { type: String, required: true, select: false },
     isAdmin: { type: Boolean, required: true, default: false, select: true },
-    isApplyingForAdmin: { type: Boolean, required: true, default: false, select: true },
+    isApplyingForAdmin: {
+      type: Boolean,
+      required: true,
+      default: false,
+      select: true,
+    },
     email: { type: String, required: true },
   },
   {
     timestamps: true,
-    // toJSON: { virtuals: true },
-    // toObject: { virtuals: true },
   }
 );
 

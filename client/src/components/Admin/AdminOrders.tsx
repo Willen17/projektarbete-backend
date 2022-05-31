@@ -23,8 +23,6 @@ function AdminOrders() {
     }
     fetch();
   }, []);
-
-  console.log(orders);
   return (
     <Container
       sx={{

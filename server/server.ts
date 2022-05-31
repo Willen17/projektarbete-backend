@@ -14,7 +14,6 @@ import { ErrorHandler } from "./resources/errorHandlers";
 
 const app = express();
 
-// Add global middlewares
 app.use(express.json());
 
 app.use(

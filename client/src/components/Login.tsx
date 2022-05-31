@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { makeRequest } from "../Helper";
+import { toast } from "react-toastify";
 
 function MuiAlert(props: JSX.IntrinsicAttributes & AlertProps) {
   return <Alert elevation={6} variant="filled" {...props} />;
@@ -35,12 +36,9 @@ function LogIn() {
     };
 
     let response = await makeRequest("/api/login", "POST", userData);
-    if(response.ok) {
-      navigate('/');
-    } else {
-      setError('Wrong email or password, please try again');
-      return;
-    }
+    if (!response.ok) return toast.error(response.data);
+    navigate("/");
+    toast.success("You successfully logged in");
   };
 
   return (

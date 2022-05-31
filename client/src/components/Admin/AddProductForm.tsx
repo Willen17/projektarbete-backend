@@ -45,13 +45,8 @@ function AddProductForm() {
   const [imageId, setImageId] = useState<string>();
 
   const handleImageChange = async (event: any) => {
-    // console.log(event.currentTarget.files[0]);
-    console.log(event);
     let data = new FormData();
     data.append("media", event.target.files[0]);
-
-    // data.append("file", event.target);
-    // data.append("file", event.target.files[0]);
     let response = await fetch("/api/media", {
       method: "POST",
       body: data,
@@ -72,7 +67,6 @@ function AddProductForm() {
         (category) => category !== event.target.value
       );
       setCategories(newList);
-      // console.log(newList);
     }
   };
 

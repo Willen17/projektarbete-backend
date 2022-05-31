@@ -5,7 +5,6 @@ import cookieSession from "cookie-session";
 import { ErrorCodes } from "../errorHandlers";
 
 export const getAllUsers = async (req: Request, res: Response) => {
-  // TODO: Who is allowed to use this endpoint?
   const users = await UserModel.find({});
   res.status(200).json(users);
 };
@@ -14,27 +13,18 @@ export const addUser = async (
   res: Response,
   next: NextFunction
 ) => {
-  // TODO: How do we handle errors in async middlewares?
-  try {
-    let findUser = await UserModel.findOne({ email: req.body.email });
-    if (findUser) {
-      console.log("user already exists");
-      return res.status(409).json("Email already exists");
-    }
-    const user = new UserModel(req.body);
-    await user.save();
-    console.log(user.fullname);
-    if (req.session) {
-      req.session.user = {
-        _id: user._id,
-        name: user.fullname,
-        isAdmin: user.isAdmin,
-      };
-    }
-    res.status(200).json(user);
-  } catch (err) {
-    next(err);
+  let findUser = await UserModel.findOne({ email: req.body.email });
+  if (findUser) throw new Error(ErrorCodes.email_taken);
+  const user = new UserModel(req.body);
+  await user.save();
+  if (req.session) {
+    req.session.user = {
+      _id: user._id,
+      name: user.fullname,
+      isAdmin: user.isAdmin,
+    };
   }
+  res.status(200).json(user);
 };
 
 export const getOneUser = async (req: Request, res: Response) => {
@@ -65,9 +55,6 @@ export const loginUser = async (req: Request, res: Response) => {
 };
 
 export const editUser = async (req: Request<{ id: string }>, res: Response) => {
-  // const order = await OrderModel.findByIdAndUpdate(req.params.id, {
-  //   isOrderSent: req.body,
-  // });
   if (!req.body) throw new Error(ErrorCodes.no_valid_inputs);
   const user = await UserModel.findByIdAndUpdate(req.params.id, {
     isApplyingForAdmin: req.body.isApplyingForAdmin,

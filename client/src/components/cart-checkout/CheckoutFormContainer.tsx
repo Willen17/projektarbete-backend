@@ -26,7 +26,6 @@ function CheckoutFormContainer() {
   const { createOrder } = useOrder();
 
   const [isLoading, setIsLoading] = useState(false);
-  console.log(isLoading);
 
   const phoneRegExp = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
   const personalIdentityRegExp =
@@ -132,7 +131,6 @@ function CheckoutFormContainer() {
         promise
           .then(() => {
             setIsLoading(false);
-            // navigate("/confirmation");
           })
           .catch((error: Error) => {
             alert(error.message);

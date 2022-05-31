@@ -11,6 +11,7 @@ export const ErrorCodes = {
   no_valid_inputs: "no_valid_inputs",
   wrong_user: "wrong_user",
   no_media: "no_media",
+  email_taken: "email_taken",
 } as const;
 
 export const ErrorHandler = (
@@ -67,6 +68,10 @@ export const ErrorHandler = (
     case ErrorCodes.no_media: {
       statusCode = 404;
       message = "No media found";
+    }
+    case ErrorCodes.email_taken: {
+      statusCode = 401;
+      message = "User with that email already exists";
     }
   }
 

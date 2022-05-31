@@ -1,5 +1,6 @@
 import { createContext, FC, useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { makeRequest } from "../Helper";
 
 export interface User {
@@ -32,15 +33,9 @@ const UserProvider: FC = (props) => {
   useEffect(() => {
     // get the cookie session details from backend
     const getCookieSession = async () => {
-      try {
-        let result = await makeRequest("/api/user/login", "GET");
-        if (result.ok) {
-          console.log(result);
-          setCurrentUser(result.data.user);
-        }
-      } catch (error) {
-        return console.log("not logged in");
-      }
+      let response = await makeRequest("/api/user/login", "GET");
+      if (!response.ok) return;
+      setCurrentUser(response.data.user);
     };
     getCookieSession();
   }, [location]);
@@ -48,20 +43,16 @@ const UserProvider: FC = (props) => {
   useEffect(() => {
     const getOrder = async () => {
       let response = await makeRequest(`/api/order/${currentUser?._id}`, "GET");
-      if (response.ok) {
-        console.log(response);
-        setOrders(response.data);
-        return;
-      } else {
-        console.log("not logged in");
-      }
+      if (!response.ok) return;
+      setOrders(response.data);
     };
     getOrder();
-  }, [currentUser?._id, location]);
+  }, [currentUser]);
 
   const logOutUser = (value: boolean) => {
     setCurrentUser(undefined);
     navigate("/");
+    toast.success("You successfully logged out");
   };
 
   return (

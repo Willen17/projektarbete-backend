@@ -12,11 +12,11 @@ import { useOrder } from "../../context/OrderContextProvider";
 import { makeRequest } from "../../Helper";
 
 export interface DeliveryOptions {
-title: string;
-cost: number;
-deliveryTime: string;
-_id: string;
-imageURL: string;
+  title: string;
+  cost: number;
+  deliveryTime: string;
+  _id: string;
+  imageURL: string;
 }
 
 const DeliveryOptions = () => {
@@ -31,7 +31,6 @@ const DeliveryOptions = () => {
   useEffect(() => {
     const fetchData = async () => {
       let response = await makeRequest(`/api/deliveryOptions`, "GET");
-      console.log(response.data);
       setDeliveryOptions(response.data);
     };
     fetchData();
@@ -70,39 +69,39 @@ const DeliveryOptions = () => {
           onChange={handleRadioChange}
           value={deliveryMethod}
         >
-          {deliveryOptions.length ? (
-            deliveryOptions.map((deliveryOption) => (
-            <FormControlLabel
-              control={<Radio required={true} />}
-              value={deliveryOption.title}
-              key={deliveryOption.title}
-              onClick={() => selectShippment(deliveryOption)}
-              label={
-                <Box
-                  sx={{
-                    display: "flex",
-                    placeItems: "center",
-                    justifyContent: "space-between",
-                    m: "1rem",
-                    flexWrap: "wrap",
-                  }}
-                >
-                  <img
-                    src={deliveryOption?.imageURL}
-                    alt={'Wazup'}
-                    height="30px"
-                  />
-                  <Typography variant="body2" sx={{ marginX: "1rem" }}>
-                    {deliveryOption.cost} SEK
-                  </Typography>
-                  <Typography variant="overline" color="#6C665F">
-                    ({deliveryOption.deliveryTime})
-                  </Typography>
-                </Box>
-            }
-            />
-          ))) : 
-          ''}
+          {deliveryOptions.length
+            ? deliveryOptions.map((deliveryOption) => (
+                <FormControlLabel
+                  control={<Radio required={true} />}
+                  value={deliveryOption.title}
+                  key={deliveryOption.title}
+                  onClick={() => selectShippment(deliveryOption)}
+                  label={
+                    <Box
+                      sx={{
+                        display: "flex",
+                        placeItems: "center",
+                        justifyContent: "space-between",
+                        m: "1rem",
+                        flexWrap: "wrap",
+                      }}
+                    >
+                      <img
+                        src={deliveryOption?.imageURL}
+                        alt={"Wazup"}
+                        height="30px"
+                      />
+                      <Typography variant="body2" sx={{ marginX: "1rem" }}>
+                        {deliveryOption.cost} SEK
+                      </Typography>
+                      <Typography variant="overline" color="#6C665F">
+                        ({deliveryOption.deliveryTime})
+                      </Typography>
+                    </Box>
+                  }
+                />
+              ))
+            : ""}
           {/* {shippingProviders.map((provider) => {
             return provider.cost !== 0 ? (
               <FormControlLabel

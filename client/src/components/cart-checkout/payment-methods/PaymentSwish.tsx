@@ -1,7 +1,6 @@
 import { Box, TextField } from "@mui/material";
 import { useFormikContext } from "formik";
 import { useEffect, useState } from "react";
-// import SwishLogo from "../../../assets/images/SwishLogo.svg";
 import { FormValues } from "../../cart-checkout/CheckoutFormContainer";
 
 const PaymentSwish = () => {

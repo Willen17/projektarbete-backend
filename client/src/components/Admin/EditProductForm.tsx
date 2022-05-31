@@ -27,7 +27,6 @@ interface editProduct {
 }
 
 function EditProductForm(props: editProduct) {
-  console.log(props.product.category);
   const InitialValue: ProductValues = {
     title: props.product.title,
     description: props.product.description,
@@ -49,13 +48,9 @@ function EditProductForm(props: editProduct) {
   const [imageId, setImageId] = useState<string>(props.product.imageId!);
 
   const handleImageChange = async (event: any) => {
-    // console.log(event.currentTarget.files[0]);
-    console.log(event);
     let data = new FormData();
     data.append("media", event.target.files[0]);
 
-    // data.append("file", event.target);
-    // data.append("file", event.target.files[0]);
     let response = await fetch("/api/media", {
       method: "POST",
       body: data,
@@ -76,13 +71,11 @@ function EditProductForm(props: editProduct) {
         (category) => category !== event.target.value
       );
       setCategories(newList);
-      // console.log(newList);
     }
   };
 
   const validateAndSaveNewProduct = (values: ProductValues) => {
     values.category = categories;
-    console.log(imageId);
     if (
       imageId &&
       values.title &&
@@ -99,7 +92,6 @@ function EditProductForm(props: editProduct) {
         stock: values.stock as number,
         category: values.category,
       };
-      console.log(newProduct);
       saveProduct(newProduct, props.product._id!);
     } else {
       toast.error("Make sure a category is choosen and an image is uploaded");

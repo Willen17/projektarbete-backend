@@ -12,7 +12,6 @@ const StartPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       let response = await makeRequest<ProductData[]>(`/api/product`, "GET");
-      console.log(response.data);
       setProducts(response.data);
     };
     fetchData();
