@@ -38,39 +38,48 @@ function AdminPage() {
     >
       <AppliedForAdmin />
       <AdminOrders />
-      <Typography
-        sx={{ textTransform: "uppercase", fontFamily: "Prata" }}
-        variant="h5"
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          padding: "0 1rem",
+          marginTop: "3rem",
+        }}
       >
-        Change products
-      </Typography>
-      <Box style={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button
-          variant="contained"
-          style={{
-            display: "flex",
-            width: "fit-content",
-            backgroundColor: "#CAC2B9",
-            textTransform: "none",
-          }}
-          onClick={() => setIsOpen(true)}
+        <Typography
+          sx={{ textTransform: "uppercase", fontFamily: "Prata" }}
+          variant="h5"
         >
-          ADD
-          <AddIcon />
-        </Button>
-        <Dialog
-          open={isOpen}
-          onClose={handleClose}
-          scroll="paper"
-          aria-labelledby="scroll-dialog-title"
-          aria-describedby="scroll-dialog-description"
-        >
-          {" "}
-          <DialogTitle id="scroll-dialog-title">Add product</DialogTitle>
-          <DialogContent dividers={true}>
-            <AddProductForm />
-          </DialogContent>
-        </Dialog>
+          Change products
+        </Typography>
+        <Box style={{ display: "flex", justifyContent: "flex-end" }}>
+          <Button
+            variant="contained"
+            style={{
+              display: "flex",
+              width: "fit-content",
+              backgroundColor: "#CAC2B9",
+              textTransform: "none",
+            }}
+            onClick={() => setIsOpen(true)}
+          >
+            ADD
+            <AddIcon />
+          </Button>
+          <Dialog
+            open={isOpen}
+            onClose={handleClose}
+            scroll="paper"
+            aria-labelledby="scroll-dialog-title"
+            aria-describedby="scroll-dialog-description"
+          >
+            {" "}
+            <DialogTitle id="scroll-dialog-title">Add product</DialogTitle>
+            <DialogContent dividers={true}>
+              <AddProductForm />
+            </DialogContent>
+          </Dialog>
+        </Box>
       </Box>
       <AdminCollapsibleTable />
     </Container>

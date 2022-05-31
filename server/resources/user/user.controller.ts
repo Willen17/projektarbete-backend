@@ -15,17 +15,17 @@ export const addUser = async (
 ) => {
   // TODO: How do we handle errors in async middlewares?
   try {
-    let findUser = await UserModel.findOne({email: req.body.email});
-    if(findUser) {
-      console.log('user already exists')
-      return res.status(409).json('Email already exists')
+    let findUser = await UserModel.findOne({ email: req.body.email });
+    if (findUser) {
+      console.log("user already exists");
+      return res.status(409).json("Email already exists");
     }
     const user = new UserModel(req.body);
     await user.save();
     console.log(user.fullname);
     if (req.session) {
       req.session.user = {
-        _id: user._id, 
+        _id: user._id,
         name: user.fullname,
         isAdmin: user.isAdmin,
       };
@@ -55,7 +55,7 @@ export const loginUser = async (req: Request, res: Response) => {
   if (!matchPassword) return res.status(401).json("Wrong username or password"); // if false
   if (req.session) {
     req.session.user = {
-      _id: user._id, 
+      _id: user._id,
       name: user.fullname,
       isAdmin: user.isAdmin,
     };
@@ -74,8 +74,21 @@ export const loginUser = async (req: Request, res: Response) => {
   // }
 };
 
+export const editUser = async (req: Request<{ id: string }>, res: Response) => {
+  // const order = await OrderModel.findByIdAndUpdate(req.params.id, {
+  //   isOrderSent: req.body,
+  // });
+  if (!req.body) return res.status(404).json("No valid inputs");
+  const user = await UserModel.findByIdAndUpdate(req.params.id, {
+    isApplyingForAdmin: req.body.isApplyingForAdmin,
+    isAdmin: req.body.isAdmin,
+  });
+
+  res.status(200).json("User status changed");
+};
+
 export const checkIsLoggedIn = async (req: Request, res: Response) => {
-  if(!req.session) return res.status(401).send("You are not logged in.");
+  if (!req.session) return res.status(401).send("You are not logged in.");
   if (!req.session.user) return res.status(401).send("You are not logged in.");
   res.status(200).json(req.session);
 };

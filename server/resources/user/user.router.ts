@@ -8,6 +8,7 @@ import {
   loginUser,
   logoutUser,
   checkIsLoggedIn,
+  editUser,
 } from "./user.controller";
 
 export const userRouter = express
@@ -15,6 +16,7 @@ export const userRouter = express
   .get("/user/login", checkIsLoggedIn)
   .get("/user", adminSecure, getAllUsers)
   .get("/user/:id", adminSecure, getOneUser)
+  .put("/user/:id", adminSecure, editUser)
   .post("/user", addUser)
   .post("/login", loginUser)
   .delete("/logout", logoutUser)
