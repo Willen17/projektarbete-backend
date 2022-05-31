@@ -1,17 +1,18 @@
 import express from "express";
-import { adminSecure, isCreator, isLoggedIn } from "../middlewares";
+import { adminSecure, isLoggedIn } from "../middlewares";
 import {
   getAllOrders,
   addOrder,
   updateOrder,
   deleteOrder,
-  getOneOrder,
+  getUserOrders,
+  orderNotFoundCheck,
 } from "./order.controller";
 
 export const orderRouter = express
   .Router()
   .get("/order", adminSecure, getAllOrders)
-  .get("/order/:id", isCreator, getOneOrder)
+  .get("/order/:id", isLoggedIn, orderNotFoundCheck, getUserOrders)
   .post("/order", isLoggedIn, addOrder)
-  .put("/order/:id", isCreator, updateOrder)
-  .delete("/order/:id", adminSecure, deleteOrder);
+  .put("/order/:id", adminSecure, orderNotFoundCheck, updateOrder)
+  .delete("/order/:id", adminSecure, orderNotFoundCheck, deleteOrder);
