@@ -1,6 +1,7 @@
 import { Container } from "@mui/material";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useCart } from "../../context/CartContextProvider";
 import { useUser } from "../../context/UserContext";
 import EmptyCart from "../EmptyCart";
@@ -15,6 +16,7 @@ function CheckoutPage() {
 
   useEffect(() => {
     if (currentUser) return;
+    toast.error("You need to login to place an order");
     navigate("/login", { replace: true, state: location.pathname });
   }, [currentUser]);
 

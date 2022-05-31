@@ -6,10 +6,3 @@ export interface ShippingProvider {
   deliveryTime: string;
   imgURL?: string;
 }
-
-// async function getDeliveryOptions() {
-//   let data = await makeRequest("/api/deliveryOptions", "GET");
-//   return data;
-// }
-
-// export let shippingProvider: ShippingProvider[] = [];

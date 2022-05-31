@@ -78,7 +78,6 @@ const OrderProvider: FC = (props) => {
     };
     fetchData();
   };
-  // console.log(order);
 
   /** generate an unique order numder */
   const generateOrderNum = () => {

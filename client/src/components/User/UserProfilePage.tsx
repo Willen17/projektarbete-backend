@@ -24,7 +24,7 @@ function UserProfilePage() {
         sx={{ textTransform: "uppercase", fontFamily: "Prata", mt: "2rem" }}
         variant="h5"
       >
-        Welcome {currentUser?.fullname}
+        Welcome {currentUser?.firstname + " " + currentUser?.lastname}
       </Typography>
       <Box
         style={{

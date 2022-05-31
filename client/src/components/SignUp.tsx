@@ -13,6 +13,7 @@ import { makeRequest } from "../Helper";
 import { useFormik } from "formik";
 import { User } from "../context/UserContext";
 import { useState } from "react";
+import { toast } from "react-toastify";
 interface FormValues extends Omit<User, "_id" | "fullname" | "isAdmin"> {
   password: string;
   isApplyingForAdmin: boolean;
@@ -34,15 +35,11 @@ function SignUp() {
 
   const signUpHandler = async (values: FormValues) => {
     values["isApplyingForAdmin"] = isApplyingForAdmin;
-    console.log(values);
 
     let response = await makeRequest("/api/user", "POST", values);
-    if (response.ok) {
-      navigate("/");
-    } else {
-      //setError("Email is already in use");
-      return;
-    }
+    if (!response.ok) return toast.error(response.data);
+    navigate("/");
+    toast.success("You successfully registered");
   };
 
   const { values, errors, touched, handleChange, handleBlur, handleSubmit } =

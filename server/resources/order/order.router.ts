@@ -12,7 +12,7 @@ import {
 export const orderRouter = express
   .Router()
   .get("/order", adminSecure, getAllOrders)
-  .get("/order/:id", isLoggedIn, orderNotFoundCheck, getUserOrders)
+  .get("/order/:id", isLoggedIn, getUserOrders)
   .post("/order", isLoggedIn, addOrder)
   .put("/order/:id", adminSecure, orderNotFoundCheck, updateOrder)
   .delete("/order/:id", adminSecure, orderNotFoundCheck, deleteOrder);

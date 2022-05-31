@@ -1,18 +1,14 @@
 import { Container, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-// import detailInfo from "../assets/images/detailinfo.png";
 import { ProductContext } from "../context/AdminPageContext";
 import { makeRequest, numWithSpaces } from "../Helper";
 import { ProductData } from "../ProductData";
 import AddToCartButton from "./shared/AddToCartButton";
 
 function ProductPage() {
-  // const newproduct = React.useContext(ProductContext).products;
   const params = useParams<{ id: string }>();
   const [product, setProduct] = useState<ProductData>();
-  // const product = newproduct.find((product) => product._id === params?.id);
-  // if (!product) return null;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -87,22 +83,19 @@ function ProductPage() {
           {product?.price} SEK
         </Typography>
         {product && product.stock > 0 ? (
-        <AddToCartButton
-          product={product!}
-          size="large"
-          style={{
-            margin: "2rem",
-            maxWidth: "360px",
-            backgroundColor: "#CAC2B9",
-            letterSpacing: "3px",
-          }}
-        />
+          <AddToCartButton
+            product={product!}
+            size="large"
+            style={{
+              margin: "2rem",
+              maxWidth: "360px",
+              backgroundColor: "#CAC2B9",
+              letterSpacing: "3px",
+            }}
+          />
         ) : (
-        <Typography>
-          Out of stock
-        </Typography>
+          <Typography>Out of stock</Typography>
         )}
-
       </Container>
     </Container>
   );

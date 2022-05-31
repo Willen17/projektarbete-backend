@@ -3,8 +3,6 @@ import { Box, Container, Typography } from "@mui/material";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { useState } from "react";
-// import invoiceLogo from "../../assets/images/invoiceLogo.png";
-// import SwishLogo from "../../assets/images/SwishLogo.svg";
 import { useCart } from "../../context/CartContextProvider";
 import PaymentCreditCard from "./payment-methods/PaymentCreditCard";
 import PaymentInvoice from "./payment-methods/PaymentInvoice";
