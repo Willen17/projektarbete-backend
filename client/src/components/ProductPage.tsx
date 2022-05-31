@@ -86,6 +86,7 @@ function ProductPage() {
         >
           {product?.price} SEK
         </Typography>
+        {product && product.stock > 0 ? (
         <AddToCartButton
           product={product!}
           size="large"
@@ -96,6 +97,12 @@ function ProductPage() {
             letterSpacing: "3px",
           }}
         />
+        ) : (
+        <Typography>
+          Out of stock
+        </Typography>
+        )}
+
       </Container>
     </Container>
   );
