@@ -1,4 +1,4 @@
-import { Container, Typography } from "@mui/material";
+import { Box, CircularProgress, Container, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ProductContext } from "../context/AdminPageContext";
@@ -44,7 +44,9 @@ function ProductPage() {
           src={product?.imageURL}
         ></Container>
       ) : (
-        <h1>KORV</h1>
+        <Box sx={{ display: "flex" }}>
+          <CircularProgress />
+        </Box>
       )}
       <Container
         style={{
