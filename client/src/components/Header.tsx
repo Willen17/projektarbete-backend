@@ -56,6 +56,17 @@ function Header() {
     },
   ];
 
+  const ProfileMenu: Page[] = [
+    {
+      label: "profile",
+      href: `/userProfilePage/${currentUser?._id}`
+    },
+    {
+      label: "admin",
+      href: `/admin`
+    }
+  ]
+
   const handleOpenMenu = () => {
     setAnchorMenu(true);
   };
@@ -67,16 +78,23 @@ function Header() {
   const logOutHandler = async () => {
     await makeRequest("/api/logout", "DELETE");
     logOutUser(false);
+    handleCloseMenu();
   };
 
   const logInHandler = async () => {
     navigate("/login");
+    handleCloseMenu();
   };
 
   const icons = () => {
     return (
       <div className={iconsContainer}>
         {currentUser?.isAdmin ? (
+        <Box           
+          sx={{
+            display: { xs: "none", sm: "none", md: "none", lg: "block" },
+          }}
+          >
           <Link to="/admin">
             <img
               className={icon}
@@ -84,10 +102,16 @@ function Header() {
               alt="admin"
             />
           </Link>
+        </Box>
         ) : (
           ""
         )}
         {currentUser && !currentUser.isAdmin ? (
+          <Box           
+            sx={{
+              display: { xs: "none", sm: "none", md: "none", lg: "block" },
+            }}
+          >
           <Link to={`/userProfilePage/${currentUser._id}`}>
             <img
               className={icon}
@@ -95,6 +119,7 @@ function Header() {
               alt="user"
             />
           </Link>
+          </Box>
         ) : (
           ""
         )}
@@ -118,7 +143,11 @@ function Header() {
           <Button
             style={{
               color: "white",
-              marginLeft: "1rem",
+            }}
+            sx={{
+              textTransform: "capitalize",
+              fontFamily: "Prata",
+              display: { xs: "none", sm: "none", md: "none", lg: "block" },
             }}
             onClick={logOutHandler}
           >
@@ -128,7 +157,11 @@ function Header() {
           <Button
             style={{
               color: "white",
-              marginLeft: "1rem",
+            }}
+            sx={{
+              textTransform: "capitalize",
+              fontFamily: "Prata",
+              display: { xs: "none", sm: "none", md: "none", lg: "block" },
             }}
             onClick={logInHandler}
           >
@@ -153,7 +186,7 @@ function Header() {
             textTransform: "capitalize",
             fontFamily: "Prata",
             m: "2.5rem",
-            display: { xs: "none", sm: "none", md: "block", lg: "block" },
+            display: { xs: "none", sm: "none", md: "none", lg: "block" },
           }}
         >
           {label}
@@ -176,7 +209,7 @@ function Header() {
             textTransform: "capitalize",
             fontFamily: "Prata",
             m: "2.5rem",
-            display: { xs: "none", sm: "none", md: "block", lg: "block" },
+            display: { xs: "none", sm: "none", md: "none", lg: "block" },
           }}
         >
           {label}
@@ -212,7 +245,9 @@ function Header() {
           sx={{
             display: {
               xs: "flex",
-              md: "none",
+              sm: "flex",
+              md: "flex",
+              lg: "none",
             },
           }}
         >
@@ -236,7 +271,7 @@ function Header() {
             open={Boolean(anchorMenu)}
             onClose={handleCloseMenu}
             sx={{
-              display: { xs: "block", md: "none" },
+              display: { xs: "block", md: "block" },
             }}
           >
             {menuLeft.map((item) => (
@@ -280,6 +315,75 @@ function Header() {
                 </Typography>
               </MenuItem>
             ))}
+            {currentUser?.isAdmin ? (
+              <MenuItem
+                onClick={handleCloseMenu}
+                component={Link}
+                to={"/admin"}
+              >
+                <Typography
+                  sx={{
+                    textTransform: "capitalize",
+                    fontFamily: "Prata",
+                    fontSize: ".9rem",
+                  }}
+                  textAlign="center"
+                >
+                  Profile
+                </Typography>
+              </MenuItem>  
+            ) : ''
+            }
+            {currentUser && !currentUser.isAdmin ? (
+              <MenuItem
+                onClick={handleCloseMenu}
+                component={Link}
+                to={`/userProfilePage/${currentUser._id}`}
+              >
+              <Typography
+                sx={{
+                  textTransform: "capitalize",
+                  fontFamily: "Prata",
+                  fontSize: ".9rem",
+                }}
+                textAlign="center"
+              >
+                Profile
+              </Typography>
+              </MenuItem>  
+              ) : ''
+            }
+            {currentUser ? (
+              <MenuItem
+                onClick={logOutHandler}
+              >
+              <Typography
+                sx={{
+                  textTransform: "capitalize",
+                  fontFamily: "Prata",
+                  fontSize: ".9rem",
+                }}
+                textAlign="center"
+              >
+                Logout
+              </Typography>
+              </MenuItem>
+            ) : (
+              <MenuItem
+                onClick={logInHandler}
+              >
+              <Typography
+                sx={{
+                  textTransform: "capitalize",
+                  fontFamily: "Prata",
+                  fontSize: ".9rem",
+                }}
+                textAlign="center"
+              >
+                Login
+              </Typography>
+              </MenuItem>
+            )}
           </Menu>
         </Box>
         {getMenuButtonsLeft()}
