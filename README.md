@@ -4,11 +4,12 @@
 
 ## About this project
 
-This project is a school assignement where the task was to create a fully functional webshop where the costumer can order products. The customer can add/remove items from the cart and then fill out his/her name, address, email etc. The customer should after that have the option to choose how the products should be delivered (three different options avaialable) and choose a payment option. All input ields has a validator to provide a user friendly experience. Once the payment has been completed the user will be presented with an order confirmation!
+This project is a school assignement where the task was to create a fully functional webshop where the costumer can register, login & order products. The customer can add/remove items from the cart and then fill out his/her name, address, email etc. The customer should after that have the option to choose how the products should be delivered (three different options avaialable) and choose a payment option. All input ields has a validator to provide a user friendly experience. Once the payment has been completed the user will be presented with an order confirmation!
 
-Our webshop also has an admin page, you can access it by pressing the profile icon next to the shopping cart.
+Our webshop also has an admin page, you can access it if you a admin by pressing the profile icon next to the shopping cart.
 In the admin page you can add/remove products and change the price, description, image and so on.
-Any product which is added from the admin page will be visibale for the customer since it's saved to the local storage!
+You can also change the status of customers orders.
+Any product which is added from the admin page will be visibale for the customer since it's saved to the data base!
 
 This project was build with React, TypeScript and Material UI.
 
@@ -27,8 +28,10 @@ npm start
 ## Made by:
 
 **Sara Lindqvist [**github**](https://github.com/saralindqvist)**
+**William Saar [**github**](https://github.com/Willen17)**
+**Felix Bakkum [**github**](https://github.com/FrontFelix)**
+**Jonatan Nyberg [**github**](https://github.com/nybbe123)**
 
-[demo](https://commecicommeca.netlify.app/)
 
 ### Krav för G
 
