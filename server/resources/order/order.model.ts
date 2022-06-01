@@ -5,7 +5,6 @@ export interface Order {
   customer: Types.ObjectId;
   products: Product[];
   paymentMethod: string;
-  total: number;
   deliveryMethod: string;
   isOrderSent: boolean;
   Address: Address;
@@ -20,7 +19,6 @@ const orderSchema = new mongoose.Schema(
     },
     products: { type: {} /*PRODUCT????*/, required: true },
     paymentMethod: { type: String, required: true },
-    total: { type: Number, required: false },
     deliveryMethod: { type: String, ref: "deliveryOption", required: true },
     isOrderSent: { type: Boolean, default: false },
     address: { type: {} /* ADDRESS??? */, required: true },
